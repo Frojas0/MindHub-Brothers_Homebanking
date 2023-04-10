@@ -2,10 +2,9 @@ package com.mindhub.homebanking.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity //solicita a Spring la creacion de una tabla de clientes para esta clase
 public class Client {
@@ -15,6 +14,8 @@ public class Client {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
     private String firstName, lastName, eMail;
+    @OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
+    Set<Account> accounts = new HashSet<>();
 
     //CONSTRUCTOR POR DEFECTO
     //esto llamara JPA para crear nuevas instancias
@@ -45,11 +46,10 @@ public class Client {
     public String geteMail() {
         return eMail;
     }
+    public Set<Account> getAccount() {return accounts;}
 
     //METODOS SETTER
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) {this.id = id;}
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -59,6 +59,8 @@ public class Client {
     public void seteMail(String eMail) {
         this.eMail = eMail;
     }
-
-
+    public void addAccount(Account account) {
+        account.setOwner(this);
+        accounts.add(account);
+    }
 }

@@ -1,5 +1,5 @@
 const { createApp } = Vue;
-const url = 'http://localhost:8080/clients';
+const url = 'http://localhost:8080/rest/clients';
 const app = createApp({
     data() {
         return {
@@ -22,7 +22,7 @@ const app = createApp({
         addClient() {
             axios({
                 method: 'post',
-                url: 'http://localhost:8080/clients',
+                url: url,
                 data: {
                     firstName: this.firstName,
                     lastName: this.lastName,

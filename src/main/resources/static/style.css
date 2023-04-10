@@ -1,58 +1,19 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-h2 {
-    border-top-right-radius: 1rem;
-    border-top-left-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #dcd1ff !important;
-    background: rgb(110, 35, 180);
-    background: linear-gradient(0deg, rgba(110, 35, 180, 1) 0%, rgba(21, 7, 54, 1) 30%, rgba(0, 0, 0, 1) 100%);
-    width: 100%;
-    height: 4rem;
-    padding-bottom: 1rem;
 }
 
 header {
-    color: #dcd1ff;
-    background-color: black;
-    height: 10vh;
-    border-bottom: rgb(110, 35, 180) solid 3px;
+    height: 10vh
 }
 
 main {
     min-height: 90vh;
-    color: black;
-    background-image: radial-gradient(circle, #7e53ca, #6f4ebf, #6049b5, #5143aa, #423e9f);
+    background-color: antiquewhite;
 }
 
-pre {
-    height: 100vh;
-    overflow-x: scroll;
-}
-
-.formStyle {
-    color: black;
+table {
+    background-color: white;
     border-radius: 1rem;
-    background-image: radial-gradient(circle, #d2c1fa, #ccbefb, #c6bafc, #bfb7fe, #b7b4ff);
-    border: rgb(110, 35, 180) solid 2px;
-}
-
-.tableContent {
-    color: black;
-    border-radius: 1rem;
-    background-image: radial-gradient(circle, #d2c1fa, #ccbefb, #c6bafc, #bfb7fe, #b7b4ff);
-    border: rgb(110, 35, 180) solid 2px;
-}
-
-.jsonContent {
-    color: black;
-    border-radius: 1rem;
-    background-image: radial-gradient(circle, #d2c1fa, #ccbefb, #c6bafc, #bfb7fe, #b7b4ff);
-    border: rgb(110, 35, 180) solid 2px;
 }
