@@ -11,7 +11,8 @@ public class ClientDTO{
     private Set<AccountDTO> accounts;
 
     //CONSTRUCTOR CON PARAMETROS
-    public ClientDTO (Client client){
+    public ClientDTO (Client client){ //Recibimos el objeto con todas las propiedades
+        // Asignamos al DTO solo las propiedades que queremos
         this.id = client.getId();
         this.firstName = client.getFirstName();
         this.lastName = client.getLastName();

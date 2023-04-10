@@ -2,64 +2,64 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
+import com.mindhub.homebanking.models.TransactionType;
+import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.repositories.TransactionRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class HomebankingApplication {
 	public static void main(String[] args) {SpringApplication.run(HomebankingApplication.class, args);}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository){
 		return (args) -> {
 
-//			SpringApplication.run(Application.class);
-
-			//Creacion y guardado de clientes
+			//CREACION DE CLIENTES
 			Client client01 = (new Client("Melba","Morel", "melba@mindhub.com"));
-			clientRepository.save(client01);
+			Client client02 = (new Client("Facundo","Rojas", "facuroja@hotmail.com"));
+			Client client03 = (new Client("Carlos","Carlera", "carlitocarlera@hotmail.com"));
+			Client client04 = (new Client("Josesito","Rios", "joserios@hotmail.com"));
 
-			clientRepository.save(new Client("Facundo","Rojas", "facuroja@hotmail.com"));
-//			clientRepository.save(new Client("Carlos","Carlera", "carlitocarlera@hotmail.com"));
-//			clientRepository.save(new Client("Josesito","Rios", "joserios@hotmail.com"));
-//			clientRepository.save(new Client("Martina","Cansada", "cansadalamarti@hotmail.com"));
-//			clientRepository.save(new Client("Agustina","Martinez", "agusmartinez@hotmail.com"));
-//			clientRepository.save(new Client("Fernanda","Moron", "farlamora@hotmail.com"));
-
-			//Creacion y guardado de cliente en variable y luego en base de datos
-			Client client02 = new Client();
-			client02.setFirstName("Jacinto");
-			client02.setLastName("Jasminez");
-			client02.seteMail("jacintillojazmines@hotmail.com");
-			clientRepository.save(client02);
-
-			//Creacion de cuentas en variables VIN001, VIN002
+			//CREACION DE CUENTAS
 			Account account01 = (new Account("VIN001",LocalDateTime.now(),5000.00,client01));
+			Account account02 = (new Account("VIN002",LocalDateTime.now().plusDays(1),7500.00,client01));
+			Account account03 = (new Account("CUENTA03PRUEBA",LocalDateTime.now(),23123.21,client02));
+			Account account04 = (new Account("CUENTA04PRUEBA",LocalDateTime.now(),31112234.23,client03));
+			Account account05 = (new Account("CUENTA05PRUEBA",LocalDateTime.now(),502323.12,client02));
+
+			//CREACION DE TRANSACCIONES
+			Transaction transaction01 = (new Transaction(TransactionType.CREDIT,1000.00,"house Credit",LocalDateTime.now(),account01));
+			Transaction transaction02 = (new Transaction(TransactionType.DEBIT,-1500.00,"tv with debit",LocalDateTime.now(),account01));
+			Transaction transaction03 = (new Transaction(TransactionType.CREDIT,1800.00,"car credit",LocalDateTime.now(),account01));
+			Transaction transaction04 = (new Transaction(TransactionType.DEBIT,-850.00,"car with debit",LocalDateTime.now(),account01));
+			Transaction transaction05 = (new Transaction(TransactionType.CREDIT,1350.00,"auxiliar credit",LocalDateTime.now(),account01));
+			Transaction transaction06 = (new Transaction(TransactionType.DEBIT,-1000.00,"debit prueba",LocalDateTime.now(),account01));
+
+			//GUARDADO DE DATOS
+			clientRepository.save(client01);
+			clientRepository.save(client02);
+			clientRepository.save(client03);
+			clientRepository.save(client04);
+
 			accountRepository.save(account01);
-
-			Account account02 = new Account();
-			account02.setNumber("VIN002");
-			account02.setBalance(7500.00);
-			account02.setCreationDate(LocalDateTime.now().plusDays(1));
-			account02.setOwner(client01);
 			accountRepository.save(account02);
+			accountRepository.save(account03);
+			accountRepository.save(account04);
+			accountRepository.save(account05);
 
-				Account account03 = (new Account("CUENTA01PRUEBA",LocalDateTime.now(),502323.12,client02));
-				accountRepository.save(account03);
-
-
-
-			/*// assume code just created a new pet instance
-			person.addPet(pet);
-			petRepository.save(pet);
-			// if and only if person was also just created, then do
-			personRepository.save(person);*/
+			transactionRepository.save(transaction01);
+			transactionRepository.save(transaction02);
+			transactionRepository.save(transaction03);
+			transactionRepository.save(transaction04);
+			transactionRepository.save(transaction05);
+			transactionRepository.save(transaction06);
 		};
 	}
 }

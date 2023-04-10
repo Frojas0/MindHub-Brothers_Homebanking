@@ -14,8 +14,9 @@ public class Client {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
     private String firstName, lastName, eMail;
-    @OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
-    Set<Account> accounts = new HashSet<>();
+    //Vinculo con Account
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
+    private Set<Account> accounts = new HashSet<>();
 
     //CONSTRUCTOR POR DEFECTO
     //esto llamara JPA para crear nuevas instancias
@@ -23,15 +24,11 @@ public class Client {
     }
 
     //CONSTRUCTOR CON PROPIEDADES
-    public Client(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
     public Client(String firstName, String lastName, String eMail) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMail = eMail;
-    }
+    }//
 
     //METODOS GETTER
     public long getId() {
@@ -60,7 +57,7 @@ public class Client {
         this.eMail = eMail;
     }
     public void addAccount(Account account) {
-        account.setOwner(this);
+        account.setClient(this);
         accounts.add(account);
     }
 }
