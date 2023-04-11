@@ -34,7 +34,7 @@
                     <tr v-for="account of data.accounts">
                         <td>{{account.id}}</td>
                         <td># {{account.number}}</td>
-                        <td>$ {{account.balance}}</td>
+                        <td>$ {{account.balance.toLocaleString('en-US')}}</td>
                         <td>{{account.creationDate.slice(0,10)}}</td>
                         <td>{{account.creationDate.slice(11,19)}}</td>
                         <td><a :href="'account.html?id=' +account.id">detail</a></td>

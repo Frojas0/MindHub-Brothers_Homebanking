@@ -39,8 +39,8 @@ public class HomebankingApplication {
 			Transaction transaction02 = (new Transaction(TransactionType.DEBIT,-1500.00,"tv with debit",LocalDateTime.now(),account01));
 			Transaction transaction03 = (new Transaction(TransactionType.CREDIT,1800.00,"car credit",LocalDateTime.now(),account01));
 			Transaction transaction04 = (new Transaction(TransactionType.DEBIT,-850.00,"car with debit",LocalDateTime.now(),account01));
-			Transaction transaction05 = (new Transaction(TransactionType.CREDIT,1350.00,"auxiliar credit",LocalDateTime.now(),account01));
-			Transaction transaction06 = (new Transaction(TransactionType.DEBIT,-1000.00,"debit prueba",LocalDateTime.now(),account01));
+			Transaction transaction05 = (new Transaction(TransactionType.CREDIT,135231231230.00,"auxiliar credit",LocalDateTime.now(),account02));
+			Transaction transaction06 = (new Transaction(TransactionType.DEBIT,-1000.00,"debit prueba",LocalDateTime.now(),account02));
 
 			//GUARDADO DE DATOS
 			clientRepository.save(client01);
