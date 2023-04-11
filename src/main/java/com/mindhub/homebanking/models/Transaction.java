@@ -24,12 +24,11 @@ public class Transaction {
     //Constructores
     public Transaction() {
     }
-    public Transaction(TransactionType type, double amount, String description, LocalDateTime transactionDate, Account account) {
+    public Transaction(TransactionType type, double amount, String description, LocalDateTime transactionDate) {
         this.type = type;
         this.amount = amount;
         this.description = description;
         this.transactionDate = transactionDate;
-        this.account = account;
     }
 
     //Metodos Setter
