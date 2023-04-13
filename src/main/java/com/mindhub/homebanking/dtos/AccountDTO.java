@@ -29,4 +29,5 @@ public class AccountDTO {
     public LocalDateTime getCreationDate() {return creationDate;}
     public double getBalance() {return balance;}
     public Set<TransactionDTO> getTransactions() {return transactions;}
+
 }

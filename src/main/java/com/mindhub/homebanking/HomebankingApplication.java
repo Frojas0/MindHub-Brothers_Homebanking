@@ -1,25 +1,26 @@
 package com.mindhub.homebanking;
 
-import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.models.TransactionType;
-import com.mindhub.homebanking.models.Transaction;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.models.*;
+import com.mindhub.homebanking.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.nio.channels.ClosedChannelException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootApplication
 public class HomebankingApplication {
 	public static void main(String[] args) {SpringApplication.run(HomebankingApplication.class, args);}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository){
 		return (args) -> {
+
+			List<Integer> mortgagePayments = List.of(12,24,36,48,60);
+			List<Integer> personalPayments = List.of(16,12,24);
+			List<Integer> carPayments = List.of(6,12,24,36);
 
 			//CREACION DE CLIENTES
 			Client client01 = (new Client("Melba","Morel", "melba@mindhub.com"));
@@ -27,20 +28,58 @@ public class HomebankingApplication {
 			Client client03 = (new Client("Carlos","Carlera", "carlitocarlera@hotmail.com"));
 			Client client04 = (new Client("Josesito","Rios", "joserios@hotmail.com"));
 
+
 			//CREACION DE CUENTAS
-			Account account01 = (new Account("VIN001",LocalDateTime.now(),5000.00,client01));
-			Account account02 = (new Account("VIN002",LocalDateTime.now().plusDays(1),7500.00,client01));
-			Account account03 = (new Account("CUENTA03PRUEBA",LocalDateTime.now(),23123.21,client02));
-			Account account04 = (new Account("CUENTA04PRUEBA",LocalDateTime.now(),31112234.23,client03));
-			Account account05 = (new Account("CUENTA05PRUEBA",LocalDateTime.now(),502323.12,client02));
+			Account account01 = (new Account("VIN001",LocalDateTime.now(),5000.00));
+			Account account02 = (new Account("VIN002",LocalDateTime.now().plusDays(1),7500.00));
+			Account account03 = (new Account("CUENTA03TEST",LocalDateTime.now(),23123.21));
+			Account account04 = (new Account("CUENTA04TEST",LocalDateTime.now(),31112234.23));
+			Account account05 = (new Account("CUENTA05TEST",LocalDateTime.now(),502323.12));
+			//asignacion a clientes
+			client01.addAccount(account01);
+			client01.addAccount(account02);
+			client02.addAccount(account03);
+			client02.addAccount(account04);
+			client02.addAccount(account05);
+
 
 			//CREACION DE TRANSACCIONES
-			Transaction transaction01 = (new Transaction(TransactionType.CREDIT,1000.00,"house Credit",LocalDateTime.now(),account01));
-			Transaction transaction02 = (new Transaction(TransactionType.DEBIT,-1500.00,"tv with debit",LocalDateTime.now(),account01));
-			Transaction transaction03 = (new Transaction(TransactionType.CREDIT,1800.00,"car credit",LocalDateTime.now(),account01));
-			Transaction transaction04 = (new Transaction(TransactionType.DEBIT,-850.00,"car with debit",LocalDateTime.now(),account01));
-			Transaction transaction05 = (new Transaction(TransactionType.CREDIT,1350.00,"auxiliar credit",LocalDateTime.now(),account01));
-			Transaction transaction06 = (new Transaction(TransactionType.DEBIT,-1000.00,"debit prueba",LocalDateTime.now(),account01));
+			Transaction transaction01 = (new Transaction(TransactionType.CREDIT,1000.00,"house Credit",LocalDateTime.now()));
+			Transaction transaction02 = (new Transaction(TransactionType.DEBIT,-1500.00,"tv with debit",LocalDateTime.now()));
+			Transaction transaction03 = (new Transaction(TransactionType.CREDIT,1800.00,"car credit",LocalDateTime.now()));
+			Transaction transaction04 = (new Transaction(TransactionType.DEBIT,-850.00,"car with debit",LocalDateTime.now()));
+			Transaction transaction05 = (new Transaction(TransactionType.CREDIT,135231231230.00,"auxiliar credit",LocalDateTime.now()));
+			Transaction transaction06 = (new Transaction(TransactionType.DEBIT,-1000.00,"debit prueba",LocalDateTime.now()));
+			//asignacion a cuentas
+			account01.addTransaction(transaction01);
+			account01.addTransaction(transaction02);
+			account01.addTransaction(transaction03);
+			account01.addTransaction(transaction04);
+			account02.addTransaction(transaction05);
+			account02.addTransaction(transaction06);
+
+
+			//CREACION DE PRESTAMOS
+			Loan mortgageLoan = (new Loan("Mortgage",500000, mortgagePayments));
+			Loan personalLoan = (new Loan("Personal",100000, personalPayments));
+			Loan carLoan = (new Loan("Car",300000, carPayments));
+
+			//CREACION DE CLIENTLOAN
+			ClientLoan loan01 = (new ClientLoan(400000,60,"Mortgage Loan"));
+			ClientLoan loan02 = (new ClientLoan(50000,12,"Personal Loan"));
+			ClientLoan loan03 = (new ClientLoan(100000,24,"Personal Loan"));
+			ClientLoan loan04 = (new ClientLoan(200000,36,"Car Loan"));
+			//asignacion a cliente
+			client01.addClientLoan(loan01);
+			client01.addClientLoan(loan02);
+			client01.addClientLoan(loan03);
+			client01.addClientLoan(loan04);
+			//asignacion a Loan
+			mortgageLoan.addClientLoan(loan01);
+			personalLoan.addClientLoan(loan02);
+			personalLoan.addClientLoan(loan03);
+			carLoan.addClientLoan(loan04);
+
 
 			//GUARDADO DE DATOS
 			clientRepository.save(client01);
@@ -60,6 +99,16 @@ public class HomebankingApplication {
 			transactionRepository.save(transaction04);
 			transactionRepository.save(transaction05);
 			transactionRepository.save(transaction06);
+
+			loanRepository.save(mortgageLoan);
+			loanRepository.save(personalLoan);
+			loanRepository.save(carLoan);
+
+			clientLoanRepository.save(loan01);
+			clientLoanRepository.save(loan02);
+			clientLoanRepository.save(loan03);
+			clientLoanRepository.save(loan04);
+
 		};
 	}
 }

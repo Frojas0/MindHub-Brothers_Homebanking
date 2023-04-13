@@ -34,12 +34,12 @@ public class ClientController {
     //Esta técnica se llama  inyecc ión de dependencia
     private ClientRepository clientRepository;
     @RequestMapping("/api/clients")
-    //@RequestMapping anotacion para asociar ruta
+    //@RequestMapping anotacion para asociar una solicitud a una ruta
     public List<ClientDTO> getClients() {
         return clientRepository.findAll().stream().map(client -> new ClientDTO(client)).collect(toList());
     }
     @RequestMapping("/api/clients/{id}")
-    public ClientDTO getClient(@PathVariable long id){
+    public ClientDTO getClient(@PathVariable long id){ //@PathVariable se utiliza para vincular una variable de la URL, con un parámetro.
         Optional<Client> optionalClient = clientRepository.findById(id);
         return optionalClient.map(client -> new ClientDTO(client)).orElse(null);
     }//Buscamos en el repositorio de clientes un cliente que tenga la propiedad ID que coincida con la ID de la url,

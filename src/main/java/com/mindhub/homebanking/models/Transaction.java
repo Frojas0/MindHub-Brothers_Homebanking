@@ -24,29 +24,29 @@ public class Transaction {
     //Constructores
     public Transaction() {
     }
-    public Transaction(TransactionType type, double amount, String description, LocalDateTime transactionDate, Account account) {
+    public Transaction(TransactionType type, double amount, String description, LocalDateTime transactionDate) {
         this.type = type;
         this.amount = amount;
         this.description = description;
         this.transactionDate = transactionDate;
-        this.account = account;
     }
-
-    //Metodos Setter
-    public void setId(long id) {this.id = id;}
-    public void setAmount(double amount) {this.amount = amount;}
-    public void setDescription(String description) {this.description = description;}
-    public void setTransactionDate(LocalDateTime transactionDate) {this.transactionDate = transactionDate;}
-    public void setType(TransactionType type) {this.type = type;}
-    public void setAccount(Account account) {this.account = account;}
-
     //Metodos Getter
     public long getId() {return id;}
     public double getAmount() {return amount;}
     public String getDescription() {return description;}
     public LocalDateTime getTransactionDate() {return transactionDate;}
     public TransactionType getType() {return type;}
-//    @JsonIgnore
+    //    @JsonIgnore
     public Account getAccount() {return account;}
+
+    //Metodos Setter
+
+    public void setAmount(double amount) {this.amount = amount;}
+    public void setDescription(String description) {this.description = description;}
+    public void setTransactionDate(LocalDateTime transactionDate) {this.transactionDate = transactionDate;}
+    public void setType(TransactionType type) {this.type = type;}
+    public void setAccount(Account account) {this.account = account;}
+
+
 
 }

@@ -5,7 +5,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Account {
@@ -31,11 +33,10 @@ public class Account {
     }
 
     //CONSTRUCTOR CON PROPIEDADES
-    public Account(String number, LocalDateTime creationDate, double balance, Client client) {
+    public Account(String number, LocalDateTime creationDate, double balance) {
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
-        this.client = client;
     }
 
     //METODOS GETTER
@@ -49,7 +50,6 @@ public class Account {
     public Set<Transaction> getTransaction() {return transactions;}
 
     //METODOS SETTER
-    public void setId(long id) {this.id = id;}
     public void setNumber(String number) {this.number = number;}
     public void setCreationDate(LocalDateTime creationDate) {this.creationDate = creationDate;}
     public void setBalance(double balance) {this.balance = balance;}

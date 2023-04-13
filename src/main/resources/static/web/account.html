@@ -11,13 +11,16 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 
-<body id="vueApp">
+<body>
     <header class="d-flex justify-content-center align-items-center" style="background-color: black; color: white;">
-        <h1>Account</h1>
+        <h1>Account:</h1>
+        <!-- <h3>{{data.number}}</h3> -->
     </header>
-    <main class="d-flex flex-column justify-content-center align-items-center">
-        <!-- <p>{{transactions}}</p> -->
-        <p>Transactions of account: {{data.number}}</p>
+    <main id="vueApp" class="d-flex flex-column justify-content-center align-items-center">
+
+        <a href="./accounts.html">ACCOUNTS</a>
+
+        <!-- <p>Transactions of account: {{data.number}}</p> -->
         <table class="table" style="width: 40rem;">
             <thead>
                 <tr>
@@ -33,7 +36,7 @@
                 <tr v-for="transaction of transactions">
                     <td># {{transaction.id}}</td>
                     <td> {{transaction.type}}</td>
-                    <td :class="transaction.type">$ {{transaction.amount}}</td>
+                    <td :class="transaction.type">$ {{transaction.amount.toLocaleString('en-US')}}</td>
                     <!-- <td v-if="transaction.type == 'CREDIT'" style="color: red;">$ {{transaction.amount}}</td>
                     <td v-else style="color: green;">$ {{transaction.amount}}</td> -->
                     <td>{{transaction.description}}</td>
