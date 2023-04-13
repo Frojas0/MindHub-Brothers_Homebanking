@@ -4,7 +4,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Loan {
@@ -16,7 +19,10 @@ public class Loan {
     private double maxAmount;
     @ElementCollection
     @Column(name="payment")
-    private List<Integer> payments = new ArrayList<Integer>();
+    private List<Integer> payments = new ArrayList<>();
+    //vinculo con ClientLoan
+    @OneToMany(mappedBy="loan", fetch=FetchType.EAGER)
+    private Set<ClientLoan> clientLoans = new HashSet<>();
 
     //Constructores
     public Loan() {
@@ -31,10 +37,18 @@ public class Loan {
     public String getName() {return name;}
     public double getMaxAmount() {return maxAmount;}
     public List<Integer> getPayments() {return payments;}
+    public List<Client> getClients() {
+        return clientLoans.stream().map(clientLoan -> clientLoan.getClient()).collect(Collectors.toList());
+    }
 
     //Metodos Setter
-    public void setId(long id) {this.id = id;}
     public void setName(String name) {this.name = name;}
     public void setMaxAmount(double maxAmount) {this.maxAmount = maxAmount;}
     public void setPayments(List<Integer> payments) {this.payments = payments;}
+
+    //Metodo ADD
+    public void addClientLoan(ClientLoan clientLoan){
+        clientLoan.setLoan(this);
+        clientLoans.add(clientLoan);
+    }
 }

@@ -11,36 +11,60 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 
-<body id="vueApp">
+<body>
     <header class="d-flex justify-content-center align-items-center" style="background-color: black; color: white;">
         <h1>Your Accounts</h1>
     </header>
-    <main class="d-flex flex-column justify-content-center">
+    <main id="vueApp" class="d-flex flex-column justify-content-center">
         <div class="d-flex flex-column justify-content-center align-items-center">
             <h2 style="background-color: white; border-radius: 1rem; padding: 1rem;">Data of: {{data.firstName}}
                 {{data.lastName}}</h2>
-            <table class="table" style="width: 40rem;">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Account Number</th>
-                        <th scope="col">Account Balance</th>
-                        <th scope="col">Creation Date</th>
-                        <th scope="col">Creation Time</th>
-                        <th scope="col">Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="account of data.accounts">
-                        <td>{{account.id}}</td>
-                        <td># {{account.number}}</td>
-                        <td>$ {{account.balance.toLocaleString('en-US')}}</td>
-                        <td>{{account.creationDate.slice(0,10)}}</td>
-                        <td>{{account.creationDate.slice(11,19)}}</td>
-                        <td><a :href="'account.html?id=' +account.id">detail</a></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table" style="width: 40rem;">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Account Number</th>
+                            <th scope="col">Account Balance</th>
+                            <th scope="col">Creation Date</th>
+                            <th scope="col">Creation Time</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="account of accounts">
+                            <td>#{{account.id}}</td>
+                            <td>{{account.number}}</td>
+                            <td>$ {{account.balance.toLocaleString('en-US')}}</td>
+                            <td>{{account.creationDate.slice(0,10)}}</td>
+                            <td>{{account.creationDate.slice(11,19)}}</td>
+                            <td><a :href="'account.html?id=' +account.id">detail</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div v-if="loans.length != 0">
+                    <table class="table" style="width: 40rem;">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Loan Amount</th>
+                                <th scope="col">Loan Name</th>
+                                <th scope="col">Loan Payments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="loan of loans">
+                                <td># {{loan.loanId}}</td>
+                                <td>$ {{loan.amount.toLocaleString('en-US')}}</td>
+                                <td>{{loan.name}}</td>
+                                <td>{{loan.payments}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h2 v-else style="background-color: white; border-radius: 1rem; padding: 1rem;"> Client with no Loans
+                </h2>
+            </div>
         </div>
         <!-- <div>
             <p>El número es: <span id="numero"></span></p>

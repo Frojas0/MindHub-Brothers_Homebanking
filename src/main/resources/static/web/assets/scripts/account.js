@@ -14,7 +14,7 @@ const app = createApp({
         axios.get(url)
             .then(response => {
                 this.data = response.data
-                this.transactions = response.data.transactions
+                this.transactions = this.data.transactions
                 this.transactions.sort((a, b) => b.id - a.id)
                 console.log(this.data);
                 console.log(this.transactions);
