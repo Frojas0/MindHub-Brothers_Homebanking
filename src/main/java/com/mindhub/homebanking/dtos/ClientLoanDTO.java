@@ -27,11 +27,4 @@ public class ClientLoanDTO {
     public String getName() {return name;}
     public int getPayments() {return payments;}
 
-    //METODOS SETTER
-    public void setLoanId(long loanId) {this.loanId = loanId;}
-    public void setAmount(double amount) {this.amount = amount;}
-    public void setName(String name) {this.name = name;}
-    public void setPayments(int payments) {this.payments = payments;}
-
-
 }
