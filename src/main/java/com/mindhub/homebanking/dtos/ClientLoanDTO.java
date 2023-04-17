@@ -2,8 +2,6 @@ package com.mindhub.homebanking.dtos;
 
 import com.mindhub.homebanking.models.ClientLoan;
 
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ClientLoanDTO {
     private long id;
@@ -12,7 +10,7 @@ public class ClientLoanDTO {
     private String name;
     private int payments;
 
-    //CONSTRUCTORES
+    //CONSTRUCTORS
     public ClientLoanDTO(ClientLoan clientLoan){
         this.id = clientLoan.getId();
         this.name = clientLoan.getName();
@@ -21,7 +19,7 @@ public class ClientLoanDTO {
         this.loanId = clientLoan.getLoan().getId();
     }
 
-    //METODOS GETTER
+    //GETTER METHODS
     public long getLoanId() {return loanId;}
     public double getAmount() {return amount;}
     public String getName() {return name;}

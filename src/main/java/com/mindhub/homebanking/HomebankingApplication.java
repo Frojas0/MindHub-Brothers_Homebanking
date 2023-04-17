@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.nio.channels.ClosedChannelException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 public class HomebankingApplication {
 	public static void main(String[] args) {SpringApplication.run(HomebankingApplication.class, args);}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return (args) -> {
 
 			List<Integer> mortgagePayments = List.of(12,24,36,48,60);
@@ -64,6 +63,7 @@ public class HomebankingApplication {
 			Loan personalLoan = (new Loan("Personal",100000, personalPayments));
 			Loan carLoan = (new Loan("Car",300000, carPayments));
 
+
 			//CREACION DE CLIENTLOAN
 			ClientLoan loan01 = (new ClientLoan(400000,60,"Mortgage Loan"));
 			ClientLoan loan02 = (new ClientLoan(50000,12,"Personal Loan"));
@@ -80,6 +80,14 @@ public class HomebankingApplication {
 			personalLoan.addClientLoan(loan03);
 			carLoan.addClientLoan(loan04);
 
+			//CREACION DE TARJETAS
+			Card card01 = (new Card(CardType.DEBIT, CardColor.GOlD,Long.parseLong("1111222233334444"), 321,LocalDateTime.now(),LocalDateTime.now().plusYears(5)));
+			Card card02 = (new Card(CardType.CREDIT, CardColor.TITANIUM,Long.parseLong("0000222244446666"), 567,LocalDateTime.now(),LocalDateTime.now().plusYears(5)));
+			Card card03 = (new Card(CardType.CREDIT, CardColor.SILVER,Long.parseLong("4321654376549876"), 555,LocalDateTime.now(),LocalDateTime.now().plusYears(5)));
+			//asignacion a cliente
+			client01.addCardHolder(card01);
+			client01.addCardHolder(card02);
+			client02.addCardHolder(card03);
 
 			//GUARDADO DE DATOS
 			clientRepository.save(client01);
@@ -109,6 +117,9 @@ public class HomebankingApplication {
 			clientLoanRepository.save(loan03);
 			clientLoanRepository.save(loan04);
 
+			cardRepository.save(card01);
+			cardRepository.save(card02);
+			cardRepository.save(card03);
 		};
 	}
 }
