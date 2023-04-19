@@ -111,9 +111,9 @@ table {
     color: white;
 }
 
-#cards-anchor:hover {
-    /* color: #737373 !important; */
-}
+/* #cards-anchor:hover {
+    color: #737373 !important;
+} */
 
 #accounts-card {
     background-color: transparent;
