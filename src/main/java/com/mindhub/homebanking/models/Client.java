@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
     public class Client {
     @Id
@@ -18,7 +17,7 @@ import java.util.Set;
     private Set<Account> accounts = new HashSet<>();
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<ClientLoan> loans = new HashSet<>();
-    @OneToMany(mappedBy="cardHolder", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
 
     //CONSTRUCTORS
@@ -69,9 +68,9 @@ import java.util.Set;
         clientLoan.setClient(this);
         loans.add(clientLoan);
     }
-    public void addCardHolder(Card cardHolder){
-        cardHolder.setCardHolder(this);
-        cards.add(cardHolder);
+    public void addCardHolder(Card client){
+        client.setClient(this);
+        cards.add(client);
     }
 
 }

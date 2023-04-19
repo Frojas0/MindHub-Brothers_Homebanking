@@ -10,10 +10,11 @@ public class CardDTO {
     private long id;
     private CardType type;
     private CardColor color;
-    private long number;
+    private String number;
     private int cvv;
     private LocalDateTime thruDate;
     private LocalDateTime fromDate;
+    private String cardHolder;
 
     //CONSTRUCTOR
     public CardDTO(Card card) {
@@ -24,13 +25,15 @@ public class CardDTO {
         this.cvv = card.getCvv();
         this.thruDate = card.getThruDate();
         this.fromDate = card.getFromDate();
+        this.cardHolder = card.getCardHolder();
     }
     //GETTER METHODS
     public long getId() {return id;}
     public CardType getType() {return type;}
     public CardColor getColor() {return color;}
-    public long getNumber() {return number;}
+    public String getNumber() {return number;}
     public int getCvv() {return cvv;}
     public LocalDateTime getThruDate() {return thruDate;}
     public LocalDateTime getFromDate() {return fromDate;}
+    public String getCardHolder() {return cardHolder;}
 }
