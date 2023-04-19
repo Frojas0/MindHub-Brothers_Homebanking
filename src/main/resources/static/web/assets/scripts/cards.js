@@ -5,7 +5,9 @@ const app = createApp({
         return {
             data: [],
             accounts: [],
-            loans: []
+            loans: [],
+            debitCards: [],
+            creditCards: []
         }
     },
     created() {
@@ -16,9 +18,13 @@ const app = createApp({
                 this.accounts.sort((a, b) => a.id - b.id)
                 this.loans = this.data.loans
                 this.loans.sort((a, b) => a.loanId - b.loanId)
-                console.log(this.data)
-                console.log(this.accounts);
-                console.log(this.loans)
+                this.debitCards = this.data.cards.filter(i => i.type === "DEBIT")
+                this.creditCards = this.data.cards.filter(i => i.type === "CREDIT")
+                // console.log(this.data)
+                // console.log(this.accounts);
+                // console.log(this.loans)
+                console.log(this.creditCards);
+                console.log(this.debitCards);
             })
             .catch(err => console.log(err))
     }

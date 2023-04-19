@@ -1,16 +1,84 @@
+/* Normalized Style */
 * {
+    font-family: Helvetica, Arial, sans-serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    /* border: 1px solid red; */
 }
 
+/* HEADER */
 header {
-    height: 10vh
+    height: 14vh;
+    background-color: black;
 }
 
+#header-nav {
+    background-color: black !important;
+    height: 14vh;
+}
+
+.navbar {
+    height: 15vh;
+    width: 95vw;
+    /* background-color: black !important; */
+}
+
+.logo-header {
+    width: 15rem;
+}
+
+.nav-link {
+    color: #737373 !important;
+    /* color: #7a6cfc !important; */
+}
+
+#navbarNav {
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.navbar-nav {
+    font-size: 150%;
+    gap: 1.5rem;
+    border: solid 2px #7a6cfc;
+    border-radius: 1rem;
+    /* background-color: #141424; */
+    /* background-image: url(../images/nnnoise.svg); */
+    background-size: cover;
+    /* background-color: antiquewhite; */
+}
+
+a:hover {
+    color: #7a6cfc !important;
+    transform: scale(1.1);
+    transition: all 0.3s;
+}
+
+/* a:active,
+a:focus {
+    color: lime !important;
+} */
+
+/* MAIN */
 main {
     min-height: 90vh;
-    background-color: antiquewhite;
+    background: url(../images/bguuundulate.svg);
+    background-size: cover;
+    background-color: #141424;
+    color: white;
+}
+
+.accountsContainer {
+    margin-top: 2rem;
+    width: 100vw;
+    height: 5rem;
+    color: #737373;
+    background: black;
+    border-top: 1px solid #7a6cfc;
+    border-bottom: 1px solid #7a6cfc;
 }
 
 table {
@@ -18,11 +86,271 @@ table {
     border-radius: 1rem;
 }
 
-/* DEBIT- CREDIT */
+.PruebaColor2 {
+    color: #7a6cfc;
+}
+
+.PruebaColor {
+    color: #1cbfff;
+}
+
+/* FOOTER */
+
+/* ACCOUNT */
 .DEBIT {
     color: green;
 }
 
 .CREDIT {
     color: red;
+}
+
+/* ACCOUNTS */
+#cards-anchor {
+    text-decoration: none;
+    color: white;
+}
+
+/* #cards-anchor:hover {
+    color: #737373 !important;
+} */
+
+#accounts-card {
+    background-color: transparent;
+}
+
+#card-logo {
+    width: 5rem;
+}
+
+.card {
+    width: 190px;
+    height: 254px;
+    transition: all 0.2s;
+    position: relative;
+    cursor: pointer;
+}
+
+.card-inner {
+    width: inherit;
+    height: inherit;
+    background: rgba(255, 255, 255, .05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(#1cbfff, #7a6cfc);
+    border-radius: 50%;
+    position: absolute;
+    animation: move-up6 2s ease-in infinite alternate-reverse;
+}
+
+.circle:nth-child(1) {
+    top: -25px;
+    left: -25px;
+}
+
+.circle:nth-child(2) {
+    bottom: -25px;
+    right: -25px;
+    animation-name: move-down1;
+}
+
+@keyframes move-up6 {
+    to {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes move-down1 {
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+/* CARDS */
+.flip-card {
+    background-color: transparent;
+    width: 312px;
+    height: 200px;
+    perspective: 1000px;
+}
+
+.cardColorTxt {
+    position: absolute;
+    letter-spacing: .2em;
+    font-size: 0.8em;
+    top: 1rem;
+    left: 1.2rem;
+}
+
+.heading_8264 {
+    position: absolute;
+    letter-spacing: .2em;
+    font-size: 0.8em;
+    top: 13.5em;
+    left: 19em;
+}
+
+.logoMindhub {
+    position: absolute;
+    top: 1rem;
+    left: 14rem;
+}
+
+.logo {
+    position: absolute;
+    top: 8em;
+    left: 15.21em;
+}
+
+.chip {
+    position: absolute;
+    top: 2.5em;
+    left: 1em;
+}
+
+.contactless {
+    position: absolute;
+    top: 2.6em;
+    left: 4em;
+}
+
+.number {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.2em;
+    top: 4.5em;
+    left: 1em;
+}
+
+.valid_thru {
+    position: absolute;
+    font-weight: bold;
+    top: 10em;
+    font-size: 0.7em;
+    left: 3em;
+}
+
+.date_8264 {
+    position: absolute;
+    font-weight: bold;
+    font-size: 0.6em;
+    top: 13em;
+    left: 5em;
+}
+
+.name {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.2em;
+    top: 8em;
+    left: 1em;
+}
+
+.strip {
+    position: absolute;
+    background-color: black;
+    width: 19.5em;
+    height: 1.5em;
+    top: 2.4em;
+    background: repeating-linear-gradient(45deg,
+            #303030,
+            #303030 10px,
+            #202020 10px,
+            #202020 20px);
+}
+
+.mstrip {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 12em;
+    height: 1.5em;
+    top: 5em;
+    left: .8em;
+    border-radius: 2.5px;
+    font-family: 'Dancing Script', cursive;
+    color: blue;
+}
+
+.sstrip {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 3em;
+    height: 1.5em;
+    top: 5em;
+    left: 14em;
+    border-radius: 2.5px;
+}
+
+.logoMindhubBG {
+    position: absolute;
+    top: 9rem;
+    left: 15rem;
+}
+
+.code {
+    font-weight: bold;
+    text-align: center;
+    margin: .2em;
+    color: black;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 1rem;
+}
+
+.flip-card-front {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+    /* background-color: aliceblue; */
+}
+
+.flip-card-back {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
+    /* background-color: antiquewhite; */
+    transform: rotateY(180deg);
+}
+
+/*dynamic class*/
+.GOLD {
+    background-color: gold;
+}
+
+.TITANIUM {
+    background-color: rgb(149, 148, 148);
+}
+
+.SILVER {
+    background-color: silver;
 }

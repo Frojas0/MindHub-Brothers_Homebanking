@@ -12,7 +12,7 @@ public class TransactionDTO {
     private String description;
     private LocalDateTime transactionDate;
 
-    //CONSTRUCTOR CON PARAMETROS
+    //CONSTRUCTORS
     public TransactionDTO(Transaction transaction){
         this.id = transaction.getId();
         this.type = transaction.getType();
@@ -21,7 +21,7 @@ public class TransactionDTO {
         this.transactionDate = transaction.getTransactionDate();
     }
 
-    //METODOS GETTER
+    //GETTER METHODS
     public long getId() {return id;}
     public TransactionType getType() {return type;}
     public double getAmount() {return amount;}

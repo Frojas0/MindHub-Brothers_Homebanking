@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 public class Loan {
@@ -20,11 +19,10 @@ public class Loan {
     @ElementCollection
     @Column(name="payment")
     private List<Integer> payments = new ArrayList<>();
-    //vinculo con ClientLoan
     @OneToMany(mappedBy="loan", fetch=FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
 
-    //Constructores
+    //CONSTRUCTORS
     public Loan() {
     }
     public Loan(String name, double maxAmount, List<Integer> payments) {
@@ -32,21 +30,19 @@ public class Loan {
         this.maxAmount = maxAmount;
         this.payments = payments;
     }
-    //Metodos Getter
+    //GETTER METHODS
     public long getId() {return id;}
     public String getName() {return name;}
     public double getMaxAmount() {return maxAmount;}
     public List<Integer> getPayments() {return payments;}
-    public List<Client> getClients() {
-        return clientLoans.stream().map(clientLoan -> clientLoan.getClient()).collect(Collectors.toList());
-    }
+    public Set<ClientLoan> getClientLoans() {return clientLoans;}
 
-    //Metodos Setter
+    //SETTER METHODS
     public void setName(String name) {this.name = name;}
     public void setMaxAmount(double maxAmount) {this.maxAmount = maxAmount;}
     public void setPayments(List<Integer> payments) {this.payments = payments;}
 
-    //Metodo ADD
+    //ADD METHODS
     public void addClientLoan(ClientLoan clientLoan){
         clientLoan.setLoan(this);
         clientLoans.add(clientLoan);

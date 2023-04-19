@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.nio.channels.ClosedChannelException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 public class HomebankingApplication {
 	public static void main(String[] args) {SpringApplication.run(HomebankingApplication.class, args);}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return (args) -> {
 
 			List<Integer> mortgagePayments = List.of(12,24,36,48,60);
@@ -45,11 +44,11 @@ public class HomebankingApplication {
 
 			//CREACION DE TRANSACCIONES
 			Transaction transaction01 = (new Transaction(TransactionType.CREDIT,1000.00,"house Credit",LocalDateTime.now()));
-			Transaction transaction02 = (new Transaction(TransactionType.DEBIT,-1500.00,"tv with debit",LocalDateTime.now()));
+			Transaction transaction02 = (new Transaction(TransactionType.DEBIT,1500.00,"tv with debit",LocalDateTime.now()));
 			Transaction transaction03 = (new Transaction(TransactionType.CREDIT,1800.00,"car credit",LocalDateTime.now()));
-			Transaction transaction04 = (new Transaction(TransactionType.DEBIT,-850.00,"car with debit",LocalDateTime.now()));
-			Transaction transaction05 = (new Transaction(TransactionType.CREDIT,135231231230.00,"auxiliar credit",LocalDateTime.now()));
-			Transaction transaction06 = (new Transaction(TransactionType.DEBIT,-1000.00,"debit prueba",LocalDateTime.now()));
+			Transaction transaction04 = (new Transaction(TransactionType.DEBIT,850.00,"car with debit",LocalDateTime.now()));
+			Transaction transaction05 = (new Transaction(TransactionType.CREDIT,1352312312.33,"auxiliar credit",LocalDateTime.now()));
+			Transaction transaction06 = (new Transaction(TransactionType.DEBIT,1000.00,"debit prueba",LocalDateTime.now()));
 			//asignacion a cuentas
 			account01.addTransaction(transaction01);
 			account01.addTransaction(transaction02);
@@ -63,6 +62,7 @@ public class HomebankingApplication {
 			Loan mortgageLoan = (new Loan("Mortgage",500000, mortgagePayments));
 			Loan personalLoan = (new Loan("Personal",100000, personalPayments));
 			Loan carLoan = (new Loan("Car",300000, carPayments));
+
 
 			//CREACION DE CLIENTLOAN
 			ClientLoan loan01 = (new ClientLoan(400000,60,"Mortgage Loan"));
@@ -80,6 +80,14 @@ public class HomebankingApplication {
 			personalLoan.addClientLoan(loan03);
 			carLoan.addClientLoan(loan04);
 
+			//CREACION DE TARJETAS
+			Card card01 = (new Card(CardType.DEBIT, CardColor.GOLD,"1111 2222 3333 4444", 321,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
+			Card card02 = (new Card(CardType.CREDIT, CardColor.TITANIUM,"0000 2222 4444 6666", 567,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
+			Card card03 = (new Card(CardType.CREDIT, CardColor.SILVER,"4321 6543 7654 9876", 555,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Facundo Rojas"));
+			//asignacion a cliente
+			client01.addCardHolder(card01);
+			client01.addCardHolder(card02);
+			client02.addCardHolder(card03);
 
 			//GUARDADO DE DATOS
 			clientRepository.save(client01);
@@ -109,6 +117,9 @@ public class HomebankingApplication {
 			clientLoanRepository.save(loan03);
 			clientLoanRepository.save(loan04);
 
+			cardRepository.save(card01);
+			cardRepository.save(card02);
+			cardRepository.save(card03);
 		};
 	}
 }
