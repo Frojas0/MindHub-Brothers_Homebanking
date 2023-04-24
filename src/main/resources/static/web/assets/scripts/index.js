@@ -3,9 +3,7 @@ createApp({
     data() {
         return {
             email: '',
-            password: '',
-            firstName: '',
-            lastName: ''
+            password: ''
         }
     },
     methods: {
@@ -28,13 +26,6 @@ createApp({
                     this.error = '*ERROR: Wrong e-mail or password';
                     this.$forceUpdate();
                 })
-        },
-        signUp() {
-            axios
-                .post('/api/clients', `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`, {
-                    headers: { 'content-type': 'application/x-www-form-urlencoded' }
-                })
-                .then(response => console.log('registered'))
         }
     }
 }).mount("#app")

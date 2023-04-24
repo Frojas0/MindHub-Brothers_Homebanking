@@ -184,7 +184,7 @@ table {
     color: #d3d3d3;
 }
 
-.form .btn {
+.form .btna {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -202,11 +202,14 @@ table {
     transition: .4s ease-in-out;
     background-color: #171717;
     color: white;
+    text-decoration: none;
 }
 
 .button1:hover {
     background-color: black;
-    color: white;
+    color: #7a6cfc !important;
+    transform: scale(1.05);
+    transition: all 0.3s;
 }
 
 .button2 {
@@ -219,6 +222,7 @@ table {
     transition: .4s ease-in-out;
     background-color: #171717;
     color: white;
+    text-decoration: none;
 }
 
 .button2:hover {
@@ -238,8 +242,10 @@ table {
 }
 
 .button3:hover {
-    background-color: red;
-    color: white;
+    background-color: black;
+    color: red !important;
+    transform: scale(1.05);
+    transition: all 0.3s;
 }
 
 /* ---------- ACCOUNTS CONTAINER ---------- */
@@ -493,7 +499,6 @@ table {
 }
 
 .GOLD {
-    /* background-color: gold; */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background: linear-gradient(to right, #ffd700, #cd7f32);
     background-size: cover;
@@ -505,7 +510,6 @@ table {
 }
 
 .SILVER {
-    /* background-color: silver; */
     background: linear-gradient(to right, #c0c0c0, #a9a9a9);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
