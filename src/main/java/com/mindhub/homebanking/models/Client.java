@@ -12,7 +12,7 @@ import java.util.Set;
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
-    private String firstName, lastName, eMail;
+    private String firstName, lastName, email;
     private String password ;
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>();
@@ -24,17 +24,17 @@ import java.util.Set;
     //CONSTRUCTORS
     public Client() {
     }
-    public Client(String firstName, String lastName, String eMail,String password) {
+    public Client(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.eMail = eMail;
+        this.email = email;
         this.password = password;
     }
     //GETTER METHODS
     public long getId() {return id;}
     public String getFirstName() {return firstName;}
     public String getLastName() {return lastName;}
-    public String geteMail() {return eMail;}
+    public String getEmail() {return email;}
     public String getPassword() {return password;}
     public Set<Account> getAccounts() {return accounts;}
     public Set<ClientLoan> getClientLoans() {return loans;}
@@ -47,8 +47,8 @@ import java.util.Set;
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
     public void setPassword(String password) {this.password = password;}
     public void setAccounts(Set<Account> accounts) {this.accounts = accounts;}

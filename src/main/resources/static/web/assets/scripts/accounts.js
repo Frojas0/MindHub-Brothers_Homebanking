@@ -1,5 +1,5 @@
 const { createApp } = Vue;
-const url = 'http://localhost:8080/api/clients/1';
+const url = 'http://localhost:8080/api/clients/current';
 const app = createApp({
     data() {
         return {
@@ -16,7 +16,7 @@ const app = createApp({
                 this.accounts.sort((a, b) => a.id - b.id)
                 this.loans = this.data.loans
                 this.loans.sort((a, b) => a.loanId - b.loanId)
-                // console.log(this.data)
+                console.log(this.data)
                 // console.log(this.accounts);
                 // console.log(this.loans)
             })

@@ -27,14 +27,14 @@ public class WebAuthorization {
                 .antMatchers("/web/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/h2-console").hasAuthority("ADMIN")
                 .antMatchers("/rest/**").hasAuthority("ADMIN")
-                .antMatchers("/web/accounts.html/**").hasAuthority("CLIENT")
-                .antMatchers("/web/account.html/**").hasAuthority("CLIENT")
-                .antMatchers("/web/cards.html/**").hasAuthority("CLIENT");
+                .antMatchers("/web/accounts.html").hasAuthority("CLIENT")
+                .antMatchers("/web/account.html").hasAuthority("CLIENT")
+                .antMatchers("/web/cards.html").hasAuthority("CLIENT");
         http.formLogin()
-                .usernameParameter("eMail")
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .loginPage("/api/login");
-        http.logout().logoutUrl("/api/logout");
+        http.logout().logoutUrl("/api/logout").deleteCookies("JSESSIONID");
 
         http.csrf().disable(); // turn off checking for CSRF tokens
         http.headers().frameOptions().disable();//disabling frameOptions so h2-console can be accessed
@@ -42,7 +42,6 @@ public class WebAuthorization {
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));// if login is successful, just clear the flags asking for authentication
         http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));// if login fails, just send an authentication failure response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());// if logout is successful, just send a success response
-
         return http.build();
     }
     private void clearAuthenticationAttributes(HttpServletRequest request) {

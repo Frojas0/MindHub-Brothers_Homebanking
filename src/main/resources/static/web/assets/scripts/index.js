@@ -11,7 +11,7 @@ createApp({
     methods: {
         login() {
             axios
-                .post('/api/login', `eMail=${this.email}&password=${this.password}`, {
+                .post('/api/login', `email=${this.email}&password=${this.password}`, {
                     headers: {
                         'content-type': 'application/x-www-form-urlencoded'
                     }
@@ -31,7 +31,7 @@ createApp({
         },
         signUp() {
             axios
-                .post('/api/clients', `firstName=${this.firstName}&lastName=${this.lastName}&eMail=${this.email}&password=${this.password}`, {
+                .post('/api/clients', `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`, {
                     headers: { 'content-type': 'application/x-www-form-urlencoded' }
                 })
                 .then(response => console.log('registered'))
