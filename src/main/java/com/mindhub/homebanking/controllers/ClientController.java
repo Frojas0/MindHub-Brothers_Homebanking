@@ -49,18 +49,22 @@ public class ClientController {
             return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
         }
 
-        clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
-        accountRepository.save(new Account("VIN"+(Math.random() * 1000), LocalDateTime.now(),0));
+        String accountNumber;
+        do {
+            int randomNumber = (int) (Math.random() * 100000000);
+            accountNumber = "VIN" + String.format("%08d", randomNumber);
+        } while (accountRepository.findByNumber(accountNumber) != null);
+        Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
+        Account newAccount = new Account(accountNumber, LocalDateTime.now(),0);
+        clientRepository.save(newClient);
+        newClient.addAccount(newAccount);
+        accountRepository.save(newAccount);
         return new ResponseEntity<>(HttpStatus.CREATED);
-
-
-//        clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password)));
-//        accountRepository.save(new Account("VIN"+"xxx", LocalDateTime.now(),0));
-//        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping("/api/clients/current")
     public ClientDTO getCurrentClient(Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
+
 }

@@ -20,7 +20,7 @@
     <main id="app">
         <a href="./accounts.html">accounts</a>
         <div class="form-container d-flex justify-content-center align-items-center">
-            <form class="form" @submit.prevent="login">
+            <form class="form">
                 <p id="heading">Login</p>
                 <div class="field">
                     <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -42,14 +42,14 @@
                 </div>
                 <div class="btn">
                     <button class="button1"
-                        type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        @click.prevent="login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
                 </div>
                 <button class="button3">Forgot Password</button>
             </form>
         </div>
 
         <div class="form-container d-flex justify-content-center align-items-center" style="padding-bottom: 2rem;">
-            <form class="form" v-on:submit.prevent="signUp">
+            <form class="form">
                 <p id="heading">Sign Up</p>
                 <div class="field">
                     <input placeholder="First Name" class="input-field" type="text" v-model="firstName" required>
@@ -64,7 +64,7 @@
                     <input placeholder="password" class="input-field" type="password" v-model="password" required>
                 </div>
                 <div class="btn">
-                    <button class="button1" type="submit">Sign Up</button>
+                    <button class="button1" @click.prevent="signUp">Sign Up</button>
                 </div>
             </form>
         </div>

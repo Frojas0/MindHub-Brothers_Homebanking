@@ -28,22 +28,18 @@ public class HomebankingApplication {
 			Client client01 = (new Client("Melba","Morel", "melba@mindhub.com",passwordEncoder.encode("Melba123")));
 			Client client02 = (new Client("Facundo","Rojas", "facuroja@hotmail.com",passwordEncoder.encode("Facundo123")));
 			Client client03 = (new Client("Carlos","Carlera", "carlitocarlera@hotmail.com",passwordEncoder.encode("Carlos123")));
-			Client client04 = (new Client("Josesito","Rios", "joserios@hotmail.com",passwordEncoder.encode("Josesito123")));
 			Client admin01 = (new Client("admin","-","admin@admin.com",passwordEncoder.encode("Admin123")));
 
 
 			//CREACION DE CUENTAS
 			Account account01 = (new Account("VIN001",LocalDateTime.now(),5000.00));
 			Account account02 = (new Account("VIN002",LocalDateTime.now().plusDays(1),7500.00));
-			Account account03 = (new Account("CUENTA03TEST",LocalDateTime.now(),23123.21));
-			Account account04 = (new Account("CUENTA04TEST",LocalDateTime.now(),31112234.23));
-			Account account05 = (new Account("CUENTA05TEST",LocalDateTime.now(),502323.12));
+			Account account03 = (new Account("VIN003",LocalDateTime.now(),23123.21));
+
 			//asignacion a clientes
 			client01.addAccount(account01);
 			client01.addAccount(account02);
 			client02.addAccount(account03);
-			client02.addAccount(account04);
-			client02.addAccount(account05);
 
 
 			//CREACION DE TRANSACCIONES
@@ -97,13 +93,10 @@ public class HomebankingApplication {
 			clientRepository.save(client01);
 			clientRepository.save(client02);
 			clientRepository.save(client03);
-			clientRepository.save(client04);
 
 			accountRepository.save(account01);
 			accountRepository.save(account02);
 			accountRepository.save(account03);
-			accountRepository.save(account04);
-			accountRepository.save(account05);
 
 			transactionRepository.save(transaction01);
 			transactionRepository.save(transaction02);

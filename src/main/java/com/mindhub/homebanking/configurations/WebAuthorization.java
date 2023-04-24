@@ -42,6 +42,7 @@ public class WebAuthorization {
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));// if login is successful, just clear the flags asking for authentication
         http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));// if login fails, just send an authentication failure response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());// if logout is successful, just send a success response
+//        http.cors()
         return http.build();
     }
     private void clearAuthenticationAttributes(HttpServletRequest request) {
