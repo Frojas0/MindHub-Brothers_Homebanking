@@ -27,6 +27,16 @@ const app = createApp({
                 console.log(this.debitCards);
             })
             .catch(err => console.log(err))
+    },
+    methods: {
+        logOut() {
+            axios
+                .post('/api/logout')
+                .then(response => {
+                    console.log('signed out!!!')
+                    window.location.replace('/web/index.html');
+                })
+        }
     }
 })
 app.mount('#vueApp')

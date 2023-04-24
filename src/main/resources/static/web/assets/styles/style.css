@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700);
+
 /* Normalized Style */
 * {
     font-family: Helvetica, Arial, sans-serif;
@@ -7,21 +10,25 @@
     /* border: 1px solid red; */
 }
 
-/* HEADER */
+/* ---------- HEADER ---------- */
+.active {
+    border-bottom: 2px solid #b1b1b1 !important;
+}
+
 header {
-    height: 14vh;
+    min-height: 14vh;
     background-color: black;
 }
 
 #header-nav {
     background-color: black !important;
-    height: 14vh;
+    min-height: 14vh;
+    z-index: 1;
 }
 
 .navbar {
     height: 15vh;
     width: 95vw;
-    /* background-color: black !important; */
 }
 
 .logo-header {
@@ -29,31 +36,26 @@ header {
 }
 
 .nav-link {
-    color: #737373 !important;
-    /* color: #7a6cfc !important; */
+    color: #b1b1b1 !important;
 }
 
 #navbarNav {
-    /* background-color: aqua; */
-    display: flex;
+    /* border-radius: 1rem; */
     justify-content: end;
     align-items: center;
 }
 
 .navbar-nav {
+    background-color: black;
     font-size: 150%;
     gap: 1.5rem;
-    border: solid 2px #7a6cfc;
+    /* border: solid 2px #7a6cfc; */
     border-radius: 1rem;
-    /* background-color: #141424; */
-    /* background-image: url(../images/nnnoise.svg); */
-    background-size: cover;
-    /* background-color: antiquewhite; */
 }
 
 a:hover {
     color: #7a6cfc !important;
-    transform: scale(1.1);
+    transform: scale(1.05);
     transition: all 0.3s;
 }
 
@@ -62,23 +64,48 @@ a:focus {
     color: lime !important;
 } */
 
-/* MAIN */
+/* ---------- MAIN ---------- */
 main {
     min-height: 90vh;
     background: url(../images/bguuundulate.svg);
     background-size: cover;
-    background-color: #141424;
+    background-color: #242439;
     color: white;
 }
 
-.accountsContainer {
+.titleContainer {
     margin-top: 2rem;
-    width: 100vw;
-    height: 5rem;
-    color: #737373;
-    background: black;
-    border-top: 1px solid #7a6cfc;
-    border-bottom: 1px solid #7a6cfc;
+    margin-bottom: 2rem;
+    width: 100%;
+    height: 4rem;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.titleP {
+    -webkit-text-stroke: 1.5px black;
+    font-weight: bold;
+    color: #b1b1b1;
+    font-size: 200%;
+    margin: 0;
+}
+
+.cardsContainer {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.subtitleP {
+    -webkit-text-stroke: 1.5px black;
+    font-weight: bold;
+    color: #b1b1b1;
+    font-size: 200%;
+    margin: 0;
+    margin-right: 2rem;
 }
 
 table {
@@ -94,26 +121,135 @@ table {
     color: #1cbfff;
 }
 
-/* FOOTER */
+/* ---------- FOOTER ---------- */
 
-/* ACCOUNT */
-.DEBIT {
-    color: green;
+/* ---------- INDEX FORM ---------- */
+.form-container {
+    padding-top: 2rem;
+    width: 100%;
 }
 
-.CREDIT {
-    color: red;
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    /* background-color: #171717; */
+    background: rgba(255, 255, 255, 0);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    transition: .4s ease-in-out;
 }
 
-/* ACCOUNTS */
+.form:hover {
+    transform: scale(1.05);
+    border: 1px solid black;
+}
+
+#heading {
+    text-align: center;
+    margin: 2em;
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.input-icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: white;
+}
+
+.input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #d3d3d3;
+}
+
+.form .btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 2.5em;
+}
+
+.button1 {
+    padding: 0.5em;
+    padding-left: 1.1em;
+    padding-right: 1.1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-color: #171717;
+    color: white;
+}
+
+.button1:hover {
+    background-color: black;
+    color: white;
+}
+
+.button2 {
+    padding: 0.5em;
+    padding-left: 2.3em;
+    padding-right: 2.3em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-color: #171717;
+    color: white;
+}
+
+.button2:hover {
+    background-color: black;
+    color: white;
+}
+
+.button3 {
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-color: #171717;
+    color: white;
+}
+
+.button3:hover {
+    background-color: red;
+    color: white;
+}
+
+/* ---------- ACCOUNTS CONTAINER ---------- */
+/* #cards-anchor:hover {
+    color: #737373 !important;
+} */
 #cards-anchor {
     text-decoration: none;
     color: white;
 }
-
-/* #cards-anchor:hover {
-    color: #737373 !important;
-} */
 
 #accounts-card {
     background-color: transparent;
@@ -176,7 +312,7 @@ table {
     }
 }
 
-/* CARDS */
+/* ---------- CARDS ---------- */
 .flip-card {
     background-color: transparent;
     width: 312px;
@@ -277,8 +413,11 @@ table {
     top: 5em;
     left: .8em;
     border-radius: 2.5px;
-    font-family: 'Dancing Script', cursive;
     color: blue;
+}
+
+.sign {
+    font-family: 'Dancing Script', cursive;
 }
 
 .sstrip {
@@ -333,24 +472,40 @@ table {
 
 .flip-card-front {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
-    /* background-color: aliceblue; */
+    background: url(../images/ffflurry.svg);
+    background-size: cover;
 }
 
 .flip-card-back {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
-    /* background-color: antiquewhite; */
+    background: url(../images/ffflurry.svg);
+    background-size: cover;
     transform: rotateY(180deg);
 }
 
 /*dynamic class*/
+.DEBIT {
+    color: green;
+}
+
+.CREDIT {
+    color: red;
+}
+
 .GOLD {
-    background-color: gold;
+    /* background-color: gold; */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right, #ffd700, #cd7f32);
+    background-size: cover;
 }
 
 .TITANIUM {
-    background-color: rgb(149, 148, 148);
+    background: linear-gradient(to right, #808080, #4d4d4d);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .SILVER {
-    background-color: silver;
+    /* background-color: silver; */
+    background: linear-gradient(to right, #c0c0c0, #a9a9a9);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }

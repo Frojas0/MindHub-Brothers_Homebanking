@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
-<body>
+<body id="vueApp">
     <header class="d-flex justify-content-center">
         <nav class="navbar navbar-expand-lg bg-body-tertiary" id="header-nav">
             <div class="container-fluid justify-content-between">
@@ -39,14 +39,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="./cards.html">CARDS</a>
                         </li>
+                        <li v-on:click="logOut">
+                            <button>LogOut</button>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <main id="vueApp" class="d-flex flex-column justify-content-center align-items-center">
-        <div class="accountsContainer d-flex align-items-center justify-content-center">
-            <h2>ACCOUNTS</h2>
+    <main class="d-flex flex-column justify-content-center align-items-center">
+        <div class="titleContainer d-flex align-items-center justify-content-center">
+            <p class="titleP">ACCOUNTS</p>
         </div>
         <div class="d-flex justify-content-center align-items-center gap-5">
             <div class="card m-4" id="accounts-card" v-for="account of accounts">
@@ -66,10 +69,9 @@
                 </div>
             </div>
         </div>
-        <h2
-            style="background-color: black;color: white; border-radius: 1rem; padding: 2rem;margin-bottom: 2rem;margin-top: 2rem;">
-            LOANS
-        </h2>
+        <div class="titleContainer d-flex align-items-center justify-content-center">
+            <p class="titleP">LOANS</p>
+        </div>
         <div class="d-flex flex-column justify-content-center align-items-center" style="margin-top: 2rem;">
             <div class="table-responsive">
                 <div v-if="loans.length != 0">

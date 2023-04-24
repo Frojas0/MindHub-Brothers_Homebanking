@@ -2,30 +2,34 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootApplication
 public class HomebankingApplication {
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	public static void main(String[] args) {SpringApplication.run(HomebankingApplication.class, args);}
 	@Bean
 	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return (args) -> {
-
 			List<Integer> mortgagePayments = List.of(12,24,36,48,60);
 			List<Integer> personalPayments = List.of(16,12,24);
 			List<Integer> carPayments = List.of(6,12,24,36);
 
 			//CREACION DE CLIENTES
-			Client client01 = (new Client("Melba","Morel", "melba@mindhub.com"));
-			Client client02 = (new Client("Facundo","Rojas", "facuroja@hotmail.com"));
-			Client client03 = (new Client("Carlos","Carlera", "carlitocarlera@hotmail.com"));
-			Client client04 = (new Client("Josesito","Rios", "joserios@hotmail.com"));
+			Client client01 = (new Client("Melba","Morel", "melba@mindhub.com",passwordEncoder.encode("Melba123")));
+			Client client02 = (new Client("Facundo","Rojas", "facuroja@hotmail.com",passwordEncoder.encode("Facundo123")));
+			Client client03 = (new Client("Carlos","Carlera", "carlitocarlera@hotmail.com",passwordEncoder.encode("Carlos123")));
+			Client client04 = (new Client("Josesito","Rios", "joserios@hotmail.com",passwordEncoder.encode("Josesito123")));
+			Client admin01 = (new Client("admin","-","admin@admin.com",passwordEncoder.encode("Admin123")));
 
 
 			//CREACION DE CUENTAS
@@ -61,14 +65,14 @@ public class HomebankingApplication {
 			//CREACION DE PRESTAMOS
 			Loan mortgageLoan = (new Loan("Mortgage",500000, mortgagePayments));
 			Loan personalLoan = (new Loan("Personal",100000, personalPayments));
-			Loan carLoan = (new Loan("Car",300000, carPayments));
+			Loan carLoan = (new Loan("Automotive",300000, carPayments));
 
 
 			//CREACION DE CLIENTLOAN
-			ClientLoan loan01 = (new ClientLoan(400000,60,"Mortgage Loan"));
-			ClientLoan loan02 = (new ClientLoan(50000,12,"Personal Loan"));
-			ClientLoan loan03 = (new ClientLoan(100000,24,"Personal Loan"));
-			ClientLoan loan04 = (new ClientLoan(200000,36,"Car Loan"));
+			ClientLoan loan01 = (new ClientLoan(400000,60));
+			ClientLoan loan02 = (new ClientLoan(50000,12));
+			ClientLoan loan03 = (new ClientLoan(100000,24));
+			ClientLoan loan04 = (new ClientLoan(200000,36));
 			//asignacion a cliente
 			client01.addClientLoan(loan01);
 			client01.addClientLoan(loan02);

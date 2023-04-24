@@ -16,11 +16,21 @@ const app = createApp({
                 this.accounts.sort((a, b) => a.id - b.id)
                 this.loans = this.data.loans
                 this.loans.sort((a, b) => a.loanId - b.loanId)
-                console.log(this.data)
-                console.log(this.accounts);
-                console.log(this.loans)
+                // console.log(this.data)
+                // console.log(this.accounts);
+                // console.log(this.loans)
             })
             .catch(err => console.log(err))
+    },
+    methods: {
+        logOut() {
+            axios
+                .post('/api/logout')
+                .then(response => {
+                    console.log('signed out!!!')
+                    window.location.replace('/web/index.html');
+                })
+        }
     }
 })
 app.mount('#vueApp')
