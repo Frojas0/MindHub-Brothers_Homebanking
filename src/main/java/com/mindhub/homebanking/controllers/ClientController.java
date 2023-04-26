@@ -52,7 +52,7 @@ public class ClientController {
         String accountNumber;
         do {
             int randomNumber = (int) (Math.random() * 100000000);
-            accountNumber = "VIN" + String.format("%08d", randomNumber);
+            accountNumber = "VIN-" + String.format("%08d", randomNumber);
         } while (accountRepository.findByNumber(accountNumber) != null);
         Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
         Account newAccount = new Account(accountNumber, LocalDateTime.now(),0);

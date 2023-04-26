@@ -7,7 +7,9 @@ const app = createApp({
             accounts: [],
             loans: [],
             debitCards: [],
-            creditCards: []
+            creditCards: [],
+            type: '',
+            color: ''
         }
     },
     created() {
@@ -35,6 +37,14 @@ const app = createApp({
                 .then(response => {
                     console.log('signed out!!!')
                     window.location.replace('/web/index.html');
+                })
+        },
+        createCard() {
+            axios
+                .post('/api/clients/current/cards', `type=${type}&color=${color}`)
+                .then(response => {
+                    console.log('CREATED')
+                    window.location.replace('/web/cards.html')
                 })
         }
     }

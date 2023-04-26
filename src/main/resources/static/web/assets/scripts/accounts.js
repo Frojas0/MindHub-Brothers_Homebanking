@@ -30,6 +30,14 @@ const app = createApp({
                     console.log('signed out!!!')
                     window.location.replace('/web/index.html');
                 })
+        },
+        createAcc() {
+            axios
+                .post('/api/clients/current/accounts')
+                .then(response => {
+                    console.log('Account created')
+                    window.location.replace('/web/accounts.html')
+                })
         }
     }
 })

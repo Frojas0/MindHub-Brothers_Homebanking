@@ -81,9 +81,9 @@ public class HomebankingApplication {
 			carLoan.addClientLoan(loan04);
 
 			//CREACION DE TARJETAS
-			Card card01 = (new Card(CardType.DEBIT, CardColor.GOLD,"1111 2222 3333 4444", 321,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
-			Card card02 = (new Card(CardType.CREDIT, CardColor.TITANIUM,"0000 2222 4444 6666", 567,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
-			Card card03 = (new Card(CardType.CREDIT, CardColor.SILVER,"4321 6543 7654 9876", 555,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Facundo Rojas"));
+			Card card01 = (new Card(CardType.DEBIT, CardColor.GOLD,1111222233334444L, 321,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
+			Card card02 = (new Card(CardType.CREDIT, CardColor.TITANIUM,0000222244446666L, 567,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
+			Card card03 = (new Card(CardType.CREDIT, CardColor.SILVER,4321654376549876L, 555,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Facundo Rojas"));
 			//asignacion a cliente
 			client01.addCardHolder(card01);
 			client01.addCardHolder(card02);

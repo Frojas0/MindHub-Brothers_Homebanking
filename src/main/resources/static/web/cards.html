@@ -60,7 +60,7 @@
             <div class="d-flex justify-content-center align-items-center" style="width: 28rem;"
                 v-if="debitCards.length != 0">
                 <p class="subtitleP">DEBIT</p>
-                <div>
+                <div class="d-flex gap-2">
                     <div class="flip-card" v-for="card of debitCards">
                         <div class="flip-card-inner">
                             <div class="flip-card-front" :class="card.color">
@@ -124,7 +124,7 @@
             <div class="d-flex justify-content-center align-items-center" style="width: 28rem;"
                 v-if="creditCards.length != 0">
                 <p class="subtitleP">CREDIT</p>
-                <div>
+                <div class="d-flex gap-2">
                     <div class="flip-card" v-for="card of creditCards">
                         <div class="flip-card-inner">
                             <div class="flip-card-front" :class="card.color">

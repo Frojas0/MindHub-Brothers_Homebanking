@@ -39,7 +39,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="./cards.html">CARDS</a>
                         </li>
-                        <li v-on:click="logOut">
+                        <li @click="logOut">
                             <button>LogOut</button>
                         </li>
                     </ul>
@@ -51,6 +51,10 @@
         <div class="titleContainer d-flex align-items-center justify-content-center">
             <p class="titleP">ACCOUNTS</p>
         </div>
+        <button @click="createAcc" class="createContainer d-flex align-items-center justify-content-center g-1">
+            <img src="./assets/images/add-icon.png" alt="addIcon" style="width: 3rem;">
+            <p class="buttonCreate" style="margin: 0;">create</p>
+        </button>
         <div class="d-flex justify-content-center align-items-center gap-5">
             <div class="card m-4" id="accounts-card" v-for="account of accounts">
                 <div class="circle"></div>

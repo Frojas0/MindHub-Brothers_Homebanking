@@ -12,7 +12,7 @@ public class Card {
     private long id;
     private CardType type;
     private CardColor color;
-    private String number;
+    private long number;
     private int cvv;
     private LocalDateTime thruDate;
     private LocalDateTime fromDate;
@@ -24,7 +24,7 @@ public class Card {
     //CONSTRUCTORS
     public Card() {
     }
-    public Card(CardType type, CardColor color, String number, int cvv, LocalDateTime thruDate, LocalDateTime fromDate, String cardHolder) {
+    public Card(CardType type, CardColor color, long number, int cvv, LocalDateTime thruDate, LocalDateTime fromDate, String cardHolder) {
         this.type = type;
         this.color = color;
         this.number = number;
@@ -38,7 +38,7 @@ public class Card {
     public long getId() {return id;}
     public CardType getType() {return type;}
     public CardColor getColor() {return color;}
-    public String getNumber() {return number;}
+    public long getNumber() {return number;}
     public int getCvv() {return cvv;}
     public LocalDateTime getThruDate() {return thruDate;}
     public LocalDateTime getFromDate() {return fromDate;}
@@ -48,7 +48,7 @@ public class Card {
     //SETTER METHODS
     public void setType(CardType type) {this.type = type;}
     public void setColor(CardColor color) {this.color = color;}
-    public void setNumber(String number) {this.number = number;}
+    public void setNumber(long number) {this.number = number;}
     public void setCvv(int cvv) {this.cvv = cvv;}
     public void setThruDate(LocalDateTime thruDate) {this.thruDate = thruDate;}
     public void setFromDate(LocalDateTime fromDate) {this.fromDate = fromDate;}
