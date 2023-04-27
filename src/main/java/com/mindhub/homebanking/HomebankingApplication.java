@@ -28,8 +28,7 @@ public class HomebankingApplication {
 			Client client01 = (new Client("Melba","Morel", "melba@mindhub.com",passwordEncoder.encode("Melba123")));
 			Client client02 = (new Client("Facundo","Rojas", "facuroja@hotmail.com",passwordEncoder.encode("Facundo123")));
 			Client client03 = (new Client("Carlos","Carlera", "carlitocarlera@hotmail.com",passwordEncoder.encode("Carlos123")));
-			Client admin01 = (new Client("admin","-","admin@admin.com",passwordEncoder.encode("Admin123")));
-
+			Client admin01 = (new Client("admin","admin","admin@admin.com",passwordEncoder.encode("admin")));
 
 			//CREACION DE CUENTAS
 			Account account01 = (new Account("VIN001",LocalDateTime.now(),5000.00));
@@ -81,9 +80,9 @@ public class HomebankingApplication {
 			carLoan.addClientLoan(loan04);
 
 			//CREACION DE TARJETAS
-			Card card01 = (new Card(CardType.DEBIT, CardColor.GOLD,1111222233334444L, 321,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
-			Card card02 = (new Card(CardType.CREDIT, CardColor.TITANIUM,0000222244446666L, 567,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
-			Card card03 = (new Card(CardType.CREDIT, CardColor.SILVER,4321654376549876L, 555,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Facundo Rojas"));
+			Card card01 = (new Card(CardType.DEBIT, CardColor.GOLD,"1111-2222-3333-4444", 321,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
+			Card card02 = (new Card(CardType.CREDIT, CardColor.TITANIUM,"0000-2222-4444-6666", 567,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
+			Card card03 = (new Card(CardType.CREDIT, CardColor.SILVER,"4321-6543-7654-9876", 555,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Facundo Rojas"));
 			//asignacion a cliente
 			client01.addCardHolder(card01);
 			client01.addCardHolder(card02);
@@ -93,6 +92,7 @@ public class HomebankingApplication {
 			clientRepository.save(client01);
 			clientRepository.save(client02);
 			clientRepository.save(client03);
+			clientRepository.save(admin01);
 
 			accountRepository.save(account01);
 			accountRepository.save(account02);

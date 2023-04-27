@@ -23,41 +23,47 @@ public class CardController {
     private ClientRepository clientRepository;
 
     @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.POST)
-    public ResponseEntity<Object> createAccount(Authentication authentication, @RequestParam String type, @RequestParam String color) {
+    public ResponseEntity<Object> createCard(Authentication authentication, @RequestParam String type, @RequestParam String color) {
         Client currentClient = clientRepository.findByEmail(authentication.getName());
         int debitAcc = 0;
         int creditAcc = 0;
+
         for (Card card : currentClient.getCards()) {
             if (card.getType().equals(CardType.CREDIT)) {
                 creditAcc++;
             } else if (card.getType().equals(CardType.DEBIT)) {
                 debitAcc++;
             }
+            if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
+                return new ResponseEntity<>("Already have a " + type.toLowerCase() + " card with this color", HttpStatus.FORBIDDEN);
+            }
         }
-        if(type.equals("CREDIT")){
-            if (creditAcc < 3){
-                Card newCard = new Card(CardType.CREDIT, CardColor.valueOf(color), randomNumber() , Integer.parseInt(randomCvv()), LocalDateTime.now(), LocalDateTime.now().plusYears(5), authentication.getName());
+        if(type.equals("CREDIT") && creditAcc < 3 ){
+                Card newCard = new Card(CardType.CREDIT, CardColor.valueOf(color), randomNumber() , Integer.parseInt(randomCvv()), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
                 currentClient.addCardHolder(newCard);
                 cardRepository.save(newCard);
-            }else {
-                return new ResponseEntity<>("Already have 3 CREDIT cards", HttpStatus.FORBIDDEN);
-        }
-        }
-        if(type.equals("DEBIT")){
-            if (debitAcc < 3){
-                Card newCard = new Card(CardType.DEBIT, CardColor.valueOf(color), randomNumber() , Integer.parseInt(randomCvv()), LocalDateTime.now(), LocalDateTime.now().plusYears(5), authentication.getName());
+        } else if(type.equals("DEBIT") && debitAcc < 3){
+                Card newCard = new Card(CardType.DEBIT, CardColor.valueOf(color), randomNumber() , Integer.parseInt(randomCvv()), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
                 currentClient.addCardHolder(newCard);
                 cardRepository.save(newCard);
-            }else {
-                return new ResponseEntity<>("Already have 3 DEBIT cards", HttpStatus.FORBIDDEN);
+        } else{
+            return new ResponseEntity<>("Already have 3 cards",HttpStatus.FORBIDDEN);
         }
-        }
-        return new ResponseEntity<>("Account created", HttpStatus.CREATED);
+        return new ResponseEntity<>("Card created",HttpStatus.CREATED);
     }
 
-    private static long randomNumber() {
-        long randomNumber = (long) (Math.random() * 10000000000000000L);
-        return randomNumber;
+    private static String randomNumber() {
+        Random randomNum = new Random();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < 4; i++) {
+            int num = randomNum.nextInt(10000);
+            sb.append(String.format("%04d", num));
+            if (i < 3) {
+                sb.append("-");
+            }
+        }
+        return sb.toString();
     }
 
     private static String randomCvv() {
