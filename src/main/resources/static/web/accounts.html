@@ -13,104 +13,108 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
-<body id="vueApp">
-    <header class="d-flex justify-content-center">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" id="header-nav">
-            <div class="container-fluid justify-content-between">
-                <a class="navbar-brand" href="#">
-                    <img class="logo-header animate__animated animate__backInLeft" src="./assets/images/logo01.png"
-                        alt="MindHub-Brothers-logo">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse animate__animated animate__backInDown" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">ABOUT US</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">ACCOUNTS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./cards.html">CARDS</a>
-                        </li>
-                        <li @click="logOut">
-                            <button>LogOut</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main class="d-flex flex-column justify-content-center align-items-center">
-        <div class="titleContainer d-flex align-items-center justify-content-center">
-            <p class="titleP">ACCOUNTS</p>
-        </div>
-        <!-- <div v-if=""></div> -->
-        <button v-if="accounts.length < 3" @click="createAcc"
-            class="createContainer d-flex align-items-center justify-content-center g-1">
-            <img src="./assets/images/add-icon.png" alt="addIcon" style="width: 3rem;">
-            <p class="buttonCreate" style="margin: 0;">create</p>
-        </button>
-        <div class="d-flex flex-wrap justify-content-around align-items-center gap-5">
-            <div class="card m-4" id="accounts-card" v-for="account of accounts">
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="card-inner animate__animated animate__fadeIn" style="color: white;">
-                    <a :href="'account.html?id=' +account.id" id="cards-anchor">
-                        <div class="d-flex flex-column justify-content-center align-items-center p-2">
-                            <img src="../web/assets/images/logo02BG.png" alt="cards-logo" id="card-logo">
-                            <h4>{{account.number}}</h4>
-                            <h6>Balance:</h6>
-                            <h6>US${{account.balance.toLocaleString('en-US')}}</h6>
-                            <h6>Creation:</h6>
-                            <h6>{{account.creationDate.slice(0,10)}}</h6>
-                        </div>
+<body>
+    <div id="vueApp">
+        <header class="d-flex justify-content-center">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary" id="header-nav">
+                <div class="container-fluid justify-content-between">
+                    <a class="navbar-brand" href="#">
+                        <img class="logo-header animate__animated animate__fadeIn" src="./assets/images/logo01.png"
+                            alt="MindHub-Brothers-logo">
                     </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">HOME</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">ABOUT US</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">ACCOUNTS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./cards.html">CARDS</a>
+                            </li>
+                            <li v-on:click="logOut">
+                                <button class="outButton">LOG OUT</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="d-flex flex-column justify-content-center align-items-center">
+            <div class="titleContainer d-flex align-items-center justify-content-center">
+                <p class="titleP">ACCOUNTS</p>
+            </div>
+            <!-- <div v-if=""></div> -->
+            <button v-if="accounts.length < 3" @click="createAcc"
+                class="createContainer d-flex align-items-center justify-content-center g-1">
+                <img src="./assets/images/add-icon.png" alt="addIcon" style="width: 3rem;">
+                <p class="buttonCreate" style="margin: 0;">create</p>
+            </button>
+            <div class="d-flex flex-wrap justify-content-around align-items-center gap-5">
+                <div class="card m-4" id="accounts-card" v-for="account of accounts">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="card-inner animate__animated animate__fadeIn" style="color: white;">
+                        <a :href="'account.html?id=' +account.id" id="cards-anchor">
+                            <div class="d-flex flex-column justify-content-center align-items-center p-2">
+                                <img src="../web/assets/images/logo02BG.png" alt="cards-logo" id="card-logo">
+                                <h4>{{account.number}}</h4>
+                                <h6>Balance:</h6>
+                                <h6>US${{account.balance.toLocaleString('en-US')}}</h6>
+                                <h6>Creation:</h6>
+                                <h6>{{account.creationDate.slice(0,10)}}</h6>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="titleContainer d-flex align-items-center justify-content-center">
-            <p class="titleP">LOANS</p>
-        </div>
-        <div class="d-flex flex-column justify-content-center align-items-center" style="margin-top: 2rem;">
-            <div class="table-responsive">
-                <div v-if="loans.length != 0">
-                    <table class="table table-dark" style="width: 40rem;">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">LOAN AMOUNT</th>
-                                <th scope="col">LOAN NAME</th>
-                                <th scope="col">LOAN PAYMENTS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="loan of loans">
-                                <td># {{loan.loanId}}</td>
-                                <td>US$ {{loan.amount.toLocaleString('en-US')}}</td>
-                                <td>{{loan.loanName}}</td>
-                                <td>{{loan.payments}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <h2 v-else style="background-color: black; border-radius: 1rem; padding: 1rem;"> Client with no Loans
-                </h2>
+            <div class="titleContainer d-flex align-items-center justify-content-center">
+                <p class="titleP">LOANS</p>
             </div>
-        </div>
-        <!-- <div>
-            <p>El número es: <span id="numero"></span></p>
-        </div> -->
-    </main>
-    <footer>
+            <div class="d-flex flex-column justify-content-center align-items-center" style="margin-top: 2rem;">
+                <div class="table-responsive">
+                    <div v-if="loans.length != 0">
+                        <table class="table table-dark" style="width: 40rem;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">LOAN AMOUNT</th>
+                                    <th scope="col">LOAN NAME</th>
+                                    <th scope="col">LOAN PAYMENTS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="loan of loans">
+                                    <td># {{loan.loanId}}</td>
+                                    <td>US$ {{loan.amount.toLocaleString('en-US')}}</td>
+                                    <td>{{loan.loanName}}</td>
+                                    <td>{{loan.payments}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h2 v-else style="background-color: black; border-radius: 1rem; padding: 1rem;"> Client with no
+                        Loans
+                    </h2>
+                </div>
+            </div>
+            <!-- <div>
+                <p>El número es: <span id="numero"></span></p>
+            </div> -->
+        </main>
+        <footer>
 
-    </footer>
+        </footer>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
