@@ -47,12 +47,12 @@ public class CardController {
                 currentClient.addCardHolder(newCard);
                 cardRepository.save(newCard);
         } else{
-            return new ResponseEntity<>("Already have 3 cards",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("you have 3 cards of the same type",HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>("Card created",HttpStatus.CREATED);
     }
 
-    private static String randomNumber() {
+    public static String randomNumber() {
         Random randomNum = new Random();
         StringBuilder sb = new StringBuilder();
 
@@ -66,7 +66,7 @@ public class CardController {
         return sb.toString();
     }
 
-    private static String randomCvv() {
+    public static String randomCvv() {
         int num = (int) (Math.random() * 1000);
         return String.format("%03d", num);
     }
