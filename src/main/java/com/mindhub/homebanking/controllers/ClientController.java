@@ -59,13 +59,9 @@ public class ClientController {
             return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
         }
 
-        String accountNumber;
-        do {
-            int randomNumber = (int) (Math.random() * 100000000);
-            accountNumber = "VIN-" + String.format("%08d", randomNumber);
-        } while (accountRepository.findByNumber(accountNumber) != null);
+
         Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
-        Account newAccount = new Account(accountNumber, LocalDateTime.now(),0);
+        Account newAccount = new Account(randomNumber(), LocalDateTime.now(),0);
         clientRepository.save(newClient);
         newClient.addAccount(newAccount);
         accountRepository.save(newAccount);
@@ -76,5 +72,12 @@ public class ClientController {
     public ClientDTO getCurrentClient(Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
-
+    public String randomNumber() {
+        String accountNumber;
+        do {
+            int randomNumber = (int) (Math.random() * 100000000);
+            accountNumber = "VIN-" + String.format("%08d", randomNumber);
+        } while (accountRepository.findByNumber(accountNumber) != null);
+        return accountNumber;
+    }
 }

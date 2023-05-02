@@ -23,7 +23,8 @@ public class CardController {
     private ClientRepository clientRepository;
 
     @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.POST)
-    public ResponseEntity<Object> createCard(Authentication authentication, @RequestParam String type, @RequestParam String color) {
+    public ResponseEntity<Object> createCard(
+            Authentication authentication, @RequestParam String type, @RequestParam String color) {
         Client currentClient = clientRepository.findByEmail(authentication.getName());
         int debitAcc = 0;
         int creditAcc = 0;
@@ -39,11 +40,11 @@ public class CardController {
             }
         }
         if(type.equals("CREDIT") && creditAcc < 3 ){
-                Card newCard = new Card(CardType.CREDIT, CardColor.valueOf(color), randomNumber() , Integer.parseInt(randomCvv()), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
+                Card newCard = new Card(CardType.CREDIT, CardColor.valueOf(color), randomNumber() , randomCvv(), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
                 currentClient.addCardHolder(newCard);
                 cardRepository.save(newCard);
         } else if(type.equals("DEBIT") && debitAcc < 3){
-                Card newCard = new Card(CardType.DEBIT, CardColor.valueOf(color), randomNumber() , Integer.parseInt(randomCvv()), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
+                Card newCard = new Card(CardType.DEBIT, CardColor.valueOf(color), randomNumber() , randomCvv(), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
                 currentClient.addCardHolder(newCard);
                 cardRepository.save(newCard);
         } else{
@@ -52,10 +53,9 @@ public class CardController {
         return new ResponseEntity<>("Card created",HttpStatus.CREATED);
     }
 
-    public static String randomNumber() {
+    public  String randomNumber() {
         Random randomNum = new Random();
         StringBuilder sb = new StringBuilder();
-
         for (int i = 0; i < 4; i++) {
             int num = randomNum.nextInt(10000);
             sb.append(String.format("%04d", num));
@@ -66,8 +66,8 @@ public class CardController {
         return sb.toString();
     }
 
-    public static String randomCvv() {
-        int num = (int) (Math.random() * 1000);
-        return String.format("%03d", num);
+    public int randomCvv() {
+        int num = (int) ((Math.random() * 899) + 100);
+        return num;
     }
 }
