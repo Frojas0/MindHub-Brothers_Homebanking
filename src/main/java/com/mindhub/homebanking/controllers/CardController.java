@@ -28,7 +28,7 @@ public class CardController {
         Client currentClient = clientRepository.findByEmail(authentication.getName());
         int debitAcc = 0;
         int creditAcc = 0;
-
+        //usar un filter
         for (Card card : currentClient.getCards()) {
             if (card.getType().equals(CardType.CREDIT)) {
                 creditAcc++;
@@ -53,7 +53,7 @@ public class CardController {
         return new ResponseEntity<>("Card created",HttpStatus.CREATED);
     }
 
-    public  String randomNumber() {
+    private String randomNumber() {
         Random randomNum = new Random();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 4; i++) {
@@ -66,7 +66,7 @@ public class CardController {
         return sb.toString();
     }
 
-    public int randomCvv() {
+    private int randomCvv() {
         int num = (int) ((Math.random() * 899) + 100);
         return num;
     }

@@ -49,38 +49,40 @@
             </nav>
         </header>
         <main class="d-flex flex-column justify-content-center align-items-center">
-            <div class="createCardContainer">
-                <form @submit.prevent="createCard" class="d-flex flex-column">
-                    <div class="labelContainer">
-                        <p class="formText">SELECT TYPE</p>
-                        <label class="labelForm" for="credit">
-                            Credit
-                            <input id="credit" type="radio" name="type" value="CREDIT" v-model="type">
-                        </label>
-                        <label class="labelForm" for="debit">
-                            Debit
-                            <input id="debit" type="radio" name="type" value="DEBIT" v-model="type">
-                        </label>
-                    </div>
+            <div class="cardsContainer d-flex align-items-center justify-content-center">
+                <div class="createFormContainer">
+                    <form @submit.prevent="createCard" class="d-flex flex-column">
+                        <div class="labelContainer">
+                            <p class="formText">SELECT TYPE</p>
+                            <label class="labelForm" for="credit">
+                                Credit
+                                <input id="credit" type="radio" name="type" value="CREDIT" v-model="type">
+                            </label>
+                            <label class="labelForm" for="debit">
+                                Debit
+                                <input id="debit" type="radio" name="type" value="DEBIT" v-model="type">
+                            </label>
+                        </div>
 
-                    <div class="labelContainer">
-                        <p class="formText">SELECT COLOR</p>
-                        <label class="labelForm" for="silver">
-                            Silver
-                            <input id="silver" type="radio" name="color" value="SILVER" v-model="color">
-                        </label>
-                        <label class="labelForm" for="gold">
-                            Gold
-                            <input id="gold" type="radio" name="color" value="GOLD" v-model="color">
-                        </label>
-                        <label class="labelForm" for="titanium">
-                            Titanium
-                            <input id="titanium" type="radio" name="color" value="TITANIUM" v-model="color">
-                        </label>
-                    </div>
+                        <div class="labelContainer">
+                            <p class="formText">SELECT COLOR</p>
+                            <label class="labelForm" for="silver">
+                                Silver
+                                <input id="silver" type="radio" name="color" value="SILVER" v-model="color">
+                            </label>
+                            <label class="labelForm" for="gold">
+                                Gold
+                                <input id="gold" type="radio" name="color" value="GOLD" v-model="color">
+                            </label>
+                            <label class="labelForm" for="titanium">
+                                Titanium
+                                <input id="titanium" type="radio" name="color" value="TITANIUM" v-model="color">
+                            </label>
+                        </div>
 
-                    <button class="button4" type="submit">CREATE</button>
-                </form>
+                        <button class="button4" type="submit">CREATE</button>
+                    </form>
+                </div>
             </div>
         </main>
         <footer>
