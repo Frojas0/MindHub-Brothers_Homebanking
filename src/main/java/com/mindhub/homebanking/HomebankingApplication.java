@@ -21,7 +21,7 @@ public class HomebankingApplication {
 	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return (args) -> {
 			List<Integer> mortgagePayments = List.of(12,24,36,48,60);
-			List<Integer> personalPayments = List.of(16,12,24);
+			List<Integer> personalPayments = List.of(12,16,24);
 			List<Integer> carPayments = List.of(6,12,24,36);
 
 			//CREACION DE CLIENTES
@@ -31,9 +31,9 @@ public class HomebankingApplication {
 			Client admin01 = (new Client("admin","admin","admin@admin.com",passwordEncoder.encode("admin")));
 
 			//CREACION DE CUENTAS
-			Account account01 = (new Account("VIN001",LocalDateTime.now(),5000.00));
-			Account account02 = (new Account("VIN002",LocalDateTime.now().plusDays(1),7500.00));
-			Account account03 = (new Account("VIN003",LocalDateTime.now(),23123.21));
+			Account account01 = (new Account("VIN-001",LocalDateTime.now(),5000.00));
+			Account account02 = (new Account("VIN-002",LocalDateTime.now().plusDays(1),7500.00));
+			Account account03 = (new Account("VIN-003",LocalDateTime.now(),23123.21));
 
 			//asignacion a clientes
 			client01.addAccount(account01);

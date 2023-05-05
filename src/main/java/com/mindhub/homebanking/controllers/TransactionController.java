@@ -46,6 +46,9 @@ public class TransactionController {
             } else
                 return new ResponseEntity<>("Fields cannot be empty", HttpStatus.FORBIDDEN);
         }
+        if(amount < 0){
+            return new ResponseEntity<>("Negative ", HttpStatus.FORBIDDEN);
+        }
         if (originNumber.equalsIgnoreCase(destinationNumber)) {
             return new ResponseEntity<>("Destination account cannot be the same as the source account", HttpStatus.FORBIDDEN);
         }
@@ -61,6 +64,10 @@ public class TransactionController {
         if (originAccount.getBalance() < amount) {
             return new ResponseEntity<>("insufficient balance", HttpStatus.FORBIDDEN);
         }
+
+        originAccount.setBalance(originAccount.getBalance()-amount);
+        destinationAccount.setBalance(destinationAccount.getBalance()+amount);
+
         Transaction debitTransaction = (new Transaction(TransactionType.DEBIT,-amount,originNumber+" "+description, LocalDateTime.now()));
         Transaction creditTransaction = (new Transaction(TransactionType.CREDIT,amount,destinationNumber+" "+description, LocalDateTime.now()));
 
@@ -69,12 +76,6 @@ public class TransactionController {
 
         transactionRepository.save(debitTransaction);
         transactionRepository.save(creditTransaction);
-
-        originAccount.setBalance(originAccount.getBalance()-amount);
-        destinationAccount.setBalance(destinationAccount.getBalance()+amount);
-
-        accountRepository.save(originAccount);
-        accountRepository.save(destinationAccount);
 
         return new ResponseEntity<>("Succesful transaction", HttpStatus.CREATED);
     }

@@ -21,11 +21,12 @@ createApp({
                         window.location.replace('./accounts.html');
                     }
                 })
-                .catch(error => {
-                    console.error(error);
-                    this.error = '*ERROR: Wrong e-mail or password';
-                    this.$forceUpdate();
-                })
+                .catch(error => Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'invalid password or email',
+                    timer: 3000,
+                }))
         }
     }
 }).mount("#app")
