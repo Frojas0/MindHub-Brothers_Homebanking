@@ -79,6 +79,7 @@ public class HomebankingApplication {
 			personalLoan.addClientLoan(loan03);
 			carLoan.addClientLoan(loan04);
 
+
 			//CREACION DE TARJETAS
 			Card card01 = (new Card(CardType.DEBIT, CardColor.GOLD,"1111-2222-3333-4444", 321,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
 			Card card02 = (new Card(CardType.CREDIT, CardColor.TITANIUM,"0000-2222-4444-6666", 567,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
@@ -87,6 +88,7 @@ public class HomebankingApplication {
 			client01.addCardHolder(card01);
 			client01.addCardHolder(card02);
 			client02.addCardHolder(card03);
+
 
 			//GUARDADO DE DATOS
 			clientRepository.save(client01);

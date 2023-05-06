@@ -71,7 +71,7 @@ public class ClientController {
     public ClientDTO getCurrentClient(Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
-    public String randomNumber() {
+    private String randomNumber() {
         String accountNumber;
         do {
             int randomNumber = (int) (Math.random() * 100000000);

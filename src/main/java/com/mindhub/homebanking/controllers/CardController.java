@@ -32,7 +32,7 @@ public class CardController {
         for (Card card : currentClient.getCards()) {
             if (card.getType().equals(CardType.CREDIT)) {
                 creditAcc++;
-            } else if (card.getType().equals(CardType.DEBIT)) {
+            }if (card.getType().equals(CardType.DEBIT)) {
                 debitAcc++;
             }
             if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
