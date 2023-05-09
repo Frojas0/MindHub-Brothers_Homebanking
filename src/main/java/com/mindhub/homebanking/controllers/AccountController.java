@@ -2,12 +2,16 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
+import com.mindhub.homebanking.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,5 +29,29 @@ public class AccountController {
     public AccountDTO getAccount(@PathVariable long id){
         Optional<Account> optionalAccount = accountRepository.findById(id);
         return optionalAccount.map(account -> new AccountDTO(account)).orElse(null);
+    }
+
+    @Autowired
+    private ClientRepository clientRepository;
+    @RequestMapping(path = "/api/clients/current/accounts", method = RequestMethod.POST)
+    public ResponseEntity<Object> createAccount (Authentication authentication){
+        Client currentClient = clientRepository.findByEmail(authentication.getName());
+        if(currentClient.getAccounts().size() < 3){
+            Account newAccount = new Account(randomNumber(), LocalDateTime.now(),0);
+            currentClient.addAccount(newAccount);
+            accountRepository.save(newAccount);
+        }else {
+            return new ResponseEntity<>("Already 3 accounts", HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>("Account created", HttpStatus.CREATED);
+    }
+
+    private String randomNumber() {
+        String accountNumber;
+        do {
+            int randomNumber = (int) (Math.random() * 100000000);
+            accountNumber = "VIN-" + String.format("%08d", randomNumber);
+        } while (accountRepository.findByNumber(accountNumber) != null);
+        return accountNumber;
     }
 }

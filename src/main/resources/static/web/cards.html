@@ -6,9 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MH Brothers | Cards</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./assets/images/logo02.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -17,49 +14,59 @@
 </head>
 
 <body>
-    <header class="d-flex justify-content-center">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" id="header-nav">
-            <div class="container-fluid justify-content-between">
-                <a class="navbar-brand" href="#">
-                    <img class="logo-header animate__animated animate__backInLeft" src="./assets/images/logo01.png"
-                        alt="MindHub-Brothers-logo">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse animate__animated animate__backInDown" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">ABOUT US</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./accounts.html">ACCOUNTS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">CARDS</a>
-                        </li>
-                    </ul>
+    <div id="vueApp">
+        <header class="d-flex justify-content-center">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary" id="header-nav">
+                <div class="container-fluid justify-content-between">
+                    <a class="navbar-brand" href="#">
+                        <img class="logo-header animate__animated animate__backInLeft" src="./assets/images/logo01.png"
+                            alt="MindHub-Brothers-logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">HOME</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./accounts.html">ACCOUNTS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">CARDS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./transfers.html">TRANSFERS</a>
+                            </li>
+                            <li v-on:click="logOut">
+                                <button class="outButton">LOG OUT</button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+            </nav>
+        </header>
+        <main class="d-flex flex-column justify-content-center align-items-center">
+            <!-- <h2
+                style="background-color: black;color: white; border-radius: 1rem; padding: 2rem;margin-bottom: 2rem;margin-top: 2rem;">
+                {{data.firstName}}
+                {{data.lastName}}
+            </h2> -->
+            <div class="titleContainer d-flex align-items-center justify-content-center">
+                <p class="titleP">CARDS</p>
             </div>
-        </nav>
-    </header>
-    <main id="vueApp" class="d-flex flex-column justify-content-center align-items-center">
-        <h2
-            style="background-color: black;color: white; border-radius: 1rem; padding: 2rem;margin-bottom: 2rem;margin-top: 2rem;">
-            {{data.firstName}}
-            {{data.lastName}}
-        </h2>
-        <div>
-            <div class="d-flex align-items-center justify-content-around">
-
-                <!-- DEBIT -->
-                <div class="d-flex flex-column justify-content-center align-items-center" style="width: 28rem;">
-                    <h2>DEBIT</h2>
-                    <div v-if="debitCards.length != 0">
+            <a v-if="creditCards.length < 3 || debitCards.length < 3" href="./create-cards.html"
+                class="createContainer d-flex align-items-center justify-content-center g-1"
+                style="text-decoration: none;">
+                <img src="./assets/images/add-icon.png" alt="addIcon" style="width: 3rem;">
+                <p class="buttonCreate" style="margin: 0;">Add Card</p>
+            </a>
+            <div class="cardsContainer d-flex align-items-center justify-content-center">
+                <div v-if="debitCards.length != 0">
+                    <p class="subtitleP" style="width: 100%; text-align: center;">DEBIT</p>
+                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
                         <div class="flip-card" v-for="card of debitCards">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front" :class="card.color">
@@ -108,7 +115,7 @@
                                     </div>
                                     <div class="strip"></div>
                                     <div class="mstrip">
-                                        <p>{{card.cardHolder}}</p>
+                                        <p class="sign">{{card.cardHolder}}</p>
                                     </div>
                                     <div class="sstrip d-flex justify-content-center align-items-center">
                                         <p class="code">{{card.cvv}}</p>
@@ -117,16 +124,13 @@
                             </div>
                         </div>
                     </div>
-                    <h3 v-else
-                        style="background-color: black;color: white; border-radius: 1rem; padding: 1rem;margin-top: 2rem;">
-                        you don't have any debit card yet
-                    </h3>
                 </div>
-
-                <!-- CREDIT -->
-                <div class="d-flex flex-column justify-content-center align-items-center" style="width: 28rem;">
-                    <h2>CREDIT</h2>
-                    <div v-if="creditCards.length != 0">
+                <p v-else class="subtitleP"> You don´t have any Debit card yet</p>
+            </div>
+            <div class="cardsContainer d-flex align-items-center justify-content-center">
+                <div v-if="creditCards.length != 0">
+                    <p class="subtitleP" style="width: 100%; text-align: center;">CREDIT</p>
+                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
                         <div class="flip-card" v-for="card of creditCards">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front" :class="card.color">
@@ -175,7 +179,7 @@
                                     </div>
                                     <div class="strip"></div>
                                     <div class="mstrip">
-                                        <p>{{card.cardHolder}}</p>
+                                        <p class="sign">{{card.cardHolder}}</p>
                                     </div>
                                     <div class="sstrip d-flex justify-content-center align-items-center">
                                         <p class="code">{{card.cvv}}</p>
@@ -184,18 +188,14 @@
                             </div>
                         </div>
                     </div>
-                    <h3 v-else
-                        style="background-color: black;color: white; border-radius: 1rem; padding: 1rem;margin-top: 2rem;">
-                        you don't have any credit card yet
-                    </h3>
                 </div>
+                <p v-else class="subtitleP"> You don´t have any Credit card yet</p>
             </div>
-        </div>
+        </main>
+        <footer>
+        </footer>
+    </div>
 
-    </main>
-    <footer>
-
-    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>

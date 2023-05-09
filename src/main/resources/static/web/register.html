@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MH Brothers | Account</title>
+    <link rel="shortcut icon" href="./assets/images/logo02.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+    <main id="app">
+        <div class="formContainer d-flex flex-wrap justify-content-center align-items-center"
+            style="padding-bottom: 2rem;">
+            <form class="form" @submit.prevent="signUp" style="width: 20rem;">
+                <p id="heading" class="formText">SIGN UP</p>
+                <div class="field">
+                    <input placeholder="First Name" autocomplete="username" class="input-field" type="text"
+                        v-model="firstName" required>
+                </div>
+                <div class="field">
+                    <input placeholder="Last Name" autocomplete="username" class="input-field" type="text"
+                        v-model="lastName" required>
+                </div>
+                <div class="field">
+                    <input placeholder="pepe@mail.com" autocomplete="username" class="input-field" type="email"
+                        v-model="email" required>
+                </div>
+                <div class="field">
+                    <input placeholder="**********" autocomplete="current-password" class="input-field" type="password"
+                        v-model="password" required>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <div class="btn">
+                        <button class="button1" type="submit">Register</button>
+                    </div>
+                    <div class="btn d-flex flex-column justify-content-center align-items-center">
+                        <a class="button1" href="./index.html">Login</a>
+                        <p>Already have an account?</p>
+                    </div>
+                </div>
+            </form>
+            <div class="artContainer d-flex justify-content-center align-items-center">
+                <p>Aca van obras de arte dinamicas</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/scripts/register.js"></script>
+</body>
+
+</html>

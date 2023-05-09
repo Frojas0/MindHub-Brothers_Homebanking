@@ -31,5 +31,4 @@ const app = createApp({
             })
         }
     }
-})
-app.mount('#vueApp')
+}).mount('#vueApp')
