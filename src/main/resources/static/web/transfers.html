@@ -62,23 +62,25 @@
                     <p class="buttonCreate" style="margin: 0;">third party account</p>
                 </button>
             </div>
-            <div class="cardsContainer d-flex align-items-center justify-content-center">
+            <div class="titleContainer d-flex align-items-center justify-content-center">
+                <p class="titleP">CONFIGURE YOUR LOAN</p>
+            </div>
+            <div class="transferFormContainer d-flex align-items-center justify-content-center">
                 <div class="createFormContainer">
                     <form @submit.prevent="transfer" class="d-flex flex-column">
                         <div class="labelContainer2">
                             <p class="formText" style="width: 15rem;">ORIGIN ACCOUNT</p>
-                            <label class="labelForm2" for="origin" v-for="account of accounts">
+                            <label class="labelForm2" v-for="account of accounts">
                                 {{account.number}}
-                                <input id="origin" type="radio" name="originNumber" :value="account.number"
-                                    v-model="originNumber">
+                                <input type="radio" name="originNumber" :value="account.number" v-model="originNumber">
                             </label>
                         </div>
 
                         <div v-if="cont1" class="labelContainer2">
                             <p class="formText" style="width: 18rem;">DESTINATION ACCOUNT</p>
-                            <label class="labelForm2" for="destination" v-for="account of accounts">
+                            <label class="labelForm2" v-for="account of accounts">
                                 {{account.number}}
-                                <input id="destination" type="radio" name="destinationNumber" :value="account.number"
+                                <input type="radio" name="destinationNumber" :value="account.number"
                                     v-model="destinationNumber">
                             </label>
                         </div>
