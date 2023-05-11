@@ -18,6 +18,10 @@ public class ClientLoan {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="loan_id")
     private Loan loan;
+    //private int currentPayment;
+    //agregar la cantidad de cuotas elegidas para el prestamo, ir restandola en base a las cuotas que decida pagar el cliente,
+    //debitar el monto  de la cuenta elegida y guardar los cambios
+
 
     //CONSTRUCTORS
     public ClientLoan(){
