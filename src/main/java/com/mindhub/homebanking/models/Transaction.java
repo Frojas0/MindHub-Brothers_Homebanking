@@ -43,5 +43,4 @@ public class Transaction {
     public void setTransactionDate(LocalDateTime transactionDate) {this.transactionDate = transactionDate;}
     public void setType(TransactionType type) {this.type = type;}
     public void setAccount(Account account) {this.account = account;}
-
 }

@@ -1,8 +1,8 @@
 package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.models.*;
-import com.mindhub.homebanking.repositories.CardRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.CardService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,14 @@ import java.util.Random;
 @RestController
 public class CardController {
     @Autowired
-    private CardRepository cardRepository;
+    private CardService cardService;
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.POST)
     public ResponseEntity<Object> createCard(
             Authentication authentication, @RequestParam String type, @RequestParam String color) {
-        Client currentClient = clientRepository.findByEmail(authentication.getName());
+        Client currentClient = clientService.findByEmail(authentication.getName());
         int debitAcc = 0;
         int creditAcc = 0;
         //usar un filter
@@ -42,11 +42,11 @@ public class CardController {
         if(type.equals("CREDIT") && creditAcc < 3 ){
                 Card newCard = new Card(CardType.CREDIT, CardColor.valueOf(color), randomNumber() , randomCvv(), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
                 currentClient.addCardHolder(newCard);
-                cardRepository.save(newCard);
+                cardService.saveCard(newCard);
         } else if(type.equals("DEBIT") && debitAcc < 3){
                 Card newCard = new Card(CardType.DEBIT, CardColor.valueOf(color), randomNumber() , randomCvv(), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
                 currentClient.addCardHolder(newCard);
-                cardRepository.save(newCard);
+                cardService.saveCard(newCard);
         } else{
             return new ResponseEntity<>("you have 3 cards of the same type",HttpStatus.FORBIDDEN);
         }

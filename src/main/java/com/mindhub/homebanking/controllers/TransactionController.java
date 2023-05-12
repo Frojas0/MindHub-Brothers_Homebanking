@@ -3,8 +3,8 @@ package com.mindhub.homebanking.controllers;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.models.TransactionType;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +20,9 @@ import java.time.LocalDateTime;
 @RestController
 public class TransactionController {
     @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionService transactionService;
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @Transactional
     @RequestMapping(path = "/api/clients/current/transactions", method = RequestMethod.POST)
@@ -30,8 +30,8 @@ public class TransactionController {
             Authentication authentication, @RequestParam double amount, @RequestParam String description,
             @RequestParam String originNumber, @RequestParam String destinationNumber) {
 
-        Account originAccount = accountRepository.findByNumber(originNumber.toUpperCase());
-        Account destinationAccount = accountRepository.findByNumber(destinationNumber.toUpperCase());
+        Account originAccount = accountService.findByNumber(originNumber.toUpperCase());
+        Account destinationAccount = accountService.findByNumber(destinationNumber.toUpperCase());
 
         if (description.isBlank() || originNumber.isBlank() || destinationNumber.isBlank() || amount == 0.0 || Double.isNaN(amount)) {
             if (description.isBlank()) {
@@ -73,8 +73,8 @@ public class TransactionController {
         originAccount.addTransaction(debitTransaction);
         destinationAccount.addTransaction(creditTransaction);
 
-        transactionRepository.save(debitTransaction);
-        transactionRepository.save(creditTransaction);
+        transactionService.saveTransaction(debitTransaction);
+        transactionService.saveTransaction(creditTransaction);
 
         return new ResponseEntity<>("Succesful transaction", HttpStatus.CREATED);
     }
