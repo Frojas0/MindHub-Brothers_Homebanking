@@ -50,11 +50,258 @@
                 </div>
             </nav>
         </header>
-        <main class="d-flex flex-column justify-content-center align-items-center">
-            fseas
+        <main class="d-flex flex-column  align-items-center">
+            <!-- CAROUSEL cobratusueldo,descargalaapp,promos,prestamos -->
+            <div class="carrouselContainer">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3"
+                            aria-label="Slide 4"></button>
+                    </div>
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="10000">
+                            <img src="..." class="d-block carrouselImg" alt="..."
+                                style="background-color: antiquewhite;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>COBRA TU SUELDO</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img src="..." class="d-block carrouselImg" alt="..." style="background-color: royalblue;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>DESCARGA LA APP</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="..." class="d-block carrouselImg" alt="..." style="background-color: grey;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>PRESTAMOS</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="..." class="d-block carrouselImg" alt="..." style="background-color: azure;">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Fourth slide label</h5>
+                                <p>PROMOS</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- HACETE CLIENTE -->
+            <div class="landigContainer01 d-flex flex-column justify-content-center align-items-center">
+                <p>HACETE CLIENTE EN MINUTOS</p>
+                <div class="promoContainer d-flex justify-content-center flex-wrap gap-5">
+                    <div class="card" style="width: 18rem;">
+                        <img src="./assets/images/makeClient01.png" class="card-img-top promoImg" alt="makeClient01"
+                            style="background-color: beige;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="80"
+                                    height="80">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M8.20705 5.1797C8.09094 5.35386 8 5.64834 8 6V12V15C8 15.5523 7.55228 16 7 16C6.44772 16 6 15.5523 6 15V12C6 11.6483 5.90906 11.3539 5.79295 11.1797C5.6966 11.0352 5.61209 11 5.5 11C5.38791 11 5.3034 11.0352 5.20705 11.1797C5.09094 11.3539 5 11.6483 5 12V16C5 17.033 5.70057 18.1402 7.0547 19.0429C8.3875 19.9315 10.1939 20.5 12 20.5C15.6675 20.5 18 18.251 18 16V12C18 11.6483 17.9091 11.3539 17.7929 11.1797C17.6966 11.0352 17.6121 11 17.5 11C17.3879 11 17.3034 11.0352 17.2071 11.1797C17.0909 11.3539 17 11.6483 17 12C17 12.5523 16.5523 13 16 13C15.4477 13 15 12.5523 15 12V11C15 10.6483 14.9091 10.3539 14.7929 10.1797C14.6966 10.0352 14.6121 10 14.5 10C14.3879 10 14.3034 10.0352 14.2071 10.1797C14.0909 10.3539 14 10.6483 14 11V11.5C14 12.0523 13.5523 12.5 13 12.5C12.4477 12.5 12 12.0523 12 11.5V11V10.5C12 10.1483 11.9091 9.85386 11.7929 9.6797C11.6966 9.53518 11.6121 9.5 11.5 9.5C11.3879 9.5 11.3034 9.53518 11.2071 9.6797C11.0909 9.85386 11 10.1483 11 10.5V11C11 11.5523 10.5523 12 10 12C9.44772 12 9 11.5523 9 11V10.5V6C9 5.64834 8.90906 5.35386 8.79295 5.1797C8.6966 5.03518 8.61209 5 8.5 5C8.38791 5 8.3034 5.03518 8.20705 5.1797ZM11 7.55195V6C11 5.35166 10.8409 4.64614 10.4571 4.0703C10.0534 3.46482 9.38791 3 8.5 3C7.61209 3 6.9466 3.46482 6.54295 4.0703C6.15906 4.64614 6 5.35166 6 6V9.05195C5.84222 9.01815 5.67545 9 5.5 9C4.61209 9 3.9466 9.46482 3.54295 10.0703C3.15906 10.6461 3 11.3517 3 12V16C3 17.967 4.29943 19.6098 5.9453 20.7071C7.6125 21.8185 9.80613 22.5 12 22.5C16.3325 22.5 20 19.749 20 16V12C20 11.3517 19.8409 10.6461 19.4571 10.0703C19.0534 9.46482 18.3879 9 17.5 9C17.1435 9 16.8229 9.07492 16.5407 9.20377C16.5141 9.15859 16.4862 9.11407 16.4571 9.0703C16.0534 8.46482 15.3879 8 14.5 8C14.0313 8 13.6245 8.12954 13.2855 8.34094C12.8757 7.85131 12.2719 7.5 11.5 7.5C11.3245 7.5 11.1578 7.51815 11 7.55195Z"
+                                            fill="#000000"></path>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <p class="card-text">Iniciá el proceso 100% online:</p>
+                            <p>
+                                Descargá la App para conseguir tu cuenta y tarjeta Open en el momento y GRATIS.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 18rem;">
+                        <img src="./assets/images/makeClient02.png" class="card-img-top promoImg" alt="makeClient02"
+                            style="background-color: rgb(210, 210, 170);">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="80"
+                                    height="80">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M7.33869 3.99177C7.198 4.02148 7.12317 4.06055 7.08713 4.08489C7.05268 4.10817 7.03459 4.13023 7.01924 4.15986C6.97777 4.23996 6.92769 4.44337 6.98894 4.85167C6.99137 4.8679 6.9934 4.88418 6.99504 4.90051L7.99504 14.9005C8.0498 15.4481 7.65177 15.9371 7.10442 15.9945C6.55708 16.052 6.06617 15.6564 6.006 15.1093L5.67655 12.1143C5.67645 12.1134 5.67636 12.1126 5.67627 12.1118C5.66239 11.9911 5.64979 11.8799 5.63813 11.777C5.60029 11.4428 5.5724 11.1966 5.54303 11C5.52925 11 5.51492 11 5.5 11C5.38791 11 5.3034 11.0352 5.20705 11.1797C5.09094 11.3539 5 11.6483 5 12V16C5 17.033 5.70057 18.1402 7.0547 19.043C8.3875 19.9315 10.1939 20.5 12 20.5C15.6675 20.5 18 18.251 18 16V12C18 11.757 17.9994 11.5559 17.9955 11.388C17.9608 11.4615 17.9214 11.5464 17.878 11.6399C17.7722 11.8681 17.6422 12.1482 17.4965 12.4431C17.2518 12.9382 16.652 13.1412 16.1569 12.8965C15.6618 12.6518 15.4588 12.052 15.7035 11.5569C16.0765 10.8022 16.1068 10.2951 16.0509 10.0413C16.0112 9.86117 15.9436 9.80998 15.8206 9.78396C15.6455 9.75654 15.5843 9.79194 15.5624 9.80504C15.5196 9.83066 15.4311 9.9055 15.3225 10.1146C15.087 10.5682 14.9414 11.2709 14.7853 12.1709C14.691 12.7147 14.174 13.0792 13.6301 12.9855C13.0862 12.8917 12.7211 12.375 12.8144 11.831L12.8147 11.8291L14.0144 4.83105C14.0159 4.82197 14.0176 4.81292 14.0194 4.80389C14.0834 4.48382 14.0296 4.24704 13.9635 4.12739C13.9333 4.07272 13.9041 4.04705 13.8837 4.03389C13.8653 4.02205 13.8272 4.00274 13.7485 3.99868L13.7401 3.99825L13.7401 3.99821C13.6403 3.99223 13.5601 4.00741 13.4271 4.17858C13.2625 4.3905 13.1051 4.75047 12.9666 5.25634L11.1685 12.249C11.051 12.7059 10.6303 13.0185 10.1591 12.9992C9.68778 12.9799 9.29407 12.6339 9.21438 12.169L8.01526 5.17411C7.92229 4.66491 7.79741 4.32357 7.6593 4.13653C7.60041 4.05677 7.55556 4.02803 7.52783 4.01524C7.50515 4.00477 7.45123 3.98486 7.33869 3.99177ZM15.5381 7.7795C15.7426 7.76592 15.9528 7.77789 16.1665 7.81396C16.1746 7.81534 16.1828 7.81682 16.1909 7.81839C16.9311 7.96232 17.4949 8.40793 17.8043 9.0363C17.8134 9.03535 17.8226 9.03448 17.8318 9.03367C18.2368 8.99818 18.6289 9.11256 18.9524 9.23045C19.7169 9.50903 19.8858 10.2635 19.9395 10.6102C20.0002 11.0026 20.0001 11.4907 20 11.9433C20 11.9623 20 11.9812 20 12V16C20 19.749 16.3325 22.5 12 22.5C9.80613 22.5 7.6125 21.8185 5.9453 20.7071C4.29943 19.6098 3 17.9671 3 16V12C3 11.3517 3.15906 10.6461 3.54295 10.0703C3.93056 9.48889 4.55963 9.03716 5.39523 9.00219L5.00728 5.12269C4.92237 4.53658 4.92686 3.85112 5.24326 3.24015C5.59458 2.56173 6.23077 2.15984 7.02111 2.01614C7.04658 2.01151 7.07222 2.00787 7.09797 2.00523C8.05874 1.90669 8.79414 2.30649 9.2682 2.94849C9.68715 3.51586 9.87693 4.23297 9.98387 4.82112L9.98567 4.83104L9.98562 4.83105L10.3957 7.2234L11.0315 4.75097L11.0352 4.73689C11.1963 4.14633 11.4383 3.47857 11.8479 2.95144C12.2892 2.38349 12.9576 1.94915 13.8557 2.00156C14.7035 2.04667 15.3535 2.50763 15.714 3.16013C16.053 3.77353 16.1157 4.50557 15.9835 5.18143L15.5381 7.7795Z"
+                                            fill="#000000"></path>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <p class="card-text">Completá el proceso con tus datos:</p>
+                            <p>
+                                Recordá que vas a necesitar tener tu DNI vigente a mano para dar de alta tu cuenta.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 18rem;">
+                        <img src="./assets/images/makeClient03.png" class="card-img-top promoImg" alt="makeClient03"
+                            style="background-color: rgb(181, 181, 116);">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="80"
+                                    height="80">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M11.2071 4.1797C11.0909 4.35387 11 4.64835 11 5V12C11 12.5203 10.601 12.9537 10.0825 12.9966C9.56397 13.0395 9.09916 12.6776 9.01361 12.1644L8.01361 6.16556C8.01143 6.15249 8.00951 6.13937 8.00785 6.12622C7.96231 5.76499 7.81705 5.41341 7.64017 5.19032C7.46942 4.97497 7.37575 4.99153 7.36821 4.99287C7.36802 4.9929 7.36789 4.99292 7.36781 4.99293L7.35356 4.99467C7.2623 5.0051 7.21808 5.0307 7.19311 5.04963C7.16425 5.07151 7.1234 5.11411 7.08251 5.19958C6.99307 5.3865 6.94181 5.70401 6.99143 6.09409L6.99308 6.10704L6.99299 6.10705L7.50548 10.6039C7.5105 10.635 7.51519 10.6653 7.51964 10.6949C7.5554 10.9324 7.58927 11.2318 7.62873 11.5806C7.63981 11.6785 7.65133 11.7803 7.66345 11.8858L7.66402 11.8907L7.99357 14.8868L7.994 14.8907C8.05431 15.4389 7.65938 15.9324 7.11129 15.9938C6.56319 16.0552 6.06888 15.6612 6.00643 15.1132L6.006 15.1093L5.53767 11C5.52554 11 5.51299 11 5.5 11C5.38791 11 5.3034 11.0352 5.20705 11.1797C5.09094 11.3539 5 11.6483 5 12V16C5 17.033 5.70057 18.1402 7.0547 19.0429C8.3875 19.9315 10.1939 20.5 12 20.5C15.6675 20.5 18 18.251 18 16V13C18 12.9862 18.0003 12.9725 18.0009 12.9587C18.017 12.5692 17.9662 12.2904 17.8954 12.1289C17.8425 12.0082 17.8064 12.0004 17.7849 11.9958C17.7833 11.9954 17.7819 11.9951 17.7805 11.9948C17.7805 11.9948 17.7803 11.9947 17.7802 11.9947C17.7746 11.993 17.7116 11.9739 17.5919 12.0917C17.4577 12.2237 17.2651 12.5327 17.1925 13.1222C17.1252 13.6693 16.6277 14.0588 16.0803 13.9928C15.533 13.9268 15.1423 13.4303 15.2069 12.8828L15.2075 12.8779L16.0069 6.10282L16.0076 6.09714C16.056 5.70622 16.0049 5.38783 15.9153 5.1998C15.8743 5.11385 15.8334 5.07095 15.8044 5.04886C15.7794 5.02976 15.735 5.00393 15.6434 4.99318C15.5608 4.98348 15.4726 4.99163 15.3348 5.17295C15.176 5.38193 15.0419 5.73084 14.9921 6.12522C14.9905 6.13832 14.9886 6.15138 14.9864 6.1644L13.9864 12.1644C13.9009 12.6776 13.4361 13.0395 12.9175 12.9966C12.399 12.9537 12 12.5203 12 12V5C12 4.64835 11.9091 4.35387 11.7929 4.1797C11.6966 4.03518 11.6121 4 11.5 4C11.3879 4 11.3034 4.03518 11.2071 4.1797ZM17.5607 10.0017C17.7875 9.97953 18.021 9.99465 18.2555 10.052C19.0018 10.2344 19.4749 10.7503 19.7273 11.3262C19.9624 11.8627 20.0206 12.4696 20 13.0196V16C20 19.749 16.3325 22.5 12 22.5C9.80613 22.5 7.6125 21.8185 5.9453 20.7071C4.29943 19.6098 3 17.967 3 16V12C3 11.3517 3.15906 10.6461 3.54295 10.0703C3.91736 9.50868 4.51705 9.06808 5.31056 9.00719L5.00655 6.33959C4.92601 5.69851 4.97576 4.96884 5.27838 4.33637C5.60274 3.65846 6.21769 3.11389 7.11952 3.0084C8.0203 2.89533 8.72093 3.36309 9.16093 3.89068C9.2484 3.60271 9.37387 3.32393 9.54295 3.0703C9.9466 2.46483 10.6121 2 11.5 2C12.3879 2 13.0534 2.46483 13.4571 3.0703C13.6192 3.31359 13.7413 3.58001 13.8282 3.8555C14.282 3.31495 14.9775 2.90127 15.8766 3.00682C16.7821 3.11313 17.397 3.6602 17.7207 4.33931C18.0224 4.97221 18.0714 5.7014 17.9928 6.33974L17.5607 10.0017Z"
+                                            fill="#000000"></path>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <p class="card-text">Ingresá dinero y activá tu tarjeta:</p>
+                            <p>
+                                Rápido y sin comisiones. Usá tu plata en lo que quieras y aprovechá nuestros beneficios.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CAROUSEL PAGA TUS SERVICIOS -->
+            <div class="servicesContainer d-flex flex-column justify-content-around align-items-center">
+                <p>paga tus servicios</p>
+                <div class="d-flex justify-content-around align-items-center" style="width: 90%;">
+                    <div class="service01"></div>
+                    <div class="service02"></div>
+                    <div class="service03"></div>
+                    <div class="service04"></div>
+                </div>
+
+            </div>
+            <!-- NECESITAS AYUDA? -->
+            <div class="helpContainer d-flex flex-column justify-content-center align-items-center">
+                <img src="./assets/images/needHelp.png" alt="needHelp?">
+                <h2>¿Need Help?</h2>
+                <!-- Button trigger modal -->
+                <button type="button" class="createContainer" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                    style="color: white;">
+                    GO TO HELP
+                </button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="color: black;">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">PREGUNTAS FRECUENTES</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="color: black;">
+                            <h3> What is MindhubBrothers?</h3>
+                            <p>MindhubBrothers is a homebanking platform that provides convenient and secure online
+                                banking services to its customers. It allows you to manage your accounts, make
+                                transactions, and access various banking services from the comfort of your home.</p>
+
+                            <h3>How do I sign up for MindhubBrothers?</h3>
+                            <p> To sign up for MindhubBrothers, you can visit their website or download their mobile
+                                app.
+                                Follow the registration process by providing the required information, such as your
+                                personal
+                                details, contact information, and account preferences. Once registered, you will receive
+                                further instructions to set up your online banking profile.</p>
+
+                            <h3>Is MindhubBrothers secure?</h3>
+                            <p>Yes, MindhubBrothers prioritizes the security of your financial information. They employ
+                                industry-standard encryption techniques to protect your data and implement advanced
+                                security
+                                measures to prevent unauthorized access. Additionally, they regularly update their
+                                systems
+                                to stay ahead of potential threats.
+                            </p>
+
+                            <h3>What banking services are available on MindhubBrothers?</h3>
+                            <p>MindhubBrothers offers a range of banking services, including account management, balance
+                                inquiries, fund transfers between accounts, bill payments, loan applications, credit
+                                card
+                                management, transaction history tracking, and more. You can also set up alerts and
+                                notifications to stay informed about your account activity.</p>
+
+                            <h3>Can I access MindhubBrothers on my mobile device?</h3>
+                            <p>Yes, MindhubBrothers has a mobile app available for iOS and Android devices. You can
+                                download the app from the respective app stores and access your accounts on the go. The
+                                mobile app provides a user-friendly interface optimized for mobile devices, allowing you
+                                to
+                                perform banking tasks conveniently.</p>
+
+                            <h3>Are there any fees associated with using MindhubBrothers?</h3>
+                            <p>MindhubBrothers may have certain fees associated with specific services or account types.
+                                It
+                                is recommended to review their fee schedule or contact their customer support for
+                                detailed
+                                information regarding any applicable fees or charges.
+                            </p>
+
+                            <h3>What if I forget my MindhubBrothers login credentials?</h3>
+                            <p>If you forget your login credentials, such as your username or password, MindhubBrothers
+                                provides a password recovery process. You can typically initiate the recovery process on
+                                their website or app by following the instructions provided. This process may involve
+                                verifying your identity through personal information or security questions.</p>
+
+                            <h3> How can I contact MindhubBrothers customer support?</h3>
+                            <p>MindhubBrothers offers various customer support channels, including phone support, email
+                                support, and sometimes live chat. You can find their contact information on their
+                                website or
+                                in the mobile app. They are available to assist you with any questions, concerns, or
+                                issues
+                                you may have regarding your accounts or the platform.
+                            </p>
+                            <h3>Remember to refer to the official MindhubBrothers website or contact their customer
+                                support
+                                for the most accurate and up-to-date information about their services and policies.</h3>
+
+                        </div>
+                        <div class="modal-footer" style="color: black;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Understood</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer>
+            <div class="d-flex flex-wrap">
+                <p style="margin: 0;">
+                    © 2023 MINDHUB BROTHERS
+                </p>
+                <p style="margin: 0;">
+                    All rights reserved.
+                </p>
+                <p style="margin: 0;">
+                    MindhubBrothers is a registered trademark.
+                </p>
+            </div>
         </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

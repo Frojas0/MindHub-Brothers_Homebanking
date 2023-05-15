@@ -51,7 +51,7 @@ public class TransactionController {
                 return new ResponseEntity<>("Fields cannot be empty", HttpStatus.FORBIDDEN);
         }
         if(amount < 0){
-            return new ResponseEntity<>("Negative ", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Amount canot be negative ", HttpStatus.FORBIDDEN);
         }
         if (originNumber.equalsIgnoreCase(destinationNumber)) {
             return new ResponseEntity<>("Destination account cannot be the same as the source account", HttpStatus.FORBIDDEN);
