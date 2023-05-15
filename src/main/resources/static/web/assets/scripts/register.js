@@ -5,7 +5,9 @@ createApp({
             email: '',
             password: '',
             firstName: '',
-            lastName: ''
+            lastName: '',
+            imgs: ["./assets/images/art1.jpg", "./assets/images/art2.jpg", "./assets/images/art3.jpg", "./assets/images/art4.jpg", "./assets/images/art5.jpg", "./assets/images/art6.jpg", "./assets/images/art7.jpg", "./assets/images/art8.jpg", "./assets/images/art9.jpg", "./assets/images/art10.jpg"],
+            randomImages: ''
         }
     },
     methods: {
@@ -35,6 +37,14 @@ createApp({
                     Swal.fire('Cancelado', '', 'info')
                 }
             });
+        },
+        randomImg() {
+            const randomNum = Math.floor(Math.random() * this.imgs.length);
+            this.randomImages = this.imgs[randomNum];
+            console.log(this.randomImages);
         }
+    },
+    mounted() {
+        this.randomImg();
     }
 }).mount("#app")

@@ -14,7 +14,7 @@ import java.util.List;
 @SpringBootApplication
 public class HomebankingApplication {
 	public static void main(String[] args) {SpringApplication.run(HomebankingApplication.class, args);}
-//		@Autowired
+//	@Autowired
 //	private PasswordEncoder passwordEncoder;
 //	@Bean
 //	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
@@ -80,9 +80,9 @@ public class HomebankingApplication {
 //
 //
 //			//CREACION DE TARJETAS
-//			Card card01 = (new Card(CardType.DEBIT, CardColor.GOLD,"1111-2222-3333-4444", 321,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
-//			Card card02 = (new Card(CardType.CREDIT, CardColor.TITANIUM,"0000-2222-4444-6666", 567,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Melba Morel"));
-//			Card card03 = (new Card(CardType.CREDIT, CardColor.SILVER,"4321-6543-7654-9876", 555,LocalDateTime.now(),LocalDateTime.now().plusYears(5), "Facundo Rojas"));
+//			Card card01 = (new Card(CardType.DEBIT, CardColor.GOLD,"1111-2222-3333-4444", 321,LocalDateTime.now().plusYears(5),LocalDateTime.now(), "Melba Morel"));
+//			Card card02 = (new Card(CardType.CREDIT, CardColor.TITANIUM,"0000-2222-4444-6666", 567,LocalDateTime.now().plusYears(5),LocalDateTime.now(), "Melba Morel"));
+//			Card card03 = (new Card(CardType.CREDIT, CardColor.SILVER,"4321-6543-7654-9876", 555,LocalDateTime.now().plusYears(5),LocalDateTime.now(), "Facundo Rojas"));
 //			//asignacion a cliente
 //			client01.addCardHolder(card01);
 //			client01.addCardHolder(card02);

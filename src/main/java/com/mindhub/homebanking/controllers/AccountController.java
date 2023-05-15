@@ -6,6 +6,7 @@ import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +30,10 @@ public class AccountController {
     }
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
     @RequestMapping(path = "/api/clients/current/accounts", method = RequestMethod.POST)
     public ResponseEntity<Object> createAccount (Authentication authentication){
-        Client currentClient = clientRepository.findByEmail(authentication.getName());
+        Client currentClient = clientService.findByEmail(authentication.getName());
         if(currentClient.getAccounts().size() < 3){
             Account newAccount = new Account(randomNumber(), LocalDateTime.now(),0);
             currentClient.addAccount(newAccount);

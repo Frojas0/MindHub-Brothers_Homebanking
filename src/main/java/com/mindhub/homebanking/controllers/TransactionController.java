@@ -1,9 +1,11 @@
 package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.models.TransactionType;
 import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
 import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ public class TransactionController {
     private TransactionService transactionService;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private ClientService clientService;
 
     @Transactional
     @RequestMapping(path = "/api/clients/current/transactions", method = RequestMethod.POST)
@@ -32,6 +36,7 @@ public class TransactionController {
 
         Account originAccount = accountService.findByNumber(originNumber.toUpperCase());
         Account destinationAccount = accountService.findByNumber(destinationNumber.toUpperCase());
+        Client currentClient = clientService.findByEmail(authentication.getName());
 
         if (description.isBlank() || originNumber.isBlank() || destinationNumber.isBlank() || amount == 0.0 || Double.isNaN(amount)) {
             if (description.isBlank()) {
@@ -54,7 +59,7 @@ public class TransactionController {
         if (originAccount == null) {
             return new ResponseEntity<>("Origin account does not exist", HttpStatus.FORBIDDEN);
         }
-        if (originAccount.getClient().getEmail() != authentication.getName()) {
+        if (originAccount.getClient().getEmail() != currentClient.getEmail()) {
             return new ResponseEntity<>("Origin account is not yours", HttpStatus.FORBIDDEN);
         }
         if (destinationAccount == null) {

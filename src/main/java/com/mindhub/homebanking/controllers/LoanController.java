@@ -63,10 +63,10 @@ public class LoanController {
             return new ResponseEntity<>("Loan amount cannot be empty", HttpStatus.FORBIDDEN);
         }if (Integer.toString(payments).isBlank()){
             return new ResponseEntity<>("Payments cannot be empty", HttpStatus.FORBIDDEN);
-        }if (amount <= 0.1){
-            return new ResponseEntity<>("Payments must be greater than 0", HttpStatus.FORBIDDEN);
-        }if (payments <= 0.1){
-            return new ResponseEntity<>("Payments must be greater than 0", HttpStatus.FORBIDDEN);
+        }if (amount < 1.0){
+            return new ResponseEntity<>("Amount must be greater than 1", HttpStatus.FORBIDDEN);
+        }if (payments <= 1){
+            return new ResponseEntity<>("Payments must be greater than 1", HttpStatus.FORBIDDEN);
         }if (amount > currentLoan.getMaxAmount()){
             return new ResponseEntity<>("Max ammount for "+currentLoan.getName()+" loan is "+currentLoan.getMaxAmount(), HttpStatus.FORBIDDEN);
         }if (!currentLoan.getPayments().contains(payments)){

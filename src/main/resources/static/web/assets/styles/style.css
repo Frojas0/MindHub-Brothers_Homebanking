@@ -34,6 +34,7 @@ header {
 
 .nav-link {
     color: #b1b1b1 !important;
+    /* transform: none !important; */
 }
 
 #navbarNav {
@@ -44,15 +45,18 @@ header {
 
 .navbar-nav {
     background-color: black;
-    font-size: 150%;
-    gap: 1.5rem;
+    font-size: 120%;
+    gap: 1rem;
     /* border: solid 2px #7a6cfc; */
-    border-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    /* padding-left: 1rem; */
+    align-items: center !important;
 }
 
 a:hover {
     color: #7a6cfc !important;
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
     transition: all 0.3s;
 }
 
@@ -61,15 +65,16 @@ a:hover {
 }
 
 .outButton {
-    background-color: transparent;
+    /* background-color: transparent;
     border: none;
     color: #b1b1b1;
-    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    padding: 0.5rem; */
+    /* padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x); */
 }
 
 .outButton:hover {
     color: #7a6cfc !important;
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
     transition: all 0.3s;
 }
 
@@ -156,6 +161,21 @@ table {
     height: 100vh;
     margin-left: 4rem;
     margin-right: 4rem;
+}
+
+/* .art {
+    width: 30rem;
+    height: 100%;
+    background-image: url(../images/art03.jpg);
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    max-width: 95vw;
+} */
+.randomArt {
+    width: 30rem;
+    height: 100%;
 }
 
 .createFormContainer {

@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.Random;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
 
 @RestController
 public class CardController {
@@ -26,32 +29,54 @@ public class CardController {
     public ResponseEntity<Object> createCard(
             Authentication authentication, @RequestParam String type, @RequestParam String color) {
         Client currentClient = clientService.findByEmail(authentication.getName());
-        int debitAcc = 0;
-        int creditAcc = 0;
-        //usar un filter
-        for (Card card : currentClient.getCards()) {
-            if (card.getType().equals(CardType.CREDIT)) {
-                creditAcc++;
-            }if (card.getType().equals(CardType.DEBIT)) {
-                debitAcc++;
-            }
-            if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
-                return new ResponseEntity<>("Already have a " + type.toLowerCase() + " card with this color", HttpStatus.FORBIDDEN);
-            }
+
+        //Hecho con filter
+        Set<Card> cards= currentClient.getCards().stream()
+                .filter(card -> card.getType().equals(CardType.valueOf(type.toUpperCase())) && card.getColor().equals(CardColor.valueOf(color.toUpperCase()))).collect(toSet());
+        // Verficar si tiene la tarjeta
+        if ( cards.size() > 0 ){
+            return new ResponseEntity<>("You already have a " + type.toLowerCase() + " " + color.toLowerCase() + " card", HttpStatus.FORBIDDEN);
         }
-        if(type.equals("CREDIT") && creditAcc < 3 ){
-                Card newCard = new Card(CardType.CREDIT, CardColor.valueOf(color), randomNumber() , randomCvv(), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
+        if (type == null || type.isBlank()){
+            return new ResponseEntity<>("Invalid type", HttpStatus.FORBIDDEN);
+        }
+        if (color == null || color.isBlank()){
+             return new ResponseEntity<>("Invalid color", HttpStatus.FORBIDDEN);
+        }
+        if (cards.stream().anyMatch(card -> card.getColor().toString() == color)){
+            return new ResponseEntity<>("You already have 3 cards of the same type", HttpStatus.FORBIDDEN);
+        }
+
+        if(type.equals("CREDIT")){
+                Card newCard = new Card(CardType.CREDIT, CardColor.valueOf(color), randomNumber() , randomCvv(), LocalDateTime.now().plusYears(5), LocalDateTime.now(), currentClient.getFirstName() + currentClient.getLastName());
                 currentClient.addCardHolder(newCard);
                 cardService.saveCard(newCard);
-        } else if(type.equals("DEBIT") && debitAcc < 3){
-                Card newCard = new Card(CardType.DEBIT, CardColor.valueOf(color), randomNumber() , randomCvv(), LocalDateTime.now(), LocalDateTime.now().plusYears(5), currentClient.getFirstName() + currentClient.getLastName());
+        }
+        if(type.equals("DEBIT")){
+                Card newCard = new Card(CardType.DEBIT, CardColor.valueOf(color), randomNumber() , randomCvv(), LocalDateTime.now().plusYears(5), LocalDateTime.now(), currentClient.getFirstName() + currentClient.getLastName());
                 currentClient.addCardHolder(newCard);
                 cardService.saveCard(newCard);
-        } else{
-            return new ResponseEntity<>("you have 3 cards of the same type",HttpStatus.FORBIDDEN);
         }
+
         return new ResponseEntity<>("Card created",HttpStatus.CREATED);
     }
+
+//        int debitAcc = 0;
+//        int creditAcc = 0;
+//        for (Card card : currentClient.getCards()) {
+//            if (card.getType().equals(CardType.CREDIT)) {
+//                creditAcc++;
+//            }if (card.getType().equals(CardType.DEBIT)) {
+//                debitAcc++;
+//            }
+//            if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
+//                return new ResponseEntity<>("Already have a " + type.toLowerCase() + " card with this color", HttpStatus.FORBIDDEN);
+//            }
+//        }
+    //Else para equals credit/debit usando else/elseif
+//        else{
+//            return new ResponseEntity<>("you have 3 cards of the same type",HttpStatus.FORBIDDEN);
+//        }
 
     private String randomNumber() {
         Random randomNum = new Random();
