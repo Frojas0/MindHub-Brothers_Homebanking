@@ -1,11 +1,9 @@
 package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.AccountDTO;
-import com.mindhub.homebanking.dtos.CardDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.ClientService;
 import com.mindhub.homebanking.utils.AccountUtils;
@@ -34,15 +32,20 @@ public class AccountController {
         return accountService.getAccount(id);
     }
     @PostMapping(path = "/api/accounts/current/create")
-    public ResponseEntity<Object> createAccount (Authentication authentication){
+    public ResponseEntity<Object> createAccount (Authentication authentication, @RequestParam AccountType type){
         Client currentClient = clientService.findByEmail(authentication.getName());
         String newNumber;
+        //
+        //
+        //VERIFICAR EXISTEMCIA Y VALIDEZ DE type.
+        //
+        //
         if(accountService.getActiveAccounts(authentication).size() < 3){
             do{
                 newNumber = AccountUtils.getAccountNumber();
             }while (accountService.findByNumber(newNumber) != null);
 
-            Account newAccount = new Account(newNumber, LocalDateTime.now(),0,true);
+            Account newAccount = new Account(newNumber, LocalDateTime.now(),0,true, type);
             currentClient.addAccount(newAccount);
             accountService.saveAccount(newAccount);
         }else {

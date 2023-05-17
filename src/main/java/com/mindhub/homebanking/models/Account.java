@@ -17,6 +17,7 @@ public class Account {
     private LocalDateTime creationDate;
     private double balance;
     private boolean status;
+    private AccountType type;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
     private Client client;
@@ -26,11 +27,12 @@ public class Account {
     //CONSTRUCTORS
     public Account() {
     }
-    public Account(String number, LocalDateTime creationDate, double balance, boolean status) {
+    public Account(String number, LocalDateTime creationDate, double balance, boolean status, AccountType type) {
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
         this.status = true;
+        this.type = type;
     }
 
     //GETTER METHODS
@@ -41,6 +43,7 @@ public class Account {
     public Client getClient() {return client;}
     public Set<Transaction> getTransaction() {return transactions;}
     public boolean getStatus() {return status;}
+    public AccountType getType() {return type;}
 
     //SETTER METHODS
     public void setNumber(String number) {this.number = number;}
@@ -48,6 +51,7 @@ public class Account {
     public void setBalance(double balance) {this.balance = balance;}
     public void setClient(Client client) {this.client = client;}
     public void setStatus(boolean status) {this.status = status;}
+    public void setType(AccountType type) {this.type = type;}
 
     //ADD METHODS
     public void addTransaction(Transaction transaction) {

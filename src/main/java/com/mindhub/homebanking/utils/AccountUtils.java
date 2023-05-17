@@ -1,9 +1,5 @@
 package com.mindhub.homebanking.utils;
 
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.services.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public final class AccountUtils {
 //    @Autowired
 //    private static AccountRepository accountRepository;

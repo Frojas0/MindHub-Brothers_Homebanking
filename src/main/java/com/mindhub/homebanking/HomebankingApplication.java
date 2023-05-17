@@ -30,9 +30,9 @@ public class HomebankingApplication {
 			Client admin01 = (new Client("admin","admin","admin@admin.com",passwordEncoder.encode("admin")));
 
 			//CREACION DE CUENTAS
-			Account account01 = (new Account("VIN-001",LocalDateTime.now(),6500.00, true));
-			Account account02 = (new Account("VIN-002",LocalDateTime.now().plusDays(1),8700.50, true));
-			Account account03 = (new Account("VIN-003",LocalDateTime.now(),4500.00, true));
+			Account account01 = (new Account("VIN-001",LocalDateTime.now(),6500.00, true, AccountType.SAVING));
+			Account account02 = (new Account("VIN-002",LocalDateTime.now().plusDays(1),8700.50, true,AccountType.SAVING));
+			Account account03 = (new Account("VIN-003",LocalDateTime.now(),4500.00, true,AccountType.SAVING));
 
 			//asignacion a clientes
 			client01.addAccount(account01);

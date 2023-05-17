@@ -4,7 +4,9 @@ const app = createApp({
         return {
             data: [],
             accounts: [],
-            loans: []
+            loans: [],
+            showhide: false,
+            type: ""
         }
     },
     created() {
@@ -43,10 +45,11 @@ const app = createApp({
         },
         createAccount() {
             axios
-                .post('/api/accounts/current/create')
+                .post('/api/accounts/current/create', `type=${this.type}`)
                 .then(response => {
                     console.log('Account created')
                     this.getAccounts()
+                    this.hide()
                 })
         },
         deleteAccount(number) {
@@ -56,6 +59,12 @@ const app = createApp({
                     console.log('Account Deleted!!!')
                     this.getAccounts()
                 })
+        },
+        show() {
+            this.showhide = true
+        },
+        hide() {
+            this.showhide = false
         }
     }
 })
