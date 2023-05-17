@@ -51,7 +51,7 @@ createApp({
         randomImg() {
             const randomNum = Math.floor(Math.random() * this.imgs.length);
             this.randomImages = this.imgs[randomNum];
-            console.log(this.randomImages);
+            // console.log(this.randomImages);
         }
     },
     mounted() {

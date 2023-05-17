@@ -4,6 +4,7 @@ import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.services.*;
+import com.mindhub.homebanking.utils.LoanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,11 +74,11 @@ public class LoanController {
             return new ResponseEntity<>("these payments are not available for"+currentLoan.getName()+" loan", HttpStatus.FORBIDDEN);
         }
 
-        ClientLoan currentClientLoan = (new ClientLoan(interestMethod(amount),payments));
+        ClientLoan currentClientLoan = (new ClientLoan(LoanUtils.getLoanInterest(amount),payments));
         currentClient.addClientLoan(currentClientLoan);
         currentLoan.addClientLoan(currentClientLoan);
 
-        Transaction currentTransaction = (new Transaction(TransactionType.CREDIT,amount,loanName+" loan approved",LocalDateTime.now()));
+        Transaction currentTransaction = (new Transaction(TransactionType.CREDIT,amount,loanName+" loan approved",LocalDateTime.now(),currentAccount.getBalance()+amount));
         currentAccount.setBalance(currentAccount.getBalance()+amount);
         currentAccount.addTransaction(currentTransaction);
 
@@ -90,10 +91,5 @@ public class LoanController {
     @GetMapping("/api/loans")
     public List<LoanDTO> getLoans() {
         return loanService.getLoans();
-    }
-
-    public double interestMethod(Double initialAmount) {
-        double finalAmount = initialAmount*1.2;
-        return finalAmount;
     }
 }

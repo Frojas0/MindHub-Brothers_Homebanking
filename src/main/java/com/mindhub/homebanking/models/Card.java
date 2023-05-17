@@ -17,6 +17,7 @@ public class Card {
     private LocalDateTime thruDate;
     private LocalDateTime fromDate;
     private String cardHolder;
+    private boolean status;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="cardHolder_id")
     private Client client;
@@ -24,7 +25,7 @@ public class Card {
     //CONSTRUCTORS
     public Card() {
     }
-    public Card(CardType type, CardColor color, String number, int cvv, LocalDateTime thruDate, LocalDateTime fromDate, String cardHolder) {
+    public Card(CardType type, CardColor color, String number, int cvv, LocalDateTime thruDate, LocalDateTime fromDate, String cardHolder, boolean status) {
         this.type = type;
         this.color = color;
         this.number = number;
@@ -32,6 +33,7 @@ public class Card {
         this.thruDate = thruDate;
         this.fromDate = fromDate;
         this.cardHolder = cardHolder;
+        this.status = true;
     }
 
     //GETTER METHODS
@@ -44,6 +46,7 @@ public class Card {
     public LocalDateTime getFromDate() {return fromDate;}
     public String getCardHolder() {return cardHolder;}
     public Client getClient() {return client;}
+    public boolean getStatus() {return status;}
 
     //SETTER METHODS
     public void setType(CardType type) {this.type = type;}
@@ -54,4 +57,5 @@ public class Card {
     public void setFromDate(LocalDateTime fromDate) {this.fromDate = fromDate;}
     public void setCardHolder(String cardHolder) {this.cardHolder = cardHolder;}
     public void setClient(Client cardHolder) {this.client = cardHolder;}
+    public void setStatus(boolean status) {this.status = status;}
 }

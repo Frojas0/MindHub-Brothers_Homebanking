@@ -1,5 +1,4 @@
 const { createApp } = Vue;
-const url = 'http://localhost:8080/api/clients/current';
 const app = createApp({
     data() {
         return {
@@ -9,25 +8,30 @@ const app = createApp({
         }
     },
     created() {
-        this.loadData();
+        this.getLoans()
+        this.getAccounts()
         // axios.get('http://localhost:8080/api/clients/current', { headers: { 'accept': 'application/xml' } }).then(response =>
         //     console.log(response.data))
     },
     methods: {
-        loadData() {
-
-            axios.get(url)
+        getLoans() {
+            axios
+                .get('/api/clients/current')
                 .then(response => {
                     this.data = response.data
-                    this.accounts = this.data.accounts
-                    this.accounts.sort((a, b) => a.id - b.id)
                     this.loans = this.data.loans
                     this.loans.sort((a, b) => a.loanId - b.loanId)
-                    // console.log(this.data)
-                    // console.log(this.accounts);
-                    // console.log(this.loans)
                 })
                 .catch(err => console.log(err))
+        },
+        getAccounts() {
+            axios
+                .get('/api/accounts/current')
+                .then(response => {
+                    this.accounts = response.data
+                    this.accounts.sort((a, b) => a.id - b.id)
+                    // console.log(this.accounts);
+                })
         },
         logOut() {
             axios
@@ -37,12 +41,20 @@ const app = createApp({
                     window.location.replace('/web/index.html');
                 })
         },
-        createAcc() {
+        createAccount() {
             axios
-                .post('/api/clients/current/accounts')
+                .post('/api/accounts/current/create')
                 .then(response => {
                     console.log('Account created')
-                    this.loadData()
+                    this.getAccounts()
+                })
+        },
+        deleteAccount(number) {
+            axios
+                .post('/api/accounts/current/delete', `number=${number}`)
+                .then(response => {
+                    console.log('Account Deleted!!!')
+                    this.getAccounts()
                 })
         }
     }

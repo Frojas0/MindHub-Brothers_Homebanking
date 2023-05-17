@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -29,7 +26,7 @@ public class TransactionController {
     private ClientService clientService;
 
     @Transactional
-    @RequestMapping(path = "/api/clients/current/transactions", method = RequestMethod.POST)
+    @PostMapping(path = "/api/clients/current/transactions")
     public ResponseEntity<Object> createTransaction(
             Authentication authentication, @RequestParam double amount, @RequestParam String description,
             @RequestParam String originNumber, @RequestParam String destinationNumber) {
@@ -72,8 +69,8 @@ public class TransactionController {
         originAccount.setBalance(originAccount.getBalance()-amount);
         destinationAccount.setBalance(destinationAccount.getBalance()+amount);
 
-        Transaction debitTransaction = (new Transaction(TransactionType.DEBIT,-amount,originNumber+" "+description, LocalDateTime.now()));
-        Transaction creditTransaction = (new Transaction(TransactionType.CREDIT,amount,destinationNumber+" "+description, LocalDateTime.now()));
+        Transaction debitTransaction = (new Transaction(TransactionType.DEBIT,-amount,originNumber+" "+description, LocalDateTime.now(), originAccount.getBalance()));
+        Transaction creditTransaction = (new Transaction(TransactionType.CREDIT,amount,destinationNumber+" "+description, LocalDateTime.now(), destinationAccount.getBalance()));
 
         originAccount.addTransaction(debitTransaction);
         destinationAccount.addTransaction(creditTransaction);

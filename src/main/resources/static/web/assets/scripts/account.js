@@ -1,6 +1,5 @@
 const { createApp } = Vue
 const id = new URLSearchParams(location.search).get('id')
-const url = `http://localhost:8080/api/accounts/${id}`
 // console.log(id);
 
 const app = createApp({
@@ -11,13 +10,13 @@ const app = createApp({
         }
     },
     created() {
-        axios.get(url)
+        axios.get(`/api/accounts/${id}`)
             .then(response => {
                 this.data = response.data
                 this.transactions = this.data.transactions
                 this.transactions.sort((a, b) => b.id - a.id)
-                console.log(this.data);
-                console.log(this.transactions);
+                // console.log(this.data);
+                // console.log(this.transactions);
             })
             .catch(err => console.log(err))
     },

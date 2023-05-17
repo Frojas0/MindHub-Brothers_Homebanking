@@ -11,6 +11,7 @@ public class AccountDTO {
     private String number;
     private LocalDateTime creationDate;
     private double balance;
+    private boolean status;
     private Set<TransactionDTO> transactions;
 
     //CONSTRUCTOR
@@ -20,6 +21,7 @@ public class AccountDTO {
         this.creationDate = account.getCreationDate();
         this.balance = account.getBalance();
         this.transactions = account.getTransaction().stream().map(transaction -> new TransactionDTO(transaction)).collect(Collectors.toSet());
+        this.status = account.getStatus();
     }
 
     //GETTER METHODS
@@ -28,5 +30,5 @@ public class AccountDTO {
     public LocalDateTime getCreationDate() {return creationDate;}
     public double getBalance() {return balance;}
     public Set<TransactionDTO> getTransactions() {return transactions;}
-
+    public boolean isStatus() {return status;}
 }

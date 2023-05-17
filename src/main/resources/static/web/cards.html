@@ -57,15 +57,59 @@
                 <p class="titleP">CARDS</p>
             </div>
             <a v-if="creditCards.length < 3 || debitCards.length < 3" href="./create-cards.html"
-                class="createContainer d-flex align-items-center justify-content-center g-1"
+                class="createContainer d-flex align-items-center justify-content-center gap-1"
                 style="text-decoration: none;">
-                <img src="./assets/images/add-icon.png" alt="addIcon" style="width: 3rem;">
+                <svg fill="#1cbfff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 442.979 442.979" xml:space="preserve"
+                    width="40" height="40">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <g>
+                            <g>
+                                <path
+                                    d="M327.93,139.923H33.462C14.982,139.923,0,154.904,0,173.384v166.355c0,18.481,14.981,33.462,33.462,33.462h294.47 c18.479,0,33.461-14.98,33.461-33.462V173.384C361.393,154.904,346.41,139.923,327.93,139.923z M53.441,210.654 c0-11.284,9.147-20.432,20.432-20.432h19.553c11.284,0,20.432,9.147,20.432,20.432v19.553c0,11.284-9.147,20.432-20.432,20.432 H73.873c-11.284,0-20.432-9.147-20.432-20.432V210.654z M154.241,319.293c0,3.159-2.561,5.719-5.719,5.719H60.341 c-3.158,0-5.72-2.561-5.72-5.719v-17.398c0-3.158,2.562-5.719,5.72-5.719h88.182c3.158,0,5.719,2.561,5.719,5.719L154.241,319.293 L154.241,319.293z M306.77,319.293c0,3.159-2.562,5.719-5.721,5.719h-88.18c-3.158,0-5.72-2.561-5.72-5.719v-17.398 c0-3.158,2.562-5.719,5.72-5.719h88.18c3.158,0,5.721,2.561,5.721,5.719V319.293z">
+                                </path>
+                                <path
+                                    d="M409.516,69.777H115.048c-18.48,0-33.462,14.981-33.462,33.462v9.04h246.346c33.691,0,61.104,27.412,61.104,61.105v25.874 h53.943v-96.019C442.979,84.758,427.996,69.777,409.516,69.777z">
+                                </path>
+                                <path
+                                    d="M389.035,303.057h20.48c18.48,0,33.463-14.981,33.463-33.463v-37.16h-53.943V303.057z">
+                                </path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
                 <p class="buttonCreate" style="margin: 0;">Add Card</p>
             </a>
+            <!-- <button class="deleteButton d-flex align-items-center justify-content-center g-1">
+                <svg viewBox="0 -0.5 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" width="20" height="20">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                    </g>
+                    <g id="SVGRepo_iconCarrier">
+                        <title>delete [#1487]</title>
+                        <desc>Created with Sketch.</desc>
+                        <defs> </defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Dribbble-Light-Preview" transform="translate(-179.000000, -360.000000)"
+                                fill="	#fB0000">
+                                <g id="icons" transform="translate(56.000000, 160.000000)">
+                                    <path
+                                        d="M130.35,216 L132.45,216 L132.45,208 L130.35,208 L130.35,216 Z M134.55,216 L136.65,216 L136.65,208 L134.55,208 L134.55,216 Z M128.25,218 L138.75,218 L138.75,206 L128.25,206 L128.25,218 Z M130.35,204 L136.65,204 L136.65,202 L130.35,202 L130.35,204 Z M138.75,204 L138.75,200 L128.25,200 L128.25,204 L123,204 L123,206 L126.15,206 L126.15,220 L140.85,220 L140.85,206 L144,206 L144,204 L138.75,204 Z"
+                                        id="delete-[#1487]"> </path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <p class="buttonCreate" style="margin: 0;">Delete Card</p>
+            </button> -->
             <div class="cardsContainer d-flex align-items-center justify-content-center">
                 <div v-if="debitCards.length != 0">
                     <p class="subtitleP" style="width: 100%; text-align: center;">DEBIT</p>
-                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+                    <div class="cardsGap d-flex flex-wrap justify-content-center align-items-center">
                         <div class="flip-card" v-for="card of debitCards">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front" :class="card.color">
@@ -121,16 +165,81 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-flex justify-content-center gap-5">
+                                <div class="delText">
+                                    <button
+                                        class="deleteButton d-flex flex-column align-items-center justify-content-center g-1"
+                                        @click="deleteCard(card.number)">
+                                        <svg fill="#CA1616" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 471.815 471.816"
+                                            xml:space="preserve" height="35" width="40">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <g>
+                                                    <g>
+                                                        <path
+                                                            d="M434.715,123.979c0-22.231-18.021-40.251-40.25-40.251H40.25C18.02,83.728,0,101.749,0,123.979v35.247h434.715V123.979 L434.715,123.979z">
+                                                        </path>
+                                                        <path
+                                                            d="M410.939,275.757l-77.988-0.023c-1.381,0-2.498,1.119-2.498,2.5l-0.002,20.002c0.002,0.662,0.264,1.297,0.732,1.768 c0.469,0.468,1.104,0.732,1.768,0.732l77.988,0.022c0.664,0,1.299-0.263,1.768-0.731s0.732-1.104,0.732-1.768v-20 C413.439,276.875,412.32,275.757,410.939,275.757z">
+                                                        </path>
+                                                        <path
+                                                            d="M372.021,188.501c-18.22,0-35.312,4.912-50.029,13.475H0v122.11c0,22.229,18.02,40.251,40.25,40.251h267.226 c17.414,14.805,39.955,23.75,64.547,23.75c55.026,0,99.793-44.766,99.793-99.793C471.814,233.268,427.049,188.501,372.021,188.501 z M148.642,309.17c0,2.852-2.313,5.163-5.164,5.163H63.855c-2.852,0-5.166-2.312-5.166-5.163v-15.71 c0-2.854,2.314-5.165,5.166-5.165h79.623c2.852,0,5.164,2.312,5.164,5.165V309.17z M372.021,351.546 c-34.935,0-63.25-28.318-63.25-63.251s28.315-63.25,63.25-63.25c34.934,0,63.25,28.318,63.25,63.25 S406.955,351.546,372.021,351.546z">
+                                                        </path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <p style="margin: 0;">Delete</p>
+                                </div>
+                                <div v-if="(card.thruDate.slice(0,10)) <= (actualDate.slice(0,10))"
+                                    class="expiredCard d-flex justify-content-center align-items-center">
+                                    <svg fill="#CBCBCB" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.93 427.93"
+                                        xml:space="preserve" width="40" heigth="35">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <g>
+                                                <g>
+                                                    <path
+                                                        d="M341.918,241.166l-32.459-17.269l32.459-17.266c47.461-0.16,86.012-31.41,86.012-69.808 c0-38.494-38.746-69.812-86.374-69.812c-47.627,0-86.375,31.317-86.374,69.812c0,17.425,7.956,33.365,21.063,45.609 l-22.227,11.972L52.805,87.542c-0.089-0.047-0.18-0.089-0.273-0.124C29.828,78.502,1.8,111.772,0.618,113.193 c-0.514,0.616-0.722,1.433-0.569,2.221c0.153,0.789,0.653,1.467,1.36,1.848l274.835,148.102 c-13.106,12.244-21.063,28.185-21.063,45.608c0,38.494,38.747,69.812,86.374,69.812c47.628,0,86.374-31.316,86.374-69.812 C427.93,272.575,389.379,241.325,341.918,241.166z M341.556,111.412c18.372,0,33.319,11.401,33.319,25.414 c0,14.014-14.947,25.416-33.319,25.416c-18.373,0-33.318-11.402-33.318-25.416C308.236,122.813,323.183,111.412,341.556,111.412z M341.556,336.387c-18.373,0-33.318-11.401-33.318-25.414c0-14.014,14.945-25.416,33.318-25.416 c18.372,0,33.319,11.402,33.319,25.416C374.875,324.985,359.928,336.387,341.556,336.387z">
+                                                    </path>
+                                                    <path
+                                                        d="M114.034,387.07h88.762c17.706,0,32.057-14.352,32.057-32.059v-85.869l-120.819-65.106V387.07z">
+                                                    </path>
+                                                    <path
+                                                        d="M202.796,40.859h-88.762v56.747l120.819,64.166V72.915C234.854,55.209,220.502,40.859,202.796,40.859z">
+                                                    </path>
+                                                    <path
+                                                        d="M11.374,355.014c0,17.705,14.351,32.057,32.057,32.057h25.768V179.875l-57.825-31.16V355.014z">
+                                                    </path>
+                                                    <path
+                                                        d="M62.812,70.402l6.385,3.391V40.859H43.429c-17.706,0-32.057,14.351-32.057,32.056v4.264 C20.97,71.082,32.339,66.28,44.336,66.28C54.924,66.278,62.002,69.973,62.812,70.402z">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <p style="margin: 0;">Expired</p>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
+
                 </div>
                 <p v-else class="subtitleP"> You don´t have any Debit card yet</p>
             </div>
             <div class="cardsContainer d-flex align-items-center justify-content-center">
                 <div v-if="creditCards.length != 0">
                     <p class="subtitleP" style="width: 100%; text-align: center;">CREDIT</p>
-                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
-                        <div class="flip-card" v-for="card of creditCards">
+                    <div class="cardsGap d-flex flex-wrap justify-content-center align-items-center">
+                        <div class="flip-card" v-for="card of creditCards" :class="card.status">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front" :class="card.color">
                                     <p class="cardColorTxt">{{card.color}}</p>
@@ -185,9 +294,76 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-flex justify-content-center gap-5">
+                                <div class="delText">
+                                    <button
+                                        class="deleteButton d-flex flex-column align-items-center justify-content-center g-1"
+                                        @click="deleteCard(card.number)">
+                                        <svg fill="#CA1616" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 471.815 471.816"
+                                            xml:space="preserve" height="35" width="40">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <g>
+                                                    <g>
+                                                        <path
+                                                            d="M434.715,123.979c0-22.231-18.021-40.251-40.25-40.251H40.25C18.02,83.728,0,101.749,0,123.979v35.247h434.715V123.979 L434.715,123.979z">
+                                                        </path>
+                                                        <path
+                                                            d="M410.939,275.757l-77.988-0.023c-1.381,0-2.498,1.119-2.498,2.5l-0.002,20.002c0.002,0.662,0.264,1.297,0.732,1.768 c0.469,0.468,1.104,0.732,1.768,0.732l77.988,0.022c0.664,0,1.299-0.263,1.768-0.731s0.732-1.104,0.732-1.768v-20 C413.439,276.875,412.32,275.757,410.939,275.757z">
+                                                        </path>
+                                                        <path
+                                                            d="M372.021,188.501c-18.22,0-35.312,4.912-50.029,13.475H0v122.11c0,22.229,18.02,40.251,40.25,40.251h267.226 c17.414,14.805,39.955,23.75,64.547,23.75c55.026,0,99.793-44.766,99.793-99.793C471.814,233.268,427.049,188.501,372.021,188.501 z M148.642,309.17c0,2.852-2.313,5.163-5.164,5.163H63.855c-2.852,0-5.166-2.312-5.166-5.163v-15.71 c0-2.854,2.314-5.165,5.166-5.165h79.623c2.852,0,5.164,2.312,5.164,5.165V309.17z M372.021,351.546 c-34.935,0-63.25-28.318-63.25-63.251s28.315-63.25,63.25-63.25c34.934,0,63.25,28.318,63.25,63.25 S406.955,351.546,372.021,351.546z">
+                                                        </path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <p style="margin: 0;">Delete</p>
+                                </div>
+                                <div v-if="(card.thruDate.slice(0,10)) <= (actualDate.slice(0,10))"
+                                    class="d-flex justify-content-center align-items-center"
+                                    style="padding-bottom: 1rem;">
+                                    <svg fill="#CBCBCB" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 427.93 427.93"
+                                        xml:space="preserve" width="40" heigth="35">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <g>
+                                                <g>
+                                                    <path
+                                                        d="M341.918,241.166l-32.459-17.269l32.459-17.266c47.461-0.16,86.012-31.41,86.012-69.808 c0-38.494-38.746-69.812-86.374-69.812c-47.627,0-86.375,31.317-86.374,69.812c0,17.425,7.956,33.365,21.063,45.609 l-22.227,11.972L52.805,87.542c-0.089-0.047-0.18-0.089-0.273-0.124C29.828,78.502,1.8,111.772,0.618,113.193 c-0.514,0.616-0.722,1.433-0.569,2.221c0.153,0.789,0.653,1.467,1.36,1.848l274.835,148.102 c-13.106,12.244-21.063,28.185-21.063,45.608c0,38.494,38.747,69.812,86.374,69.812c47.628,0,86.374-31.316,86.374-69.812 C427.93,272.575,389.379,241.325,341.918,241.166z M341.556,111.412c18.372,0,33.319,11.401,33.319,25.414 c0,14.014-14.947,25.416-33.319,25.416c-18.373,0-33.318-11.402-33.318-25.416C308.236,122.813,323.183,111.412,341.556,111.412z M341.556,336.387c-18.373,0-33.318-11.401-33.318-25.414c0-14.014,14.945-25.416,33.318-25.416 c18.372,0,33.319,11.402,33.319,25.416C374.875,324.985,359.928,336.387,341.556,336.387z">
+                                                    </path>
+                                                    <path
+                                                        d="M114.034,387.07h88.762c17.706,0,32.057-14.352,32.057-32.059v-85.869l-120.819-65.106V387.07z">
+                                                    </path>
+                                                    <path
+                                                        d="M202.796,40.859h-88.762v56.747l120.819,64.166V72.915C234.854,55.209,220.502,40.859,202.796,40.859z">
+                                                    </path>
+                                                    <path
+                                                        d="M11.374,355.014c0,17.705,14.351,32.057,32.057,32.057h25.768V179.875l-57.825-31.16V355.014z">
+                                                    </path>
+                                                    <path
+                                                        d="M62.812,70.402l6.385,3.391V40.859H43.429c-17.706,0-32.057,14.351-32.057,32.056v4.264 C20.97,71.082,32.339,66.28,44.336,66.28C54.924,66.278,62.002,69.973,62.812,70.402z">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <p style="margin: 0;">Expired</p>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
+
                 </div>
+
                 <p v-else class="subtitleP"> You don´t have any Credit card yet</p>
             </div>
         </main>

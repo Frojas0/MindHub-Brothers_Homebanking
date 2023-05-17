@@ -48,27 +48,36 @@
             </nav>
         </header>
         <main class="d-flex flex-column justify-content-center align-items-center">
-            <table class="table table-dark" style="width: 40rem;">
+            <table class="table table-responsive table-dark w-75">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <!-- <th scope="col">#</th> -->
                         <th scope="col">Type</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Description</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Time</th>
+                        <th scope="col" class="balance">Balance</th>
+                        <!-- <th scope="col">Time</th> -->
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                     <tr v-for="transaction of transactions">
-                        <td># {{transaction.id}}</td>
+                        <!-- <td># {{transaction.id}}</td> -->
                         <td> {{transaction.type}}</td>
-                        <td :class="transaction.type">$ {{transaction.amount.toLocaleString('en-US')}}</td>
+                        <td :class="transaction.type">{{transaction.amount.toLocaleString("en-US", { style:
+                            "currency", currency:
+                            "USD" })}}</td>
                         <!-- <td v-if="transaction.type == 'CREDIT'" style="color: red;">$ {{transaction.amount}}</td>
-                        <td v-else style="color: green;">$ {{transaction.amount}}</td> -->
+                                <td v-else style="color: green;">$ {{transaction.amount}}</td> -->
                         <td>{{transaction.description}}</td>
-                        <td>{{transaction.transactionDate.slice(0,10)}}</td>
-                        <td>{{transaction.transactionDate.slice(11,19)}}</td>
+                        <td class="d-flex flex-column">
+                            {{transaction.transactionDate.slice(0,10)}}
+                            <p class="hourContainer">{{transaction.transactionDate.slice(11,19)}}</p>
+                        </td>
+                        <td class="balance">{{transaction.finalBalance.toLocaleString("en-US", { style:
+                            "currency", currency:
+                            "USD" })}}</td>
+                        <!-- <td>{{transaction.transactionDate.slice(11,19)}}</td> -->
                     </tr>
                 </tbody>
             </table>
