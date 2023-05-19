@@ -26,7 +26,7 @@ public class CardController {
     private ClientService clientService;
 
     @PostMapping("api/clients/current/cards")
-    public ResponseEntity<Object> createCard(
+    public ResponseEntity<Object> reateCard(
             Authentication authentication, @RequestParam String type, @RequestParam String color) {
         Client currentClient = clientService.findByEmail(authentication.getName());
 
@@ -36,6 +36,7 @@ public class CardController {
                         && card.getColor().equals(CardColor.valueOf(color.toUpperCase()))
                 && card.getStatus() == true)
                 .collect(toSet());
+
         // Verficar si tiene la tarjeta
         if ( cards.size() > 0 ){
             return new ResponseEntity<>("You already have a " + type.toLowerCase() + " " + color.toLowerCase() + " card", HttpStatus.FORBIDDEN);

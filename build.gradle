@@ -28,6 +28,8 @@ dependencies {
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//PDF
+//	implementation 'org.apache.pdfbox:pdfbox:2.0.24'
 }
 
 tasks.named('test') {

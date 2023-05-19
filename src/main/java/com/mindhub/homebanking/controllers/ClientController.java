@@ -68,7 +68,8 @@ public class ClientController {
         clientService.saveClient(newClient);
         newClient.addAccount(newAccount);
         accountService.saveAccount(newAccount);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+
+        return new ResponseEntity<>("Registered", (HttpStatus.CREATED));
     }
 
     @GetMapping("/api/clients/current")

@@ -28,7 +28,7 @@ createApp({
                 })
                 .then(response => {
                     if (this.email == "admin@admin.com") {
-                        window.location.replace('/h2-console');
+                        window.location.replace('./admin/manager.html');
                     } else {
                         window.location.replace('./accounts.html');
                     }

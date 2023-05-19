@@ -21,8 +21,9 @@ h2 {
 header {
     color: #dcd1ff;
     background-color: black;
-    height: 10vh;
+    height: 14vh;
     border-bottom: rgb(110, 35, 180) solid 3px;
+    width: 100%;
 }
 
 main {
@@ -44,13 +45,6 @@ pre {
 }
 
 .tableContent {
-    color: black;
-    border-radius: 1rem;
-    background-image: radial-gradient(circle, #d2c1fa, #ccbefb, #c6bafc, #bfb7fe, #b7b4ff);
-    border: rgb(110, 35, 180) solid 2px;
-}
-
-.jsonContent {
     color: black;
     border-radius: 1rem;
     background-image: radial-gradient(circle, #d2c1fa, #ccbefb, #c6bafc, #bfb7fe, #b7b4ff);

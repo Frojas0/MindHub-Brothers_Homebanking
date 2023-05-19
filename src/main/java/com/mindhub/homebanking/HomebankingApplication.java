@@ -9,11 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 @SpringBootApplication
 public class HomebankingApplication {
-	public static void main(String[] args) {SpringApplication.run(HomebankingApplication.class, args);}
+	public static void main(String[] args) throws IOException {SpringApplication.run(HomebankingApplication.class, args);}
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Bean
@@ -57,9 +58,9 @@ public class HomebankingApplication {
 
 
 			//CREACION DE PRESTAMOS
-			Loan mortgageLoan = (new Loan("Mortgage",500000, mortgagePayments));
-			Loan personalLoan = (new Loan("Personal",100000, personalPayments));
-			Loan carLoan = (new Loan("Automotive",300000, carPayments));
+			Loan mortgageLoan = (new Loan("MORTGAGE",500000, mortgagePayments));
+			Loan personalLoan = (new Loan("PERSONAL",100000, personalPayments));
+			Loan carLoan = (new Loan("AUTOMOTIVE",300000, carPayments));
 
 
 			//CREACION DE CLIENTLOAN
@@ -122,6 +123,7 @@ public class HomebankingApplication {
 			cardRepository.save(card02);
 			cardRepository.save(card03);
 			cardRepository.save(card04);
+
 		};
 	}
 
