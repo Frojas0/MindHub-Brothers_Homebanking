@@ -33,6 +33,7 @@ public class WebAuthorization {
                 .antMatchers("/h2-console/**").hasAuthority("ADMIN")
                 .antMatchers("/rest/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST,"/api/loans/**").hasAuthority("CLIENT")
+                .antMatchers("/api/transactions").hasAuthority("CLIENT")
 //                .antMatchers(HttpMethod.GET,"/api/loans/**").hasAuthority("CLIENT")
                 .antMatchers("/api/clients/current/accounts").hasAuthority("CLIENT")
                 .antMatchers("/web/accounts.html").hasAuthority("CLIENT")

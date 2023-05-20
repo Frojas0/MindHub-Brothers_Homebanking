@@ -19,7 +19,7 @@ public class TransactionDTO {
         this.type = transaction.getType();
         this.amount = transaction.getAmount();
         this.description = transaction.getDescription();
-        this.transactionDate = transaction.getTransactionDate();
+        this.transactionDate = transaction.getDate();
         this.finalBalance = transaction.getFinalBalance();
     }
 
