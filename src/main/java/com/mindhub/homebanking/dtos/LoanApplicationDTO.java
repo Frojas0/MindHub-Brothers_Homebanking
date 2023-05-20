@@ -7,12 +7,13 @@ public class LoanApplicationDTO {
     private String destinyNumber;
 
     //CONSTRUCTORS
-    public LoanApplicationDTO(long loanId, double amount, int payments, String destinyNumber){
-        this.loanId = loanId;
-        this.amount = amount;
-        this.payments = payments;
-        this.destinyNumber = destinyNumber;
-    }
+    public LoanApplicationDTO(){}
+//    public LoanApplicationDTO(long loanId, double amount, int payments, String destinyNumber){
+//        this.loanId = loanId;
+//        this.amount = amount;
+//        this.payments = payments;
+//        this.destinyNumber = destinyNumber;
+//    }
 
     //GETTER METHODS
     public long getLoanId() {return loanId;}

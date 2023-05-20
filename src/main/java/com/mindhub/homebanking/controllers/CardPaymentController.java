@@ -3,12 +3,12 @@ package com.mindhub.homebanking.controllers;
 import com.mindhub.homebanking.dtos.CardPaymentDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.services.CardService;
-import com.mindhub.homebanking.services.ClientService;
 import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 public class CardPaymentController {
     @Autowired

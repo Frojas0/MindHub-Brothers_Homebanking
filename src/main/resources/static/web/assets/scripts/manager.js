@@ -35,7 +35,7 @@ const app = createApp({
             })
             console.log(this.paymentsList);
             console.log(this.maxAmount);
-            axios.post('/api/manager/loans', { name: this.name, maxAmount: this.maxAmount, payments: this.paymentsList })
+            axios.post('/api/manager/loans', { name: this.name, maxAmmount: this.maxAmount, payments: this.paymentsList })
                 .then(response => {
                     console.log('Loan created!!!');
                     this.getLoans()

@@ -66,18 +66,18 @@ const app = createApp({
         },
         adquireLoan() {
             Swal.fire({
-                title: 'SEGURO',
+                title: 'Sure? you are about to acquire a loan',
                 showDenyButton: true,
                 showCancelButton: false,
-                confirmButtonText: 'SI',
-                denyButtonText: `NO`,
+                confirmButtonText: 'Yes',
+                denyButtonText: `No`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios.post('/api/loans', { loanId: this.actualLoan.id, amount: this.amount, payments: this.payment, destinyNumber: this.destinyNumber })
                         .then(response => Swal.fire({
                             icon: 'success',
-                            title: 'Aprobado',
+                            title: 'Approved',
                             timer: 3000,
                         })).catch(error => Swal.fire({
                             icon: 'error',
@@ -87,7 +87,7 @@ const app = createApp({
                         }))
                     // Swal.fire('GUARDADO!', '', 'success')
                 } else if (result.isDenied) {
-                    Swal.fire('PRESTAMO CANCELADO', '', 'info')
+                    Swal.fire('Loan Cancelled', '', 'info')
                 }
             });
         }

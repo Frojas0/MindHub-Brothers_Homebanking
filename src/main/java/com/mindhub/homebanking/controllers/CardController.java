@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
@@ -26,7 +25,7 @@ public class CardController {
     private ClientService clientService;
 
     @PostMapping("api/clients/current/cards")
-    public ResponseEntity<Object> reateCard(
+    public ResponseEntity<Object> createCard(
             Authentication authentication, @RequestParam String type, @RequestParam String color) {
         Client currentClient = clientService.findByEmail(authentication.getName());
 
