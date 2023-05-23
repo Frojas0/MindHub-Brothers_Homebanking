@@ -15,7 +15,7 @@
 
 <body>
     <main id="app">
-        <div class="indexContainer d-flex flex-wrap justify-content-center align-items-center">
+        <div class="introContainer d-flex flex-wrap justify-content-center align-items-center">
             <form class="form">
                 <p id="heading" class="formText">LOGIN</p>
                 <div class="field">
@@ -45,8 +45,12 @@
                 </div>
                 <button class="button3">Forgot Password</button>
             </form>
-            <div class="artContainer d-flex justify-content-center align-items-center">
-                <p>Aca van obras de arte dinamicas</p>
+            <div class="artContainer d-flex flex-column justify-content-center align-items-center">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h5 class="artAuthor">{{ randomImages.author }}</h5>
+                    <p class="artName"><em>{{randomImages.name}}</em></p>
+                </div>
+                <img class="randomArt" :src="randomImages.src" alt="randomImg">
             </div>
         </div>
     </main>

@@ -2,9 +2,11 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.utils.AccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,45 +15,69 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 public class AccountController {
     @Autowired
-    private AccountRepository accountRepository;
-    @RequestMapping("/api/accounts")
-    public List<AccountDTO> getAccounts() {
-        return accountRepository.findAll().stream().map(account -> new AccountDTO(account)).collect(toList());
-    }
-    @RequestMapping("/api/accounts/{id}")
-    public AccountDTO getAccount(@PathVariable long id){
-        Optional<Account> optionalAccount = accountRepository.findById(id);
-        return optionalAccount.map(account -> new AccountDTO(account)).orElse(null);
-    }
-
+    private AccountService accountService;
     @Autowired
-    private ClientRepository clientRepository;
-    @RequestMapping(path = "/api/clients/current/accounts", method = RequestMethod.POST)
-    public ResponseEntity<Object> createAccount (Authentication authentication){
-        Client currentClient = clientRepository.findByEmail(authentication.getName());
-        if(currentClient.getAccounts().size() < 3){
-            Account newAccount = new Account(randomNumber(), LocalDateTime.now(),0);
+    private ClientService clientService;
+
+    @GetMapping("/api/accounts")
+    public List<AccountDTO> getAccounts() {
+        return accountService.getAccounts();
+    }
+    @GetMapping("/api/accounts/{id}")
+    public AccountDTO getAccount(@PathVariable long id){
+        return accountService.getAccount(id);
+    }
+    @PostMapping(path = "/api/accounts/current/create")
+    public ResponseEntity<Object> createAccount (Authentication authentication, @RequestParam AccountType type){
+        Client currentClient = clientService.findByEmail(authentication.getName());
+        String newNumber;
+        //
+        //
+        //VERIFICAR EXISTEMCIA Y VALIDEZ DE type.
+        //
+        //
+        if(accountService.getActiveAccounts(authentication).size() < 3){
+            do{
+                newNumber = AccountUtils.getAccountNumber();
+            }while (accountService.findByNumber(newNumber) != null);
+
+            Account newAccount = new Account(newNumber, LocalDateTime.now(),0,true, type);
             currentClient.addAccount(newAccount);
-            accountRepository.save(newAccount);
+            accountService.saveAccount(newAccount);
         }else {
-            return new ResponseEntity<>("Already 3 accounts", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("You already have 3 accounts", HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>("Account created", HttpStatus.CREATED);
     }
+    @PostMapping("api/accounts/current/delete")
+    public ResponseEntity<Object> deleteAccount (Authentication authentication,@RequestParam String number){
+         Client currentClient = clientService.findByEmail(authentication.getName());
+         Account currentAccount = accountService.findByNumber(number);
 
-    private String randomNumber() {
-        String accountNumber;
-        do {
-            int randomNumber = (int) (Math.random() * 100000000);
-            accountNumber = "VIN-" + String.format("%08d", randomNumber);
-        } while (accountRepository.findByNumber(accountNumber) != null);
-        return accountNumber;
+         if (currentAccount.getBalance() >= 1.0){
+             return new ResponseEntity<>("Balance has to be less than 1 ", HttpStatus.FORBIDDEN);
+         }
+         if (currentClient != currentAccount.getClient()){
+             return new ResponseEntity<>("This account does not belong to you", HttpStatus.FORBIDDEN);
+         }
+         if (accountService.findByNumber(number) == null){
+             return new ResponseEntity<>("This account does not exist", HttpStatus.FORBIDDEN);
+         }
+         if (!currentAccount.getStatus()){
+             return new ResponseEntity<>("This account does not exist", HttpStatus.FORBIDDEN);
+         }
+
+         currentAccount.setStatus(false);
+         accountService.saveAccount(currentAccount);
+
+        return new ResponseEntity<>("Account deleted", HttpStatus.CREATED);
+     }
+    @GetMapping("api/accounts/current")
+    public List<AccountDTO> activeAccounts (Authentication authentication){
+        return accountService.getActiveAccounts(authentication);
     }
 }

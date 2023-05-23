@@ -12,23 +12,21 @@ public class ClientLoan {
     private long id;
     private double amount;
     private int payments;
+    private boolean status;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
     private Client client;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="loan_id")
     private Loan loan;
-    //private int currentPayment;
-    //agregar la cantidad de cuotas elegidas para el prestamo, ir restandola en base a las cuotas que decida pagar el cliente,
-    //debitar el monto  de la cuenta elegida y guardar los cambios
-
 
     //CONSTRUCTORS
     public ClientLoan(){
     }
-    public ClientLoan(double amount, int payments) {
+    public ClientLoan(double amount, int payments, boolean status) {
         this.amount = amount;
         this.payments = payments;
+        this.status = status;
     }
 
     //GETTER METHODS
@@ -37,11 +35,12 @@ public class ClientLoan {
     public int getPayments() {return payments;}
     public Client getClient() {return client;}
     public Loan getLoan() {return loan;}
+    public boolean getStatus() {return status;}
 
     //SETTER METHODS
     public void setAmount(double amount) {this.amount = amount;}
     public void setPayments(int payments) {this.payments = payments;}
     public void setClient(Client client) {this.client = client;}
     public void setLoan(Loan loan) {this.loan = loan;}
-
+    public void setStatus(boolean status) {this.status = status;}
 }

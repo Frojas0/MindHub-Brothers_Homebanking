@@ -11,6 +11,7 @@ public class TransactionDTO {
     private double amount;
     private String description;
     private LocalDateTime transactionDate;
+    private double finalBalance;
 
     //CONSTRUCTORS
     public TransactionDTO(Transaction transaction){
@@ -18,7 +19,8 @@ public class TransactionDTO {
         this.type = transaction.getType();
         this.amount = transaction.getAmount();
         this.description = transaction.getDescription();
-        this.transactionDate = transaction.getTransactionDate();
+        this.transactionDate = transaction.getDate();
+        this.finalBalance = transaction.getFinalBalance();
     }
 
     //GETTER METHODS
@@ -27,4 +29,5 @@ public class TransactionDTO {
     public double getAmount() {return amount;}
     public String getDescription() {return description;}
     public LocalDateTime getTransactionDate() {return transactionDate;}
+    public double getFinalBalance() {return finalBalance;}
 }

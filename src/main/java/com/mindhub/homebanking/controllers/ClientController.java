@@ -2,9 +2,11 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.repositories.AccountRepository;
+import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.utils.AccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,27 +20,27 @@ import java.util.List;
 @RestController
 public class ClientController {
     @Autowired
-    ClientService clientService;
-
+    private ClientService clientService;
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
-    @RequestMapping("/api/clients")
+    @GetMapping("/api/clients")
     public List<ClientDTO> getClients() {
         return clientService.getClient();
     }
 
-    @RequestMapping("/api/clients/{id}")
+    @GetMapping("/api/clients/{id}")
     public ClientDTO getClient(@PathVariable long id) {
         return clientService.getClientDTO(id);
     }
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @RequestMapping(path = "/api/clients", method = RequestMethod.POST)
+    @PostMapping(path = "/api/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
+        String newNumber;
         if (firstName.isBlank() || lastName.isBlank() || email.isBlank() || password.isBlank()) {
             if (firstName.isBlank()){
                 return new ResponseEntity<>("First name is required", HttpStatus.FORBIDDEN);
@@ -55,25 +57,23 @@ public class ClientController {
         if (clientService.findByEmail(email) !=  null) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
-
         Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
-        Account newAccount = new Account(randomNumber(), LocalDateTime.now(),0);
+
+        do{
+            newNumber = AccountUtils.getAccountNumber();
+        }while (accountService.findByNumber(newNumber) != null);
+
+        Account newAccount = new Account(newNumber, LocalDateTime.now(),0,true, AccountType.SAVING);
+
         clientService.saveClient(newClient);
         newClient.addAccount(newAccount);
-        accountRepository.save(newAccount);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        accountService.saveAccount(newAccount);
+
+        return new ResponseEntity<>("Registered", (HttpStatus.CREATED));
     }
 
-    @RequestMapping("/api/clients/current")
+    @GetMapping("/api/clients/current")
     public ClientDTO getCurrentClient(Authentication authentication) {
         return new ClientDTO(clientService.findByEmail(authentication.getName()));
-    }
-    private String randomNumber() {
-        String accountNumber;
-        do {
-            int randomNumber = (int) (Math.random() * 100000000);
-            accountNumber = "VIN-" + String.format("%08d", randomNumber);
-        } while (accountRepository.findByNumber(accountNumber) != null);
-        return accountNumber;
     }
 }

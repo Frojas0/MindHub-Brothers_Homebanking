@@ -15,6 +15,7 @@ public class CardDTO {
     private LocalDateTime thruDate;
     private LocalDateTime fromDate;
     private String cardHolder;
+    private boolean status;
 
     //CONSTRUCTOR
     public CardDTO(Card card) {
@@ -26,6 +27,7 @@ public class CardDTO {
         this.thruDate = card.getThruDate();
         this.fromDate = card.getFromDate();
         this.cardHolder = card.getCardHolder();
+        this.status = card.getStatus();
     }
     //GETTER METHODS
     public long getId() {return id;}
@@ -36,4 +38,8 @@ public class CardDTO {
     public LocalDateTime getThruDate() {return thruDate;}
     public LocalDateTime getFromDate() {return fromDate;}
     public String getCardHolder() {return cardHolder;}
+
+    public boolean isStatus() {
+        return status;
+    }
 }
