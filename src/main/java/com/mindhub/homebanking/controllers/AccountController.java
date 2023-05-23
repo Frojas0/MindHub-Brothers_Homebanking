@@ -28,8 +28,16 @@ public class AccountController {
         return accountService.getAccounts();
     }
     @GetMapping("/api/accounts/{id}")
-    public AccountDTO getAccount(@PathVariable long id){
-        return accountService.getAccount(id);
+    public ResponseEntity<Object> getAccount( @PathVariable long id, Authentication authentication){
+        Client client = clientService.findByEmail(authentication.getName());
+        Account account = accountService.findById(id);
+
+        if (account != null && account.getClient() == client) {
+            AccountDTO accountDTO = new AccountDTO(account);
+            return new ResponseEntity<>(accountDTO, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("This account its not yours", HttpStatus.FORBIDDEN);
     }
     @PostMapping(path = "/api/accounts/current/create")
     public ResponseEntity<Object> createAccount (Authentication authentication, @RequestParam AccountType type){

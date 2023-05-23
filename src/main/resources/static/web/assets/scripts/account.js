@@ -23,7 +23,11 @@ const app = createApp({
                 // console.log(this.data);
                 // console.log(this.transactions);
             })
-            .catch(err => console.log(err))
+            .catch(error => Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.response.data,
+            }))
     },
     methods: {
         logOut() {
