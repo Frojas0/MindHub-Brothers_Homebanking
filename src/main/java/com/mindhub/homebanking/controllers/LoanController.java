@@ -7,15 +7,13 @@ import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.services.*;
 import com.mindhub.homebanking.utils.LoanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,10 +45,12 @@ public class LoanController {
         String loanName = loanService.findById(loanId).getName();
         double amount = loanApplicationDTO.getAmount();
         int payments = loanApplicationDTO.getPayments();
+        double interest = currentLoan.getInterest();
         String destinyNumber = loanApplicationDTO.getDestinyNumber();
 
         //Lista de prestamos adquiridos
-        List<String> adquireLoans = currentClient.getClientLoans().stream().map(clientLoan1 -> clientLoan1.getLoan().getName()).collect(Collectors.toList());
+        List<String> adquireLoans = currentClient.getClientLoans().stream().filter(cL -> cL.getStatus()).map(cL2 ->cL2.getLoan().getName()).collect(Collectors.toList());
+//        List<String> adquireLoans = currentClient.getClientLoans().stream().map(clientLoan1 -> clientLoan1.getLoan().getName()).collect(Collectors.toList());
 
         if (currentLoan == null){
             return new ResponseEntity<>("This loan do not exist", HttpStatus.FORBIDDEN);
@@ -78,7 +78,7 @@ public class LoanController {
             return new ResponseEntity<>("these payments are not available for"+currentLoan.getName()+" loan", HttpStatus.FORBIDDEN);
         }
 
-        ClientLoan currentClientLoan = (new ClientLoan(LoanUtils.getLoanInterest(amount),payments));
+        ClientLoan currentClientLoan = (new ClientLoan((amount * (1+(interest + LoanUtils.getLoanInterest(currentLoan.getPayments(), payments)))),payments,true));
         currentClient.addClientLoan(currentClientLoan);
         currentLoan.addClientLoan(currentClientLoan);
 
@@ -93,8 +93,23 @@ public class LoanController {
     }
     @PostMapping("/api/manager/loans")
     public ResponseEntity<Object> createLoan(Authentication authentication, @RequestBody CreateLoanDTO createLoanDTO){
+
+        if (createLoanDTO.getInterest() < 0){
+            return new ResponseEntity<>("Interest must be > 1", HttpStatus.FORBIDDEN);
+        }
+        if (createLoanDTO.getName().isBlank()){
+            return new ResponseEntity<>("Name cannot be empty", HttpStatus.FORBIDDEN);
+        }
+        if (createLoanDTO.getMaxAmount() < 1){
+            return new ResponseEntity<>("Amount must be > 1", HttpStatus.FORBIDDEN);
+        }
+        if (createLoanDTO.getPayments().size() < 1){
+            return new ResponseEntity<>("Payments need at least 1 payment", HttpStatus.FORBIDDEN);
+        }
+
         String name = createLoanDTO.getName().toUpperCase();
         double maxAmount = createLoanDTO.getMaxAmount();
+        double interest = createLoanDTO.getInterest();
         List<Integer> payments = createLoanDTO.getPayments();
 
         Client currentClient = clientService.findByEmail(authentication.getName());
@@ -103,20 +118,11 @@ public class LoanController {
         if (!currentClient.getEmail().contains("admin@admin.com")){
             return new ResponseEntity<>("you are not an administrator", HttpStatus.FORBIDDEN);
         }
-        if (name.isBlank()){
-            return new ResponseEntity<>("Name cannot be empty", HttpStatus.FORBIDDEN);
-        }
-        if (maxAmount < 1){
-            return new ResponseEntity<>("Amount must be > 1", HttpStatus.FORBIDDEN);
-        }
-        if (payments.size() < 1){
-            return new ResponseEntity<>("Payments need at least 1 payment", HttpStatus.FORBIDDEN);
-        }
         if (existingLoan != null){
             return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
         }
 
-       Loan newLoan = new Loan(name,maxAmount,payments);
+       Loan newLoan = new Loan(name,maxAmount,payments,interest);
        loanService.saveLoan(newLoan);
 
        return new ResponseEntity<>("Succesful: new loan created", HttpStatus.CREATED);

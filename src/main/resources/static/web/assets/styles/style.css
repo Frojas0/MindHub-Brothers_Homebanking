@@ -181,6 +181,29 @@ table {
     border: none;
 }
 
+.modalButton {
+    padding: .5rem !important;
+    background: rgba(255, 255, 255, .05) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25) !important;
+    backdrop-filter: blur(5px) !important;
+    border-radius: 8px;
+    border: none !important;
+}
+
+.modalButton:hover {
+    transform: scale(1.05);
+    border: 1px solid black;
+    transition: all 0.3s;
+}
+
+.modalBody {}
+
+.modalLabel {
+    display: flex;
+    justify-content: space-between;
+    width: 10rem !important;
+}
+
 .expiredCard {
     color: #CA1616;
     font-weight: bold;

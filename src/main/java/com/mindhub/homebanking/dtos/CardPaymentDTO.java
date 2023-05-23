@@ -8,12 +8,6 @@ public class CardPaymentDTO {
 
     //CONSTRUCTOR
     public CardPaymentDTO(){}
-//    public CardPaymentDTO(String number, int cvv, double amount, String description) {
-//        this.number = number;
-//        this.cvv = cvv;
-//        this.amount = amount;
-//        this.description = description;
-//    }
 
     //GETTER METHODS
     public String getNumber() {return number;}

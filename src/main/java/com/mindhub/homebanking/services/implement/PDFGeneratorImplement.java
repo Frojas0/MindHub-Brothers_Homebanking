@@ -1,4 +1,4 @@
-package com.mindhub.homebanking.service.implement;
+package com.mindhub.homebanking.services.implement;
 
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
@@ -8,7 +8,6 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.services.PDFGeneratorService;
 import org.springframework.stereotype.Service;

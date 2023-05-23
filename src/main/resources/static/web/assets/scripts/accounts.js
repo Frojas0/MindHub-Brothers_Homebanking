@@ -6,7 +6,10 @@ const app = createApp({
             accounts: [],
             loans: [],
             showhide: false,
-            type: ""
+            type: "",
+            accountNumber: "",
+            payments: "",
+            loanName: ""
         }
     },
     created() {
@@ -18,11 +21,11 @@ const app = createApp({
     methods: {
         getLoans() {
             axios
-                .get('/api/clients/current')
+                .get('/api/clients/acquiredLoans')
                 .then(response => {
-                    this.data = response.data
-                    this.loans = this.data.loans
+                    this.loans = response.data
                     this.loans.sort((a, b) => a.loanId - b.loanId)
+                    // console.log(this.loans);
                 })
                 .catch(err => console.log(err))
         },
@@ -65,6 +68,36 @@ const app = createApp({
         },
         hide() {
             this.showhide = false
+        },
+        payLoan() {
+            Swal.fire({
+                title: 'Seguro?',
+                text: "Estas a punto de pagar un prestamo \n" + "Loan: " + this.loanName + " Payments: " + this.payments,
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Si',
+                denyButtonText: `No`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/clients/payLoan', `accountNumber=${this.accountNumber}&payments=${this.payments}&name=${this.loanName}`)
+                        .then(response => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Approved',
+                                timer: 3000,
+                            })
+                            window.location.replace('./accounts.html');
+                        })
+                        .catch(error => Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: error.response.data,
+                            timer: 3000,
+                        }))
+                } else if (result.isDenied) {
+                    Swal.fire('Payment Cancelled', '', 'info')
+                }
+            })
         }
     }
 })

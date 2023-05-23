@@ -33,12 +33,14 @@ public class WebAuthorization {
                 .antMatchers("/h2-console/**").hasAuthority("ADMIN")
                 .antMatchers("/rest/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST,"/api/loans/**").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST,"api/clients/payLoan").hasAuthority("CLIENT")
                 .antMatchers("/api/transactions").hasAuthority("CLIENT")
 //                .antMatchers(HttpMethod.GET,"/api/loans/**").hasAuthority("CLIENT")
                 .antMatchers("/api/clients/current/accounts").hasAuthority("CLIENT")
                 .antMatchers("/web/accounts.html").hasAuthority("CLIENT")
                 .antMatchers("/web/account.html").hasAuthority("CLIENT")
-                .antMatchers("/web/cards.html").hasAuthority("CLIENT");
+                .antMatchers("/web/cards.html").hasAuthority("CLIENT")
+                .antMatchers("/api/clients/acquiredLoans").hasAuthority("CLIENT");
 
 //              .anyRequest().denyAll();
         http.formLogin()
@@ -54,8 +56,6 @@ public class WebAuthorization {
         http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));// if login fails, just send an authentication failure response
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());// if logout is successful, just send a success response
 
-
-//      @cors
         return http.build();
     }
     private void clearAuthenticationAttributes(HttpServletRequest request) {

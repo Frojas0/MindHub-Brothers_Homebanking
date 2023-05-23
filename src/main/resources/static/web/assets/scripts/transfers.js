@@ -1,5 +1,4 @@
 const { createApp } = Vue;
-const url = 'http://localhost:8080/api/clients/current';
 const app = createApp({
     data() {
         return {
@@ -14,12 +13,11 @@ const app = createApp({
         }
     },
     created() {
-        axios.get(url)
+        axios.get('/api/accounts/current')
             .then(response => {
-                this.data = response.data
-                this.accounts = this.data.accounts
+                this.accounts = response.data
                 this.accounts.sort((a, b) => a.id - b.id)
-                // console.log(this.accounts);
+                console.log(this.accounts);
             })
             .catch(err => console.log(err))
     },

@@ -58,26 +58,23 @@ public class HomebankingApplication {
 
 
 			//CREACION DE PRESTAMOS
-			Loan mortgageLoan = (new Loan("MORTGAGE",500000, mortgagePayments));
-			Loan personalLoan = (new Loan("PERSONAL",100000, personalPayments));
-			Loan carLoan = (new Loan("AUTOMOTIVE",300000, carPayments));
+			Loan mortgageLoan = (new Loan("MORTGAGE",500000, mortgagePayments,0.18));
+			Loan personalLoan = (new Loan("PERSONAL",100000, personalPayments,0.2));
+			Loan carLoan = (new Loan("AUTOMOTIVE",300000, carPayments,0.15));
 
 
 			//CREACION DE CLIENTLOAN
-			ClientLoan loan01 = (new ClientLoan(400000,60));
-			ClientLoan loan02 = (new ClientLoan(50000,12));
-			ClientLoan loan03 = (new ClientLoan(100000,24));
-			ClientLoan loan04 = (new ClientLoan(200000,36));
+			ClientLoan loan01 = (new ClientLoan(40000,60, true));
+			ClientLoan loan02 = (new ClientLoan(5000,12, true));
+			ClientLoan loan03 = (new ClientLoan(20000,36,true ));
 			//asignacion a cliente
 			client01.addClientLoan(loan01);
 			client01.addClientLoan(loan02);
 			client01.addClientLoan(loan03);
-			client01.addClientLoan(loan04);
 			//asignacion a Loan
 			mortgageLoan.addClientLoan(loan01);
 			personalLoan.addClientLoan(loan02);
-			personalLoan.addClientLoan(loan03);
-			carLoan.addClientLoan(loan04);
+			carLoan.addClientLoan(loan03);
 
 
 			//CREACION DE TARJETAS
@@ -117,7 +114,6 @@ public class HomebankingApplication {
 			clientLoanRepository.save(loan01);
 			clientLoanRepository.save(loan02);
 			clientLoanRepository.save(loan03);
-			clientLoanRepository.save(loan04);
 
 			cardRepository.save(card01);
 			cardRepository.save(card02);
