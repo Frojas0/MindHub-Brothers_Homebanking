@@ -52,9 +52,7 @@ public class LoanController {
         List<String> adquireLoans = currentClient.getClientLoans().stream().filter(cL -> cL.getStatus()).map(cL2 ->cL2.getLoan().getName()).collect(Collectors.toList());
 //        List<String> adquireLoans = currentClient.getClientLoans().stream().map(clientLoan1 -> clientLoan1.getLoan().getName()).collect(Collectors.toList());
 
-        if (currentLoan == null){
-            return new ResponseEntity<>("This loan do not exist", HttpStatus.FORBIDDEN);
-        }if (currentAccount == null){
+        if (currentAccount == null){
             return new ResponseEntity<>("This account do not exist", HttpStatus.FORBIDDEN);
         }if (!currentClient.getAccounts().contains(accountService.findByNumber(destinyNumber))){
             return new ResponseEntity<>("Destiny account is not yours ", HttpStatus.FORBIDDEN);
@@ -91,6 +89,7 @@ public class LoanController {
 
         return new ResponseEntity<>("Succesful: Loan approved", HttpStatus.CREATED);
     }
+
     @PostMapping("/api/manager/loans")
     public ResponseEntity<Object> createLoan(Authentication authentication, @RequestBody CreateLoanDTO createLoanDTO){
 

@@ -38,4 +38,6 @@ public class AccountServiceImplement implements AccountService {
         List<Account> accounts = currentClient.getAccounts().stream().filter(account -> account.getStatus()).collect(toList());
         return accounts.stream().map(account -> new AccountDTO(account)).collect(toList());
     }
+    @Override
+    public Account findById(long id){return accountRepository.findById(id).orElse(null);}
 }

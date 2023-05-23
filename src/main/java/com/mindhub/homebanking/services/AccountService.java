@@ -11,5 +11,6 @@ public interface AccountService {
     AccountDTO getAccount(long id);
     void saveAccount(Account account);
     Account findByNumber(String number);
+    Account findById(long id);
     List<AccountDTO>getActiveAccounts(Authentication authentication);
 }

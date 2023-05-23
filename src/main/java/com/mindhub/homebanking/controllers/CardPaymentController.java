@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 @RestController
 public class CardPaymentController {
     @Autowired
-    CardService cardService;
+    private CardService cardService;
     @Autowired
-    TransactionService transactionService;
+    private TransactionService transactionService;
     @Transactional
     @PostMapping("api/card/payment")
     public ResponseEntity<Object> paymentWithCard(@RequestBody CardPaymentDTO cardPaymentDTO){
