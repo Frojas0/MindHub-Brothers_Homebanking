@@ -23,13 +23,14 @@ createApp({
     methods: {
         signUp() {
             Swal.fire({
-                title: 'ACEPTAS LOS TERMINOS Y CONDICIONES',
+                icon: 'warning',
+                title: 'Create account?',
+                text: 'read terms and conditions',
                 showDenyButton: true,
                 showCancelButton: false,
-                confirmButtonText: 'Si',
-                denyButtonText: `No`,
+                confirmButtonText: 'Create',
+                denyButtonText: `Cancel`,
             }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios.post('/api/clients', `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`)
                         .then(response => {
@@ -44,7 +45,7 @@ createApp({
                             timer: 3000,
                         }))
                 } else if (result.isDenied) {
-                    Swal.fire('Cancelado', '', 'info')
+                    Swal.fire('Cancel', 'account creation cancelled', 'info')
                 }
             });
         },

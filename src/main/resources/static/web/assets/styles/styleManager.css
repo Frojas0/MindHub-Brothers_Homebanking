@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-h2 {
+.h2Title {
     border-top-right-radius: 1rem;
     border-top-left-radius: 1rem;
     display: flex;

@@ -59,33 +59,34 @@ const app = createApp({
                     this.actualLoan = i;
                 }
             }
-            console.log(this.actualLoan);
+            // console.log(this.actualLoan);
             // console.log(this.actualLoan.id);
             // console.log(this.amount);
             // console.log(this.destinyNumber);
         },
         adquireLoan() {
             Swal.fire({
-                title: 'Sure? you are about to acquire a loan',
+                icon: 'warning',
+                title: 'Sure?',
+                text: 'you are about to acquire a loan',
                 showDenyButton: true,
                 showCancelButton: false,
-                confirmButtonText: 'Yes',
-                denyButtonText: `No`,
+                confirmButtonText: 'Confirm',
+                denyButtonText: `Cancel`,
             }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     axios.post('/api/loans', { loanId: this.actualLoan.id, amount: this.amount, payments: this.payment, destinyNumber: this.destinyNumber })
                         .then(response => Swal.fire({
                             icon: 'success',
                             title: 'Approved',
                             timer: 3000,
-                        })).catch(error => Swal.fire({
+                        }), window.location.replace('/web/index.html')
+                        ).catch(error => Swal.fire({
                             icon: 'error',
                             title: 'Error',
                             text: error.response.data,
                             timer: 3000,
                         }))
-                    // Swal.fire('GUARDADO!', '', 'success')
                 } else if (result.isDenied) {
                     Swal.fire('Loan Cancelled', '', 'info')
                 }

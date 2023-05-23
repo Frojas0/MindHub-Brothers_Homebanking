@@ -50,18 +50,41 @@ const app = createApp({
             axios
                 .post('/api/accounts/current/create', `type=${this.type}`)
                 .then(response => {
-                    console.log('Account created')
+                    Swal.fire('Created', 'you have a new account', 'success')
                     this.getAccounts()
                     this.hide()
                 })
         },
         deleteAccount(number) {
-            axios
-                .post('/api/accounts/current/delete', `number=${number}`)
-                .then(response => {
-                    console.log('Account Deleted!!!')
-                    this.getAccounts()
-                })
+            Swal.fire({
+                icon: 'warning',
+                title: 'Shure?',
+                text: "you are about to delete account: " + number,
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Delete',
+                denyButtonText: `Cancel`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/accounts/current/delete', `number=${number}`)
+                        .then(response => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deleted',
+                                timer: 3000,
+                            })
+                            this.getAccounts()
+                        })
+                        .catch(error => Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: error.response.data,
+                            timer: 3000,
+                        }))
+                } else if (result.isDenied) {
+                    Swal.fire('Delete cancelled', '', 'info')
+                }
+            })
         },
         show() {
             this.showhide = true
@@ -71,12 +94,13 @@ const app = createApp({
         },
         payLoan() {
             Swal.fire({
-                title: 'Seguro?',
-                text: "Estas a punto de pagar un prestamo \n" + "Loan: " + this.loanName + " Payments: " + this.payments,
+                icon: 'warning',
+                title: 'Shure?',
+                text: "you are about to pay the following loan: " + this.loanName + " Payments: " + this.payments,
                 showDenyButton: true,
                 showCancelButton: false,
-                confirmButtonText: 'Si',
-                denyButtonText: `No`,
+                confirmButtonText: 'Pay',
+                denyButtonText: `Cancel`,
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.post('/api/clients/payLoan', `accountNumber=${this.accountNumber}&payments=${this.payments}&name=${this.loanName}`)
@@ -84,7 +108,7 @@ const app = createApp({
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Approved',
-                                timer: 3000,
+                                timer: 300000,
                             })
                             window.location.replace('./accounts.html');
                         })
@@ -95,7 +119,12 @@ const app = createApp({
                             timer: 3000,
                         }))
                 } else if (result.isDenied) {
-                    Swal.fire('Payment Cancelled', '', 'info')
+                    // Swal.fire({
+                    //     title: 'Payment Cancelled',
+                    //     icon: 'info',
+                    //     timer: 2500,
+                    // })
+                    window.location.replace('./accounts.html');
                 }
             })
         }

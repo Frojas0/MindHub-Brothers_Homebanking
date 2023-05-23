@@ -36,6 +36,7 @@ const app = createApp({
         },
         downloadPDF() {
             Swal.fire({
+                icon: 'warning',
                 title: 'Shure?',
                 text: "you will download a pdf with the history of your transactions",
                 showDenyButton: true,
