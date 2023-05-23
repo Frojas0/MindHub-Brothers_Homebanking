@@ -41,19 +41,41 @@ const app = createApp({
                 .catch(err => console.log(err))
         },
         deleteCard(number) {
-            axios
-                .post('/api/current/card/delete', `number=${number}`)
-                .then(response => {
-                    console.log('Card deleted!!!');
-                    this.loadCards()
-                })
+            Swal.fire({
+                icon: 'warning',
+                title: 'Shure?',
+                text: "you are about to delete card: " + number,
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Delete',
+                denyButtonText: `Cancel`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/current/card/delete', `number=${number}`)
+                        .then(response => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Deleted',
+                                timer: 3000,
+                            })
+                            this.loadCards()
+                        })
+                        .catch(error => Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: error.response.data,
+                            timer: 3000,
+                        }))
+                } else if (result.isDenied) {
+                    Swal.fire('Delete cancelled', '', 'info')
+                }
+            })
         }
     }
 })
 app.mount('#vueApp')
-// this.accounts = this.data.accounts
-// this.accounts.sort((a, b) => a.id - b.id)
-// this.loans = this.data.loans
-// this.loans.sort((a, b) => a.loanId - b.loanId)
-// console.log(this.accounts);
-// console.log(this.loans)
+// axios.post('/api/current/card/delete', `number=${number}`)
+// .then(response => {
+//     console.log('Card deleted!!!');
+//     this.loadCards()
+// })

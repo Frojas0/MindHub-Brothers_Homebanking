@@ -31,12 +31,35 @@ const app = createApp({
                 })
         },
         transfer() {
-            axios
-                .post('/api/clients/current/transactions', `originNumber=${this.originNumber}&destinationNumber=${this.destinationNumber}&description=${this.description}&amount=${this.amount}`)
-                .then(response => {
-                    console.log('SUCCESFULL')
-                    window.location.replace('/web/accounts.html')
-                })
+            Swal.fire({
+                icon: 'warning',
+                title: 'Shure?',
+                text: "you are about to transfer from: " + this.originNumber + " to: " + this.destinationNumber + " amount: " + this.amount,
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Transfer',
+                denyButtonText: `Cancel`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/clients/current/transactions', `originNumber=${this.originNumber}&destinationNumber=${this.destinationNumber}&description=${this.description}&amount=${this.amount}`)
+                        .then(response => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Correct transaction',
+                                timer: 3000,
+                            })
+                            window.location.replace('/web/accounts.html')
+                        })
+                        .catch(error => Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: error.response.data,
+                            timer: 3000,
+                        }))
+                } else if (result.isDenied) {
+                    Swal.fire('Transfer cancelled', '', 'info')
+                }
+            })
         },
         own() {
             this.cont1 = true
@@ -49,3 +72,8 @@ const app = createApp({
     }
 })
 app.mount('#vueApp')
+// axios.post('/api/clients/current/transactions', `originNumber=${this.originNumber}&destinationNumber=${this.destinationNumber}&description=${this.description}&amount=${this.amount}`)
+//     .then(response => {
+//         console.log('SUCCESFULL')
+//         window.location.replace('/web/accounts.html')
+//     })
