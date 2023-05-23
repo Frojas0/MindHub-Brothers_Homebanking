@@ -80,7 +80,7 @@ const app = createApp({
                             icon: 'success',
                             title: 'Approved',
                             timer: 3000,
-                        }), window.location.replace('/web/index.html')
+                        }), window.location.replace('/web/accounts.html')
                         ).catch(error => Swal.fire({
                             icon: 'error',
                             title: 'Error',
